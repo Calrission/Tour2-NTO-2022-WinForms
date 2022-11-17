@@ -33,8 +33,8 @@
             this.btnCreate = new System.Windows.Forms.Button();
             this.dgwRoles = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RegionName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RegionDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RoleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RoleDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgwRoles)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,8 +78,8 @@
             this.dgwRoles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgwRoles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
-            this.RegionName,
-            this.RegionDescription});
+            this.RoleName,
+            this.RoleDescription});
             this.dgwRoles.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgwRoles.Location = new System.Drawing.Point(12, 45);
             this.dgwRoles.MultiSelect = false;
@@ -100,21 +100,21 @@
             this.Id.ReadOnly = true;
             this.Id.Visible = false;
             // 
-            // RegionName
+            // RoleName
             // 
-            this.RegionName.DataPropertyName = "Name";
-            this.RegionName.HeaderText = "Название";
-            this.RegionName.Name = "RegionName";
-            this.RegionName.ReadOnly = true;
-            this.RegionName.Width = 200;
+            this.RoleName.DataPropertyName = "Name";
+            this.RoleName.HeaderText = "Название";
+            this.RoleName.Name = "RoleName";
+            this.RoleName.ReadOnly = true;
+            this.RoleName.Width = 200;
             // 
-            // RegionDescription
+            // RoleDescription
             // 
-            this.RegionDescription.DataPropertyName = "Description";
-            this.RegionDescription.HeaderText = "Описание";
-            this.RegionDescription.Name = "RegionDescription";
-            this.RegionDescription.ReadOnly = true;
-            this.RegionDescription.Width = 500;
+            this.RoleDescription.DataPropertyName = "Description";
+            this.RoleDescription.HeaderText = "Описание";
+            this.RoleDescription.Name = "RoleDescription";
+            this.RoleDescription.ReadOnly = true;
+            this.RoleDescription.Width = 500;
             // 
             // RoleList
             // 
@@ -142,7 +142,7 @@
         private Button btnCreate;
         private DataGridView dgwRoles;
         private DataGridViewTextBoxColumn Id;
-        private DataGridViewTextBoxColumn RegionName;
-        private DataGridViewTextBoxColumn RegionDescription;
+        private DataGridViewTextBoxColumn RoleName;
+        private DataGridViewTextBoxColumn RoleDescription;
     }
 }

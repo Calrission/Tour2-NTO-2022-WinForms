@@ -25,5 +25,11 @@ namespace TravelCompanyCore
             using (RoleList rl = new())
                 rl.ShowDialog();
         }
+
+        private void btnContacts_Click(object sender, EventArgs e)
+        {
+            using (ContactList cl = new())
+                cl.ShowDialog();
+        }
     }
 }

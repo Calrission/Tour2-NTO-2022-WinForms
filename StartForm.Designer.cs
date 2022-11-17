@@ -30,6 +30,7 @@
         {
             this.btnRegions = new System.Windows.Forms.Button();
             this.btnRoles = new System.Windows.Forms.Button();
+            this.btnContacts = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnRegions
@@ -52,11 +53,22 @@
             this.btnRoles.UseVisualStyleBackColor = true;
             this.btnRoles.Click += new System.EventHandler(this.btnRoles_Click);
             // 
+            // btnContacts
+            // 
+            this.btnContacts.Location = new System.Drawing.Point(155, 105);
+            this.btnContacts.Name = "btnContacts";
+            this.btnContacts.Size = new System.Drawing.Size(189, 23);
+            this.btnContacts.TabIndex = 2;
+            this.btnContacts.Text = "Контакты";
+            this.btnContacts.UseVisualStyleBackColor = true;
+            this.btnContacts.Click += new System.EventHandler(this.btnContacts_Click);
+            // 
             // StartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(503, 450);
+            this.Controls.Add(this.btnContacts);
             this.Controls.Add(this.btnRoles);
             this.Controls.Add(this.btnRegions);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -72,5 +84,6 @@
 
         private Button btnRegions;
         private Button btnRoles;
+        private Button btnContacts;
     }
 }
