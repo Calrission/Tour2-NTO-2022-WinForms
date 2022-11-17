@@ -58,7 +58,7 @@ namespace TravelCompanyCore
             using (EditRegion er = new())
             {
                 er.EditableRegion = new();
-                er.EditableRegion.Id = Guid.Empty; // Признак того, что региона создаётся, а не редактируется
+                er.EditableRegion.Id = Guid.Empty; // Признак того, что регион создаётся, а не редактируется
                 er.EditableRegion.Name = String.Empty;
                 er.EditableRegion.Description = String.Empty;
 
@@ -87,7 +87,7 @@ namespace TravelCompanyCore
             }
         }
 
-        private void dgwRegions_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e) // Редактирование по двойному клику в строке грида
+        private void dgwRegions_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             btnEdit_Click(sender, new EventArgs());
         }

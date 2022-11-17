@@ -19,5 +19,11 @@ namespace TravelCompanyCore
             using (RegionList rl = new()) 
                 rl.ShowDialog();
         }
+
+        private void btnRoles_Click(object sender, EventArgs e)
+        {
+            using (RoleList rl = new())
+                rl.ShowDialog();
+        }
     }
 }

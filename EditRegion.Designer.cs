@@ -50,7 +50,7 @@
             // 
             this.txtRegionName.Location = new System.Drawing.Point(110, 12);
             this.txtRegionName.Name = "txtRegionName";
-            this.txtRegionName.Size = new System.Drawing.Size(317, 23);
+            this.txtRegionName.Size = new System.Drawing.Size(414, 23);
             this.txtRegionName.TabIndex = 1;
             // 
             // label2
@@ -66,14 +66,13 @@
             // 
             this.rtxtRegionDescription.Location = new System.Drawing.Point(110, 62);
             this.rtxtRegionDescription.Name = "rtxtRegionDescription";
-            this.rtxtRegionDescription.Size = new System.Drawing.Size(316, 90);
+            this.rtxtRegionDescription.Size = new System.Drawing.Size(414, 90);
             this.rtxtRegionDescription.TabIndex = 3;
             this.rtxtRegionDescription.Text = "";
             // 
             // btnOK
             // 
-            this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.Location = new System.Drawing.Point(147, 171);
+            this.btnOK.Location = new System.Drawing.Point(186, 171);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 4;
@@ -84,13 +83,12 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(228, 171);
+            this.btnCancel.Location = new System.Drawing.Point(267, 171);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // lblRegionNameValidation
             // 
@@ -98,16 +96,16 @@
             this.lblRegionNameValidation.ForeColor = System.Drawing.Color.Red;
             this.lblRegionNameValidation.Location = new System.Drawing.Point(111, 40);
             this.lblRegionNameValidation.Name = "lblRegionNameValidation";
-            this.lblRegionNameValidation.Size = new System.Drawing.Size(32, 15);
+            this.lblRegionNameValidation.Size = new System.Drawing.Size(416, 15);
             this.lblRegionNameValidation.TabIndex = 6;
-            this.lblRegionNameValidation.Text = "label";
+            this.lblRegionNameValidation.Text = "Наименование региона не должно быть короче двух значащих символов";
             // 
             // EditRegion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(438, 210);
+            this.ClientSize = new System.Drawing.Size(536, 210);
             this.Controls.Add(this.lblRegionNameValidation);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);

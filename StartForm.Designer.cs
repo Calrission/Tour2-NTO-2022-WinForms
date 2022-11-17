@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.btnRegions = new System.Windows.Forms.Button();
+            this.btnRoles = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnRegions
@@ -41,11 +42,22 @@
             this.btnRegions.UseVisualStyleBackColor = true;
             this.btnRegions.Click += new System.EventHandler(this.btnRegions_Click);
             // 
+            // btnRoles
+            // 
+            this.btnRoles.Location = new System.Drawing.Point(155, 64);
+            this.btnRoles.Name = "btnRoles";
+            this.btnRoles.Size = new System.Drawing.Size(189, 23);
+            this.btnRoles.TabIndex = 1;
+            this.btnRoles.Text = "Роли";
+            this.btnRoles.UseVisualStyleBackColor = true;
+            this.btnRoles.Click += new System.EventHandler(this.btnRoles_Click);
+            // 
             // StartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(503, 450);
+            this.Controls.Add(this.btnRoles);
             this.Controls.Add(this.btnRegions);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -59,5 +71,6 @@
         #endregion
 
         private Button btnRegions;
+        private Button btnRoles;
     }
 }

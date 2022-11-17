@@ -49,7 +49,7 @@
             this.RegionName,
             this.RegionDescription});
             this.dgwRegions.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgwRegions.Location = new System.Drawing.Point(7, 36);
+            this.dgwRegions.Location = new System.Drawing.Point(8, 36);
             this.dgwRegions.MultiSelect = false;
             this.dgwRegions.Name = "dgwRegions";
             this.dgwRegions.ReadOnly = true;
@@ -57,7 +57,7 @@
             this.dgwRegions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgwRegions.Size = new System.Drawing.Size(761, 275);
             this.dgwRegions.TabIndex = 0;
-            this.dgwRegions.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwRegions_CellContentDoubleClick);
+            this.dgwRegions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwRegions_CellDoubleClick);
             this.dgwRegions.SelectionChanged += new System.EventHandler(this.dgwRegions_SelectionChanged);
             // 
             // Id

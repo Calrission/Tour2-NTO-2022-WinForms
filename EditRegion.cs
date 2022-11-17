@@ -19,11 +19,6 @@ namespace TravelCompanyCore
             InitializeComponent();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void btnOK_Click(object sender, EventArgs e)
         {
             bool isNew = false; // флаг редактирования
@@ -47,6 +42,7 @@ namespace TravelCompanyCore
                         db.SaveChanges();
                     }
                 }
+                this.DialogResult = DialogResult.OK; // Чтобы окно закрылось и последующая перепривязка данных в родительском окне состоялась
                 this.Close();
             }
         }
