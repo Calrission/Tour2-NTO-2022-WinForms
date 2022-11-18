@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -10,13 +11,13 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TravelCompanyCore.Models;
 
 namespace TravelCompanyCore
 {
     public partial class EditContact : Form
     {
-        private List<Models.Role> roles; // Справочник ролей (всех)
-        //internal Models.Contact? EditableContact { get; set; }
+        List<string>rls=new List<string>(); // Здесь бесссылочно будет храниться строковый список имен ролей в системе
         public Guid? EditableId { get; set; }
 
         public EditContact()
@@ -39,41 +40,27 @@ namespace TravelCompanyCore
         }
         private void EditContact_Load(object sender, EventArgs e)
         {
-            //if (EditableContact != null)
-            //{
-            //    using (ApplicationContext db = new ApplicationContext())
-            //    {
-            //        // При редактировании дозаполняем контакт значениями из БД, поскольку из грида всего не перетащишь
-            //        if (EditableContact.Id != Guid.Empty) EditableContact = db.Contacts.
-            //                Include(c => c.Roles).ToList().Find(c => c.Id == EditableContact.Id); // благодаря инклюду прилетают и роли
-            //        roles = db.Roles.ToList(); // Весь справочник ролей
-            //        bool toCheckOrNotToCheck = false; // Ставить ли галочку при привязке
-            //        foreach (Models.Role rl in roles) // Привязываем справочные значения к контролу...
-            //        {
-            //            toCheckOrNotToCheck = EditableContact.Roles.Contains(rl); // ...проверяем, есть ли такая роль у контакта...
-            //            clbRoles.Items.Add(rl.Name, toCheckOrNotToCheck); // ...и добавляем роль в контрол (с галочкой, если это роль контакта)
-            //        }
-            //        txtFirstName.Text = EditableContact.FirstName;
-            //        txtLastName.Text = EditableContact.LastName;
-            //        txtPatronymicName.Text = EditableContact.PatronymicName;
-            //        txtEmail.Text = EditableContact.EmailAddress;
-            //        mtxtPhone.Text = EditableContact.PhoneNumber.Remove(0, 2); // За вычетом первых двух символов +7
-            //    }
-            //}
             using (ApplicationContext db = new ApplicationContext())
             {
-                roles = db.Roles.ToList(); // Весь справочник ролей
+                // Это жуткие костыли, которые нужно будет переделать!!!
+                Models.Role[] roles = new Models.Role[db.Roles.Count()]; // Промежуточный контейнер для заполнения списка
+                db.Roles.ToImmutableList().CopyTo(roles); // Заполняем его
+                foreach (Models.Role rl in roles) // А из него заполняем строковый спиcок ролей
+                {
+                    rls.Add(rl.Name);
+                }
+                // Конец костылей
 
                 if (EditableId != null && EditableId != Guid.Empty)
                 {
                     // При редактировании дозаполняем контакт значениями из БД, поскольку из грида всего не перетащишь
                     Models.Contact? EditableContact = db.Contacts.Include(c => c.Roles).ToList().Find(c => c.Id == EditableId); // благодаря инклюду прилетят и роли
                     CheckState toCheckOrNotToCheck = CheckState.Unchecked; // Ставить ли галочку при привязке
-                    foreach (Models.Role rl in roles) // Привязываем справочные значения к контролу...
+                    foreach (string rl in rls) // Привязываем справочные значения к контролу...
                     {
                         // ...проверяем, есть ли такая роль у контакта...
-                        toCheckOrNotToCheck = EditableContact.Roles.Contains(rl)? toCheckOrNotToCheck = CheckState.Checked : toCheckOrNotToCheck = CheckState.Unchecked;
-                        clbRoles.Items.Add(rl.Name, toCheckOrNotToCheck); // ...и добавляем роль в контрол (с галочкой, если это роль контакта)
+                        toCheckOrNotToCheck = EditableContact.Roles.Exists(r => r.Name == rl) ? toCheckOrNotToCheck = CheckState.Checked : toCheckOrNotToCheck = CheckState.Unchecked;
+                        clbRoles.Items.Add(rl, toCheckOrNotToCheck); // ...и добавляем роль в контрол (с галочкой, если это роль контакта)
                     }
                     txtFirstName.Text = EditableContact.FirstName;
                     txtLastName.Text = EditableContact.LastName;
@@ -83,9 +70,9 @@ namespace TravelCompanyCore
                 }
                 else
                 {
-                    foreach (Models.Role rl in roles) // Привязываем справочные значения к контролу безо всяких галочек
+                    foreach (string rl in rls) // Привязываем справочные значения к контролу безо всяких галочек
                     {
-                        clbRoles.Items.Add(rl.Name);
+                        clbRoles.Items.Add(rl);
                     }
                 }
             }
@@ -172,47 +159,6 @@ namespace TravelCompanyCore
         {
             bool isNew = false; // флаг редактирования
 
-            //////if (isModelValid())
-            //////{
-            //////    if (EditableContact != null)
-            //////    {
-            //////        if (EditableContact.Id == Guid.Empty) // Создание Контакта
-            //////        {
-            //////            isNew = true;
-            //////            EditableContact.Id = Guid.NewGuid(); // Генерим новичку Id...
-            //////            EditableContact.Roles = new(); // ...и создаём ему пустое множество ролей
-            //////        }
-            //////        EditableContact.FirstName = txtFirstName.Text.Trim();
-            //////        EditableContact.LastName = txtLastName.Text.Trim();
-            //////        EditableContact.PatronymicName = txtPatronymicName.Text.Trim();
-            //////        EditableContact.EmailAddress= txtEmail.Text.Trim();
-            //////        EditableContact.PhoneNumber = "+7" + mtxtPhone.Text.Trim();
-            //////        // Теперь роли
-            //////        EditableContact.Roles.Clear(); // Удаляем все роли
-
-            //////        using (ApplicationContext db = new ApplicationContext())
-            //////        {
-            //////            if (isNew) db.Contacts.Add(EditableContact); // создаём
-            //////            else db.Contacts.Update(EditableContact); // редактируем
-            //////            db.SaveChanges(); // сохраняемся с пустыми ролями, чтобы удалить все записи из промежуточных таблиц
-            //////        }
-
-            //////        // Попробуем отдельный контекст для связей:
-            //////        using (ApplicationContext db2 = new ApplicationContext())
-            //////        {
-            //////            foreach (string role in clbRoles.SelectedItems) // Для каждой роли, чекнутой в списке
-            //////            {
-            //////                EditableContact.Roles.Add(roles.First(r => r.Name == role)); // Делаем добавление
-            //////            }
-            //////            db2.Contacts.Update(EditableContact); // обновляем ещё раз, чтобы добавить новые записи в промежуточную таблицу
-            //////            db2.SaveChanges(); // Создание работает, редактирование без смены роли - тоже. Смена роли НЕ работает :(
-            //////        }
-
-            //////    }
-            //////    this.DialogResult = DialogResult.OK; // Чтобы окно закрылось и последующая перепривязка данных в родительском окне состоялась
-            //////    this.Close();
-            ///
-
             if (isModelValid())
             {
                 // Работаем сразу в конексте
@@ -227,7 +173,6 @@ namespace TravelCompanyCore
                     }
                     else // Редактирование Контакта
                     {
-                        //EditableContact = db.Contacts.Find(EditableId);
                         EditableContact = db.Contacts.Include(c => c.Roles).ToList().Find(c => c.Id == EditableId); // С ролями, то есть
                     }
 
@@ -237,21 +182,18 @@ namespace TravelCompanyCore
                     EditableContact.EmailAddress = txtEmail.Text.Trim();
                     EditableContact.PhoneNumber = "+7" + mtxtPhone.Text.Trim();
 
-                    foreach (Models.Role role in roles)
+                    foreach (string rl in rls)
                     {
-                        if (!clbRoles.CheckedItems.Contains(role.Name)) // Если чек НЕ стоит, то роль нужно удалить. Безусловно
-                            EditableContact.Roles.Remove(role);
+                        if (!clbRoles.CheckedItems.Contains(rl)) // Если чек НЕ стоит, то роль нужно удалить. Безусловно
+                        {
+                            EditableContact.Roles.Remove(db.Roles.FirstOrDefault(r => r.Name == rl));
+                        }                            
                         else // Если чек стоит... 
                         {
-                            if (!EditableContact.Roles.Exists(c => c.Name == role.Name)) // ...то если такой роли ещё нет,
-                                EditableContact.Roles.Add(role); // её нужно добавить (и только в этом случае)
+                            if (!EditableContact.Roles.Exists(c => c.Name == rl)) // ...то если такой роли у Контакта до сих пор не было,
+                                EditableContact.Roles.Add(db.Roles.FirstOrDefault(r => r.Name == rl)); // её нужно добавить (и только в этом случае)
                         }
                     }
-
-                    //foreach (string role in clbRoles.SelectedItems) // Для каждой роли, чекнутой в списке
-                    //{
-                    //    EditableContact.Roles.Add(roles.First(r => r.Name == role)); // Делаем добавление
-                    //}
 
                     if (isNew) db.Contacts.Add(EditableContact); // создаём
                     else db.Contacts.Update(EditableContact); // редактируем

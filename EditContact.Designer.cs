@@ -156,6 +156,7 @@
             // 
             // clbRoles
             // 
+            this.clbRoles.CheckOnClick = true;
             this.clbRoles.FormattingEnabled = true;
             this.clbRoles.Location = new System.Drawing.Point(110, 213);
             this.clbRoles.Name = "clbRoles";
