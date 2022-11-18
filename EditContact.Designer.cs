@@ -74,6 +74,7 @@
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(374, 23);
             this.txtLastName.TabIndex = 6;
+            this.txtLastName.TextChanged += new System.EventHandler(this.txtLastName_TextChanged);
             this.txtLastName.Validating += new System.ComponentModel.CancelEventHandler(this.txtLastName_Validating);
             // 
             // label1
@@ -91,6 +92,7 @@
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(374, 23);
             this.txtFirstName.TabIndex = 7;
+            this.txtFirstName.TextChanged += new System.EventHandler(this.txtFirstName_TextChanged);
             this.txtFirstName.Validating += new System.ComponentModel.CancelEventHandler(this.txtFirstName_Validating);
             // 
             // label3
@@ -141,7 +143,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(12, 173);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(55, 15);
+            this.label6.Size = new System.Drawing.Size(56, 15);
             this.label6.TabIndex = 271;
             this.label6.Text = "Телефон";
             // 

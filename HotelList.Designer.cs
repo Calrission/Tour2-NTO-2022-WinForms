@@ -33,8 +33,6 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnCreate = new System.Windows.Forms.Button();
             this.dgwHotels = new System.Windows.Forms.DataGridView();
-            this.hotelListBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.fakeDataSourceBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HotelName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Region = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,6 +41,8 @@
             this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RegionId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ManagerId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hotelListBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fakeDataSourceBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgwHotels)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hotelListBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fakeDataSourceBindingSource)).BeginInit();
@@ -68,6 +68,7 @@
             this.btnEdit.TabIndex = 14;
             this.btnEdit.Text = "Изменить";
             this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnCreate
             // 
@@ -77,6 +78,7 @@
             this.btnCreate.TabIndex = 13;
             this.btnCreate.Text = "Создать";
             this.btnCreate.UseVisualStyleBackColor = true;
+            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
             // 
             // dgwHotels
             // 

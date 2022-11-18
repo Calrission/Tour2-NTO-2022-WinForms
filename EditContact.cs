@@ -204,5 +204,15 @@ namespace TravelCompanyCore
                 this.Close();
             }
     }
+
+        private void txtLastName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtFirstName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
