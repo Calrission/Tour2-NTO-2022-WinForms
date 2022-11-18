@@ -32,8 +32,8 @@ namespace TravelCompanyCore
                         isNew = true;
                         EditableRegion.Id = Guid.NewGuid();
                     }
-                    EditableRegion.Name = txtRegionName.Text;
-                    EditableRegion.Description = rtxtRegionDescription.Text;
+                    EditableRegion.Name = txtRegionName.Text.Trim();
+                    EditableRegion.Description = rtxtRegionDescription.Text.Trim();
 
                     using (ApplicationContext db = new ApplicationContext())
                     {

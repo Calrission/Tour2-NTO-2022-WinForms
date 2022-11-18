@@ -46,13 +46,13 @@ namespace TravelCompanyCore
             {
                 if (EditableRole != null)
                 {
-                    if (EditableRole.Id == Guid.Empty) // Создание роли
+                    if (EditableRole.Id == Guid.Empty) // Создание Роли
                     {
                         isNew = true;
                         EditableRole.Id = Guid.NewGuid();
                     }
-                    EditableRole.Name = txtRoleName.Text;
-                    EditableRole.Description = rtxtRoleDescription.Text;
+                    EditableRole.Name = txtRoleName.Text.Trim();
+                    EditableRole.Description = rtxtRoleDescription.Text.Trim();
 
                     using (ApplicationContext db = new ApplicationContext())
                     {
