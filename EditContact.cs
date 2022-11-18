@@ -237,14 +237,14 @@ namespace TravelCompanyCore
                     EditableContact.EmailAddress = txtEmail.Text.Trim();
                     EditableContact.PhoneNumber = "+7" + mtxtPhone.Text.Trim();
 
-                    foreach (string role in clbRoles.Items)
+                    foreach (Models.Role role in roles)
                     {
-                        if (!clbRoles.CheckedItems.Contains(role)) // Если чек НЕ стоит, то роль нужно удалить. Безусловно
-                            EditableContact.Roles.Remove(roles.First(r => r.Name == role));
+                        if (!clbRoles.CheckedItems.Contains(role.Name)) // Если чек НЕ стоит, то роль нужно удалить. Безусловно
+                            EditableContact.Roles.Remove(role);
                         else // Если чек стоит... 
                         {
-                            if (!EditableContact.Roles.Exists(c => c.Name == role)) // ...то если такой роли ещё нет,
-                                EditableContact.Roles.Add(roles.First(r => r.Name == role)); // её нужно добавить (и только в этом случае)
+                            if (!EditableContact.Roles.Exists(c => c.Name == role.Name)) // ...то если такой роли ещё нет,
+                                EditableContact.Roles.Add(role); // её нужно добавить (и только в этом случае)
                         }
                     }
 
