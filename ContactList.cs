@@ -56,23 +56,6 @@ namespace TravelCompanyCore
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            //using (EditContact ct = new())
-            //{
-            //    ct.EditableContact = new();
-            //    ct.EditableContact.Id = Guid.Empty; // Признак того, что регион создаётся, а не редактируется
-            //    ct.EditableContact.FirstName = String.Empty;
-            //    ct.EditableContact.LastName= String.Empty;
-            //    ct.EditableContact.PatronymicName= String.Empty;
-            //    ct.EditableContact.PhoneNumber = "+7";
-            //    ct.EditableContact.EmailAddress= String.Empty;
-            //    ct.EditableContact.Roles = new();
-
-            //    if (ct.ShowDialog(this) == DialogResult.OK) // если юзер сохранился, перепривязываем грид
-            //    {
-            //        using (ApplicationContext db = new ApplicationContext())
-            //            dgwContacts.DataSource = db.Contacts.ToList();
-            //    }
-            //}
             using (EditContact ct = new())
             {
                 ct.EditableId = Guid.Empty;
@@ -86,18 +69,6 @@ namespace TravelCompanyCore
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            //using (EditContact ct = new())
-            //{
-            //    ct.EditableContact = new();
-            //    ct.EditableContact.Id = (Guid)dgwContacts.SelectedCells[0].Value; // Существующий Id - признак того, что регион редактируется
-
-            //    if (ct.ShowDialog(this) == DialogResult.OK) // если юзер сохранился, перепривязываем грид
-            //    {
-            //        using (ApplicationContext db = new ApplicationContext())
-            //            dgwContacts.DataSource = db.Contacts.ToList();
-            //    }
-            //}
-
             using (EditContact ct = new())
             {
                 ct.EditableId= (Guid)dgwContacts.SelectedCells[0].Value;

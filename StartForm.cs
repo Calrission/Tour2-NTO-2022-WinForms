@@ -31,5 +31,11 @@ namespace TravelCompanyCore
             using (ContactList cl = new())
                 cl.ShowDialog();
         }
+
+        private void btnHotels_Click(object sender, EventArgs e)
+        {
+            using (HotelList hl = new())
+                hl.ShowDialog();
+        }
     }
 }
