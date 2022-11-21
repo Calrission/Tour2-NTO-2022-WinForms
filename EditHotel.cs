@@ -20,9 +20,11 @@ namespace TravelCompanyCore
 
         bool isModelValid()
         {
-            if (String.IsNullOrEmpty(txtName.Text.Trim()) || txtName.Text.Trim().Length < 2)
+            if (String.IsNullOrEmpty(txtName.Text.Trim()) || txtName.Text.Trim().Length < 2 || txtName.Text.Length > 200)
                 return false;
             if (String.IsNullOrEmpty(mtxtPhone.Text.Trim()) || !phone_validation().IsMatch(mtxtPhone.Text.Trim()))
+                return false;
+            if (rtxtHotelDescription.Text.Length > 500)
                 return false;
             return true;
         }
@@ -55,8 +57,6 @@ namespace TravelCompanyCore
                     mtxtPhone.Text = EditableHotel.PhoneNumber.Remove(0, 2); // За вычетом первых двух символов +7
                     comboBoxRegion.SelectedIndex = regions.IndexOf(EditableHotel.Region);
                     comboBoxManager.SelectedIndex = managers.IndexOf(EditableHotel.Manager);
-
-
                 }
 
             }
@@ -68,6 +68,8 @@ namespace TravelCompanyCore
                 errorProvider1.SetError(txtName, "Не указано Название отеля!");
             else if (txtName.Text.Trim().Length < 2)
                 errorProvider1.SetError(txtName, "Название не должно быть короче двух значащих символов!");
+            else if (txtName.Text.Length > 200)
+                errorProvider1.SetError(txtName, "Название не должно быть длинее 200 символов!");
             else
                 errorProvider1.Clear();
         }
@@ -78,6 +80,14 @@ namespace TravelCompanyCore
                 errorProvider1.SetError(mtxtPhone, "Не указан Телефон!");
             else if (!phone_validation().IsMatch(mtxtPhone.Text.Trim()))
                 errorProvider1.SetError(mtxtPhone, "Номер телефона не соответствует формату!");
+            else
+                errorProvider1.Clear();
+        }
+
+        private void rtxtHotelDescription_Validating(object sender, CancelEventArgs e)
+        {
+            if (rtxtHotelDescription.Text.Length > 500)
+                errorProvider1.SetError(rtxtHotelDescription, "Описание не должно быть длинне 500 символов!");
             else
                 errorProvider1.Clear();
         }
@@ -117,5 +127,7 @@ namespace TravelCompanyCore
                 this.Close();
             }
         }
+
+        
     }
 }
