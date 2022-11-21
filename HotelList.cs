@@ -52,5 +52,33 @@ namespace TravelCompanyCore
                 }
             }
         }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            using (EditHotel eh = new()) 
+            {
+                eh.EditableId = (Guid)dgwHotels.SelectedCells[0].Value;
+
+                if (eh.ShowDialog(this) == DialogResult.OK) // если юзер сохранился, перепривязываем грид
+                {
+                    using (ApplicationContext db = new ApplicationContext())
+                        dgwHotels.DataSource = db.Hotels.Include(h => h.Region).Include(h => h.Manager).ToList(); 
+                }
+            }
+        }
+
+        private void btnCreate_Click(object sender, EventArgs e)
+        {
+            using (EditHotel eh = new())
+            {
+                eh.EditableId = Guid.Empty;
+
+                if (eh.ShowDialog(this) == DialogResult.OK) // если юзер сохранился, перепривязываем грид
+                {
+                    using (ApplicationContext db = new ApplicationContext())
+                        dgwHotels.DataSource = db.Hotels.Include(h => h.Region).Include(h => h.Manager).ToList();
+                }
+            }
+        }
     }
 }
