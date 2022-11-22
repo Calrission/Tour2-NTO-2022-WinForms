@@ -17,5 +17,10 @@ namespace TravelCompanyCore.Models
         public Guid? RegionId { get; set; } // Один ко многим (в регионе много отелей)
         public Models.Contact? Manager { get; set; }
         public Guid? ManagerId { get; set; } // Один ко многим (управляющий может рулить несколькими заведениями)
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

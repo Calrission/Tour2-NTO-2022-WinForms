@@ -37,5 +37,11 @@ namespace TravelCompanyCore
             using (HotelList hl = new())
                 hl.ShowDialog();
         }
+
+        private void btnTours_Click(object sender, EventArgs e)
+        {
+            using (TourList tl = new())
+                tl.ShowDialog();
+        }
     }
 }
