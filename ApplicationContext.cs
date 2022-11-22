@@ -21,6 +21,8 @@ namespace TravelCompanyCore
 
         public DbSet<Models.Tour> Tours => Set<Models.Tour>();
 
+        public DbSet<Models.Client> Clients => Set<Models.Client>();
+
         public ApplicationContext() => Database.EnsureCreated();
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
