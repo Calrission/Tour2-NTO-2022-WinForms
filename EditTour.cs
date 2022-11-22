@@ -42,7 +42,6 @@ namespace TravelCompanyCore
                 else 
                 {
                     EditableTour = new Models.Tour();
-                    EditableTour.Id = Guid.NewGuid();
                 }
 
             }
@@ -64,7 +63,11 @@ namespace TravelCompanyCore
                     EditableTour.StartDateTime = dateTimeStart.Value;
                     EditableTour.EndDateTime = dateTimeEnd.Value;
 
-                    if (isNew) db.Tours.Add(EditableTour); // создаём
+                    if (isNew)
+                    {
+                        EditableTour.Id = Guid.NewGuid();
+                        db.Tours.Add(EditableTour); // создаём
+                    }
                     else db.Tours.Update(EditableTour); // редактируем
                     db.SaveChanges();
                 }
@@ -81,8 +84,21 @@ namespace TravelCompanyCore
 
         bool isModelValid()
         {
-            
+            if (rtxtTourDescription.Text.Length > 500)
+                return false;
+            if (dateTimeEnd.Value.Date < dateTimeStart.Value.Date)
+                return false;
             return true;
+        }
+
+        private void rtxtTourDescription_Validating(object sender, CancelEventArgs e)
+        {
+            if (rtxtTourDescription.Text.Length > 500)
+                errorProvider1.SetError(rtxtTourDescription, "Описание не должно быть длинне 500 символов!");
+            else if (dateTimeEnd.Value.Date  < dateTimeStart.Value.Date)
+                errorProvider1.SetError(dateTimeEnd, "Дата отъезда не должна быть раньше даты заезда");
+            else
+                errorProvider1.Clear();
         }
     }
 }

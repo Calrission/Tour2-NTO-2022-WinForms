@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.comboFoods = new System.Windows.Forms.ComboBox();
             this.numericCost = new System.Windows.Forms.NumericUpDown();
             this.rtxtTourDescription = new System.Windows.Forms.RichTextBox();
@@ -42,7 +43,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.numericCost)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // comboFoods
@@ -81,6 +84,7 @@
             this.rtxtTourDescription.Size = new System.Drawing.Size(374, 90);
             this.rtxtTourDescription.TabIndex = 147;
             this.rtxtTourDescription.Text = "";
+            this.rtxtTourDescription.Validating += new System.ComponentModel.CancelEventHandler(this.rtxtTourDescription_Validating);
             // 
             // label2
             // 
@@ -182,6 +186,10 @@
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // EditTour
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -205,6 +213,7 @@
             this.Text = "Создание/Редактирование тура";
             this.Load += new System.EventHandler(this.EditTour_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericCost)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -226,5 +235,6 @@
         private Label label6;
         private Button btnCancel;
         private Button btnOK;
+        private ErrorProvider errorProvider1;
     }
 }
