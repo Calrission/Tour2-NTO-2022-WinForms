@@ -25,6 +25,12 @@ namespace TravelCompanyCore
 
         private void EditTour_Load(object sender, EventArgs e)
         {
+            dateTimeStart.Format = DateTimePickerFormat.Custom;
+            dateTimeStart.CustomFormat = "MM/dd/yyyy hh:mm:ss";
+
+            dateTimeEnd.Format = DateTimePickerFormat.Custom;
+            dateTimeEnd.CustomFormat = "MM/dd/yyyy hh:mm:ss";
+
             using (ApplicationContext db = new ApplicationContext()){
                 comboFoods.DataSource = db.Foods.ToList();
                 comboHotels.DataSource = db.Hotels.ToList();
@@ -62,6 +68,8 @@ namespace TravelCompanyCore
                     EditableTour.FoodId = (Guid)comboFoods.SelectedValue;
                     EditableTour.StartDateTime = dateTimeStart.Value;
                     EditableTour.EndDateTime = dateTimeEnd.Value;
+                    EditableTour.NightAmount = CalcNightsBetweenStartEnd();
+                    EditableTour.DayAmount = EditableTour.NightAmount + 1;
 
                     if (isNew)
                     {
@@ -75,6 +83,15 @@ namespace TravelCompanyCore
                 this.DialogResult = DialogResult.OK; // Чтобы окно закрылось и последующая перепривязка данных в родительском окне состоялась
                 this.Close();
             }
+        }
+
+        private int CalcNightsBetweenStartEnd() 
+        {
+            int NightsAmount = 0; // Если въезд и выезд в один день, то количество ночей равно нулю, а количество дней, соответственно - единице
+
+            double totalDays = (dateTimeEnd.Value - dateTimeStart.Value).TotalDays;
+            NightsAmount = (int)Math.Floor(totalDays); // 0.0833334 - это величина, чуть большая TotalDays между 12 и 14 часами
+            return NightsAmount;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

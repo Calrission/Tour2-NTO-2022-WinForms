@@ -51,7 +51,8 @@ namespace TravelCompanyCore
             modelBuilder.Entity<Models.Contact>().HasData(
                 new Models.Contact { Id = Guid.Parse("264FD9D1-0E27-4609-B7CD-344FB3FD044F"), LastName = "Лебедихин", FirstName = "Петр", PatronymicName = "Степанович", EmailAddress = "lebedichp@yandex.ru", PhoneNumber = "+79091256789" },
                 new Models.Contact { Id = Guid.Parse("4B37D5EF-0A58-4EDC-9E57-953C59E46BA4"), LastName = "Порожнев", FirstName = "Степан", PatronymicName = "Аркадиевич", EmailAddress = "stepaporozhnev@gmail.com", PhoneNumber = "+75376432905" },
-                new Models.Contact { Id = Guid.Parse("242B1D5F-9103-474A-AEC4-F9143E87D58B"), LastName = "Епифанов", FirstName = "Николай", PatronymicName = "Александрович", EmailAddress = "kolyaepifan@yandex.ru", PhoneNumber = "+79536789123" }
+                new Models.Contact { Id = Guid.Parse("242B1D5F-9103-474A-AEC4-F9143E87D58B"), LastName = "Епифанов", FirstName = "Николай", PatronymicName = "Александрович", EmailAddress = "kolyaepifan@yandex.ru", PhoneNumber = "+79536789123" },
+                new Models.Contact { Id = Guid.Parse("242B1D5F-9103-474A-AEC4-F9143E87D58A"), LastName = "", FirstName = "", PatronymicName = "", EmailAddress = "", PhoneNumber = "" }
                 );
 
             // Добавляем Контакты в Роли

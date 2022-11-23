@@ -42,14 +42,7 @@ namespace TravelCompanyCore
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                // Это жуткие костыли, которые нужно будет переделать!!!
-                //Models.Role[] roles = new Models.Role[db.Roles.Count()]; // Промежуточный контейнер для заполнения списка
                 rls=db.Roles.ToList();
-                //foreach (Models.Role rl in roles) // А из него заполняем строковый спиcок ролей
-                //{
-                //    rls.Add(rl.Name);
-                //}
-                // Конец костылей
 
                 if (EditableId != null && EditableId != Guid.Empty)
                 {
