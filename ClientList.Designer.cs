@@ -156,7 +156,7 @@
             this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.dgwClients);
             this.Name = "ClientList";
-            this.Text = "ClientList";
+            this.Text = "Список клиентов";
             this.Load += new System.EventHandler(this.ClientList_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgwClients)).EndInit();
             this.ResumeLayout(false);

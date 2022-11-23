@@ -27,7 +27,7 @@ namespace TravelCompanyCore
             using(ApplicationContext db = new ApplicationContext())
             {
                 comboxClientType.DataSource = db.TypesClient.ToList();
-                comboContact.DataSource = db.Contacts.ToList();
+                comboContact.DataSource = db.Contacts.ToList().FindAll(t => t.ToString() != "");
 
                 if (EditableId != Guid.Empty)
                 {

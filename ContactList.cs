@@ -22,7 +22,7 @@ namespace TravelCompanyCore
             using (ApplicationContext db = new ApplicationContext())
             {
                 // получаем объекты из бд и выводим в грид
-                dgwContacts.DataSource = db.Contacts.ToList();
+                dgwContacts.DataSource = db.Contacts.ToList().FindAll(t => t.ToString() != "");
             }
         }
 
@@ -49,7 +49,7 @@ namespace TravelCompanyCore
                         db.Contacts.Remove(contact);
                         db.SaveChanges();
                     }
-                    dgwContacts.DataSource = db.Contacts.ToList(); // перепривязка
+                    dgwContacts.DataSource = db.Contacts.ToList().FindAll(t => t.ToString() != ""); // перепривязка
                 }
             }
         }
@@ -62,7 +62,7 @@ namespace TravelCompanyCore
                 if (ct.ShowDialog(this) == DialogResult.OK) // если юзер сохранился, перепривязываем грид
                 {
                     using (ApplicationContext db = new ApplicationContext())
-                        dgwContacts.DataSource = db.Contacts.ToList();
+                        dgwContacts.DataSource = db.Contacts.ToList().FindAll(t => t.ToString() != "");
                 }
             }
         }
@@ -75,7 +75,7 @@ namespace TravelCompanyCore
                 if (ct.ShowDialog(this) == DialogResult.OK) // если юзер сохранился, перепривязываем грид
                 {
                     using (ApplicationContext db = new ApplicationContext())
-                        dgwContacts.DataSource = db.Contacts.ToList();
+                        dgwContacts.DataSource = db.Contacts.ToList().FindAll(t => t.ToString() != "");
                 }
             }
         }
