@@ -50,6 +50,7 @@
             this.btnDelete.TabIndex = 19;
             this.btnDelete.Text = "Удалить";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEdit
             // 
@@ -61,6 +62,7 @@
             this.btnEdit.TabIndex = 18;
             this.btnEdit.Text = "Изменить";
             this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnCreate
             // 
@@ -71,6 +73,7 @@
             this.btnCreate.TabIndex = 17;
             this.btnCreate.Text = "Создать";
             this.btnCreate.UseVisualStyleBackColor = true;
+            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
             // 
             // dgwClients
             // 
@@ -95,6 +98,7 @@
             this.dgwClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgwClients.Size = new System.Drawing.Size(951, 367);
             this.dgwClients.TabIndex = 16;
+            this.dgwClients.SelectionChanged += new System.EventHandler(this.dgwClients_SelectionChanged);
             // 
             // Id
             // 
