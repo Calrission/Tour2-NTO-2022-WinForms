@@ -12,20 +12,16 @@
 
         public DateTime EndDateTime { get; set;  }
 
-        private int dayAmount = 0;
-
-        // TODO
-        public int DayAmount {
-            get {
-                return dayAmount;
-            }
-            set {
-                dayAmount = (int)Math.Floor((EndDateTime - StartDateTime).TotalDays);
-            }
+        public int NightAmount
+        {
+            get;
+            set;
         }
 
-        // TODO
-        public int NightAmount { get; set; }
+        public int DayAmount {
+            get;
+            set; 
+        }
 
         public Models.Food? Food { get; set; }
 
