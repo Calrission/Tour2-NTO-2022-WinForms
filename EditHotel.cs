@@ -37,7 +37,7 @@ namespace TravelCompanyCore
             using (ApplicationContext db = new ApplicationContext())
             {
                 var regions = db.Regions.ToList();
-                var managers = db.Contacts.ToList();
+                var managers = db.Contacts.ToList().FindAll(t => t.ToString() != "");
                 comboBoxRegion.DataSource = regions;
                 comboBoxManager.DataSource = managers;
 

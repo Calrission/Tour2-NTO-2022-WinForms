@@ -21,6 +21,8 @@ namespace TravelCompanyCore.Models
 
         public override string ToString() // Чтобы корректно работало отображение в родительском объекте при привязке в DataGridView
         {
+            if (LastName.Length == 0 || FirstName.Length == 0 || PatronymicName.Length == 0)
+                return "";
             return string.IsNullOrEmpty(PatronymicName) ? string.Format("{0} {1}.", LastName, FirstName[0]) : string.Format("{0} {1}.{2}.", LastName, FirstName[0], PatronymicName[0]);
         }
 
