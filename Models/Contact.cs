@@ -29,8 +29,6 @@ namespace TravelCompanyCore.Models
             {
                 return ToString();
             }
-        }
-
-        
+        }        
     }
 }

@@ -12,12 +12,17 @@ namespace TravelCompanyCore.Models
 
         public string Name { get; set; }
 
-        public Guid ManagerId { get; set; }
+        public Guid ContactId { get; set; }
 
-        public Models.Contact? Manager { get; set; }
+        public Models.Contact? Contact { get; set; }
 
-        public Guid TypeClientId { get; set; }
+        public Guid ClientTypeId { get; set; }
 
-        public Models.TypeClient? TypeClient { get; set; }
+        public Models.ClientType? ClientType { get; set; }
+
+        public string PhoneNumber 
+        {
+            get { return Contact != null ? Contact.PhoneNumber : "-"; }
+        }
     }
 }

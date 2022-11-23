@@ -17,7 +17,7 @@ namespace TravelCompanyCore
 
         public DbSet<Models.Food> Foods => Set<Models.Food>();
 
-        public DbSet<Models.TypeClient> TypesClient => Set<Models.TypeClient>();
+        public DbSet<Models.ClientType> TypesClient => Set<Models.ClientType>();
 
         public DbSet<Models.Tour> Tours => Set<Models.Tour>();
 
@@ -64,6 +64,7 @@ namespace TravelCompanyCore
                     // А Степана Порожнева и Епифанова Николая - Управляющими отеля
                     new { ContactsId = Guid.Parse("4B37D5EF-0A58-4EDC-9E57-953C59E46BA4"), RolesId = Guid.Parse("514F8200-EB0E-4241-9114-C7CBB6E5AC2F") },
                     new { ContactsId = Guid.Parse("242B1D5F-9103-474A-AEC4-F9143E87D58B"), RolesId = Guid.Parse("514F8200-EB0E-4241-9114-C7CBB6E5AC2F") }
+                    
                     )
                 );
 
@@ -75,9 +76,15 @@ namespace TravelCompanyCore
                 );
 
             // Инициализируем Типы клиентов
-            modelBuilder.Entity<Models.TypeClient>().HasData(
-                new Models.TypeClient { Id = Guid.Parse("cd3b7458-6f73-49c3-a56b-af81101cc3cd"), Name = "физическое лицо" },
-                new Models.TypeClient { Id = Guid.Parse("65bc9547-acd5-420e-8d60-0f037bfc4e79"), Name = "юридическое лицо" }
+            modelBuilder.Entity<Models.ClientType>().HasData(
+                new Models.ClientType { Id = Guid.Parse("cd3b7458-6f73-49c3-a56b-af81101cc3cd"), Name = "физическое лицо" },
+                new Models.ClientType { Id = Guid.Parse("65bc9547-acd5-420e-8d60-0f037bfc4e79"), Name = "юридическое лицо" }
+                );
+
+            // Инициализируем Клиентов
+            modelBuilder.Entity<Models.Client>().HasData(
+                new Models.Client { Id = Guid.Parse("6d97731c-8408-4430-9c71-072842173fd4"), Name = "Турагенство «Ромашка»", ContactId = Guid.Parse("264FD9D1-0E27-4609-B7CD-344FB3FD044F"), ClientTypeId = Guid.Parse("65bc9547-acd5-420e-8d60-0f037bfc4e79") },
+                new Models.Client { Id = Guid.Parse("87f50d79-1c38-47ce-acf6-0a7aa6de3fbd"), Name = "Агенство «Васильки»", ContactId = Guid.Parse("4B37D5EF-0A58-4EDC-9E57-953C59E46BA4"), ClientTypeId = Guid.Parse("65bc9547-acd5-420e-8d60-0f037bfc4e79") }
                 );
 
             // Инициализируем Отели
