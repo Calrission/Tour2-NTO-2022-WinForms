@@ -33,13 +33,15 @@
             this.btnContacts = new System.Windows.Forms.Button();
             this.btnHotels = new System.Windows.Forms.Button();
             this.btnTours = new System.Windows.Forms.Button();
+            this.btnClients = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnRegions
             // 
-            this.btnRegions.Location = new System.Drawing.Point(155, 24);
+            this.btnRegions.Location = new System.Drawing.Point(177, 32);
+            this.btnRegions.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnRegions.Name = "btnRegions";
-            this.btnRegions.Size = new System.Drawing.Size(189, 23);
+            this.btnRegions.Size = new System.Drawing.Size(216, 31);
             this.btnRegions.TabIndex = 0;
             this.btnRegions.Text = "Регионы";
             this.btnRegions.UseVisualStyleBackColor = true;
@@ -47,9 +49,10 @@
             // 
             // btnRoles
             // 
-            this.btnRoles.Location = new System.Drawing.Point(155, 64);
+            this.btnRoles.Location = new System.Drawing.Point(177, 85);
+            this.btnRoles.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnRoles.Name = "btnRoles";
-            this.btnRoles.Size = new System.Drawing.Size(189, 23);
+            this.btnRoles.Size = new System.Drawing.Size(216, 31);
             this.btnRoles.TabIndex = 1;
             this.btnRoles.Text = "Роли";
             this.btnRoles.UseVisualStyleBackColor = true;
@@ -57,9 +60,10 @@
             // 
             // btnContacts
             // 
-            this.btnContacts.Location = new System.Drawing.Point(155, 105);
+            this.btnContacts.Location = new System.Drawing.Point(177, 140);
+            this.btnContacts.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnContacts.Name = "btnContacts";
-            this.btnContacts.Size = new System.Drawing.Size(189, 23);
+            this.btnContacts.Size = new System.Drawing.Size(216, 31);
             this.btnContacts.TabIndex = 2;
             this.btnContacts.Text = "Контакты";
             this.btnContacts.UseVisualStyleBackColor = true;
@@ -67,9 +71,10 @@
             // 
             // btnHotels
             // 
-            this.btnHotels.Location = new System.Drawing.Point(155, 146);
+            this.btnHotels.Location = new System.Drawing.Point(177, 195);
+            this.btnHotels.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnHotels.Name = "btnHotels";
-            this.btnHotels.Size = new System.Drawing.Size(189, 23);
+            this.btnHotels.Size = new System.Drawing.Size(216, 31);
             this.btnHotels.TabIndex = 3;
             this.btnHotels.Text = "Отели";
             this.btnHotels.UseVisualStyleBackColor = true;
@@ -77,25 +82,39 @@
             // 
             // btnTours
             // 
-            this.btnTours.Location = new System.Drawing.Point(155, 192);
+            this.btnTours.Location = new System.Drawing.Point(177, 248);
+            this.btnTours.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnTours.Name = "btnTours";
-            this.btnTours.Size = new System.Drawing.Size(189, 23);
+            this.btnTours.Size = new System.Drawing.Size(216, 31);
             this.btnTours.TabIndex = 4;
             this.btnTours.Text = "Туры";
             this.btnTours.UseVisualStyleBackColor = true;
             this.btnTours.Click += new System.EventHandler(this.btnTours_Click);
             // 
+            // btnClients
+            // 
+            this.btnClients.Location = new System.Drawing.Point(177, 302);
+            this.btnClients.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnClients.Name = "btnClients";
+            this.btnClients.Size = new System.Drawing.Size(216, 31);
+            this.btnClients.TabIndex = 5;
+            this.btnClients.Text = "Клиенты";
+            this.btnClients.UseVisualStyleBackColor = true;
+            this.btnClients.Click += new System.EventHandler(this.btnClients_Click);
+            // 
             // StartForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(503, 450);
+            this.ClientSize = new System.Drawing.Size(575, 600);
+            this.Controls.Add(this.btnClients);
             this.Controls.Add(this.btnTours);
             this.Controls.Add(this.btnHotels);
             this.Controls.Add(this.btnContacts);
             this.Controls.Add(this.btnRoles);
             this.Controls.Add(this.btnRegions);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.Name = "StartForm";
             this.Text = "Туристическое агенство «АЛЛА»";
@@ -111,5 +130,6 @@
         private Button btnContacts;
         private Button btnHotels;
         private Button btnTours;
+        private Button btnClients;
     }
 }
