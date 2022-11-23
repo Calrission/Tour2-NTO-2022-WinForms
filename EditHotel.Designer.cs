@@ -114,6 +114,7 @@
             // comboBoxRegion
             // 
             this.comboBoxRegion.DisplayMember = "Name";
+            this.comboBoxRegion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxRegion.FormattingEnabled = true;
             this.comboBoxRegion.Location = new System.Drawing.Point(128, 221);
             this.comboBoxRegion.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -143,6 +144,7 @@
             // comboBoxManager
             // 
             this.comboBoxManager.DisplayMember = "Fio";
+            this.comboBoxManager.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxManager.FormattingEnabled = true;
             this.comboBoxManager.Location = new System.Drawing.Point(128, 260);
             this.comboBoxManager.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);

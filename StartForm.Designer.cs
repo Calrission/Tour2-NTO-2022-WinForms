@@ -32,6 +32,7 @@
             this.btnRoles = new System.Windows.Forms.Button();
             this.btnContacts = new System.Windows.Forms.Button();
             this.btnHotels = new System.Windows.Forms.Button();
+            this.btnTours = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnRegions
@@ -74,11 +75,22 @@
             this.btnHotels.UseVisualStyleBackColor = true;
             this.btnHotels.Click += new System.EventHandler(this.btnHotels_Click);
             // 
+            // btnTours
+            // 
+            this.btnTours.Location = new System.Drawing.Point(155, 192);
+            this.btnTours.Name = "btnTours";
+            this.btnTours.Size = new System.Drawing.Size(189, 23);
+            this.btnTours.TabIndex = 4;
+            this.btnTours.Text = "Туры";
+            this.btnTours.UseVisualStyleBackColor = true;
+            this.btnTours.Click += new System.EventHandler(this.btnTours_Click);
+            // 
             // StartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(503, 450);
+            this.Controls.Add(this.btnTours);
             this.Controls.Add(this.btnHotels);
             this.Controls.Add(this.btnContacts);
             this.Controls.Add(this.btnRoles);
@@ -98,5 +110,6 @@
         private Button btnRoles;
         private Button btnContacts;
         private Button btnHotels;
+        private Button btnTours;
     }
 }

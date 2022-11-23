@@ -15,6 +15,14 @@ namespace TravelCompanyCore
         public DbSet<Models.Contact> Contacts => Set<Models.Contact>();
         public DbSet<Models.Hotel> Hotels => Set<Models.Hotel>();
 
+        public DbSet<Models.Food> Foods => Set<Models.Food>();
+
+        public DbSet<Models.TypeClient> TypesClient => Set<Models.TypeClient>();
+
+        public DbSet<Models.Tour> Tours => Set<Models.Tour>();
+
+        public DbSet<Models.Client> Clients => Set<Models.Client>();
+
         public ApplicationContext() => Database.EnsureCreated();
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -57,6 +65,19 @@ namespace TravelCompanyCore
                     new { ContactsId = Guid.Parse("4B37D5EF-0A58-4EDC-9E57-953C59E46BA4"), RolesId = Guid.Parse("514F8200-EB0E-4241-9114-C7CBB6E5AC2F") },
                     new { ContactsId = Guid.Parse("242B1D5F-9103-474A-AEC4-F9143E87D58B"), RolesId = Guid.Parse("514F8200-EB0E-4241-9114-C7CBB6E5AC2F") }
                     )
+                );
+
+            // Инициализируем Питание
+            modelBuilder.Entity<Models.Food>().HasData(
+                new Models.Food { Id = Guid.Parse("f3ab28b7-b8a7-4c82-8584-335c58f2d000"), Name = "без питания" },
+                new Models.Food { Id = Guid.Parse("a1e10f82-c118-483f-adde-6d9f1162f03d"), Name = "с завтраком" },
+                new Models.Food { Id = Guid.Parse("5bfbcef2-0acb-4d1c-b718-35745f46bc07"), Name = "3-х разовое" }
+                );
+
+            // Инициализируем Типы клиентов
+            modelBuilder.Entity<Models.TypeClient>().HasData(
+                new Models.TypeClient { Id = Guid.Parse("cd3b7458-6f73-49c3-a56b-af81101cc3cd"), Name = "физическое лицо" },
+                new Models.TypeClient { Id = Guid.Parse("65bc9547-acd5-420e-8d60-0f037bfc4e79"), Name = "юридическое лицо" }
                 );
 
             // Инициализируем Отели
