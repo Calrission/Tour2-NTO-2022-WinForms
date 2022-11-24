@@ -43,10 +43,9 @@
             // btnDelete
             // 
             this.btnDelete.Enabled = false;
-            this.btnDelete.Location = new System.Drawing.Point(197, 397);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnDelete.Location = new System.Drawing.Point(172, 326);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(86, 31);
+            this.btnDelete.Size = new System.Drawing.Size(75, 23);
             this.btnDelete.TabIndex = 19;
             this.btnDelete.Text = "Удалить";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -55,10 +54,9 @@
             // btnEdit
             // 
             this.btnEdit.Enabled = false;
-            this.btnEdit.Location = new System.Drawing.Point(104, 397);
-            this.btnEdit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnEdit.Location = new System.Drawing.Point(91, 326);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(86, 31);
+            this.btnEdit.Size = new System.Drawing.Size(75, 23);
             this.btnEdit.TabIndex = 18;
             this.btnEdit.Text = "Изменить";
             this.btnEdit.UseVisualStyleBackColor = true;
@@ -66,10 +64,9 @@
             // 
             // btnCreate
             // 
-            this.btnCreate.Location = new System.Drawing.Point(12, 397);
-            this.btnCreate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnCreate.Location = new System.Drawing.Point(10, 326);
             this.btnCreate.Name = "btnCreate";
-            this.btnCreate.Size = new System.Drawing.Size(86, 31);
+            this.btnCreate.Size = new System.Drawing.Size(75, 23);
             this.btnCreate.TabIndex = 17;
             this.btnCreate.Text = "Создать";
             this.btnCreate.UseVisualStyleBackColor = true;
@@ -88,16 +85,16 @@
             this.PhoneNumber,
             this.TypeClient});
             this.dgwClients.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgwClients.Location = new System.Drawing.Point(12, 22);
-            this.dgwClients.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dgwClients.Location = new System.Drawing.Point(10, 44);
             this.dgwClients.MultiSelect = false;
             this.dgwClients.Name = "dgwClients";
             this.dgwClients.ReadOnly = true;
             this.dgwClients.RowHeadersWidth = 51;
             this.dgwClients.RowTemplate.Height = 25;
             this.dgwClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgwClients.Size = new System.Drawing.Size(951, 367);
+            this.dgwClients.Size = new System.Drawing.Size(832, 275);
             this.dgwClients.TabIndex = 16;
+            this.dgwClients.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwClients_CellDoubleClick);
             this.dgwClients.SelectionChanged += new System.EventHandler(this.dgwClients_SelectionChanged);
             // 
             // Id
@@ -148,13 +145,16 @@
             // 
             // ClientList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(978, 450);
+            this.ClientSize = new System.Drawing.Size(856, 358);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.dgwClients);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximizeBox = false;
             this.Name = "ClientList";
             this.Text = "Список клиентов";
             this.Load += new System.EventHandler(this.ClientList_Load);

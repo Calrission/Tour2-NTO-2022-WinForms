@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualBasic.Devices;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,8 @@ namespace TravelCompanyCore.Models
 {
     internal class Contact
     {
+        [NotMapped]
+        public static readonly Guid BotId = Guid.Parse("EE91E6A7-CB38-4DB0-B702-04D0903CF231"); // Id Бота Пахома, чтоб было с чем сравнивать
         public Guid Id { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
@@ -21,16 +24,24 @@ namespace TravelCompanyCore.Models
 
         public override string ToString() // Чтобы корректно работало отображение в родительском объекте при привязке в DataGridView
         {
-            if (LastName.Length == 0 || FirstName.Length == 0 || PatronymicName.Length == 0)
-                return "";
-            return string.IsNullOrEmpty(PatronymicName) ? string.Format("{0} {1}.", LastName, FirstName[0]) : string.Format("{0} {1}.{2}.", LastName, FirstName[0], PatronymicName[0]);
+            return FullName;
         }
 
-        public string Fio {
+        public string ShortFullName
+        {
             get
             {
-                return ToString();
+                if (Id == BotId) return "сам клиент";
+                return string.IsNullOrEmpty(PatronymicName) ? string.Format("{0} {1}.", LastName, FirstName[0]) : string.Format("{0} {1}.{2}.", LastName, FirstName[0], PatronymicName[0]);
             }
-        }        
+        }
+        public string FullName
+        {
+            get
+            {
+                if (Id == BotId) return "сам клиент";
+                return string.IsNullOrEmpty(PatronymicName) ? string.Format("{0} {1}", LastName, FirstName) : string.Format("{0} {1} {2}", LastName, FirstName, PatronymicName);
+            }
+        }
     }
 }

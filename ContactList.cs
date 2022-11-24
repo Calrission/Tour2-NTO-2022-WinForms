@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TravelCompanyCore.Models;
 
 namespace TravelCompanyCore
 {
@@ -22,7 +23,8 @@ namespace TravelCompanyCore
             using (ApplicationContext db = new ApplicationContext())
             {
                 // получаем объекты из бд и выводим в грид
-                dgwContacts.DataSource = db.Contacts.ToList().FindAll(t => t.ToString() != "");
+                dgwContacts.AutoGenerateColumns = false;
+                dgwContacts.DataSource = db.Contacts.ToList().FindAll(t => t.Id != Contact.BotId); // Пахома оставляем за бортом, он не редактируемый
             }
         }
 

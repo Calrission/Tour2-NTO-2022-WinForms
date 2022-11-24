@@ -20,9 +20,16 @@ namespace TravelCompanyCore.Models
 
         public Models.ClientType? ClientType { get; set; }
 
-        public string PhoneNumber 
+        private string selfPhoneNumber;
+        public string PhoneNumber  // Для физика возвращается его телефон, для юрика - телефон его Контакта
         {
-            get { return Contact != null ? Contact.PhoneNumber : "-"; }
+            get
+            {
+                if (ContactId == Contact.BotId) return selfPhoneNumber;
+                if (Contact != null) return Contact.PhoneNumber;
+                else return "?????"; // Нужно при привязке?
+            }
+            set { selfPhoneNumber = value; }
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TravelCompanyCore.Models;
 
 namespace TravelCompanyCore
 {
@@ -25,11 +26,18 @@ namespace TravelCompanyCore
 
         private void EditTour_Load(object sender, EventArgs e)
         {
-            dateTimeStart.Format = DateTimePickerFormat.Custom;
-            dateTimeStart.CustomFormat = "MM/dd/yyyy hh:mm:ss";
+            // инициализация контролов выбора дат
+            DateTime dtNow = DateTime.Now;
 
-            dateTimeEnd.Format = DateTimePickerFormat.Custom;
-            dateTimeEnd.CustomFormat = "MM/dd/yyyy hh:mm:ss";
+            dateTimeStart.Value = new DateTime(dtNow.Year, dtNow.Month, dtNow.Day, 12, 0, 0, 0); // Расчётный час заезда - 12:00
+            dateTimeEnd.Value = new DateTime(dtNow.Year, dtNow.Month, dtNow.Day, 14, 0, 0, 0); // Расчётный час выезда - 14:00
+
+            // ИМХО это мудрёж ненужный - никто не считает время заезда/выезда с такой точностью
+            //dateTimeStart.Format = DateTimePickerFormat.Custom;
+            //dateTimeStart.CustomFormat = "MM/dd/yyyy hh:mm:ss";
+
+            //dateTimeEnd.Format = DateTimePickerFormat.Custom;
+            //dateTimeEnd.CustomFormat = "MM/dd/yyyy hh:mm:ss";
 
             using (ApplicationContext db = new ApplicationContext()){
                 comboFoods.DataSource = db.Foods.ToList();
@@ -49,7 +57,6 @@ namespace TravelCompanyCore
                 {
                     EditableTour = new Models.Tour();
                 }
-
             }
         }
 
@@ -68,8 +75,6 @@ namespace TravelCompanyCore
                     EditableTour.FoodId = (Guid)comboFoods.SelectedValue;
                     EditableTour.StartDateTime = dateTimeStart.Value;
                     EditableTour.EndDateTime = dateTimeEnd.Value;
-                    EditableTour.NightAmount = CalcNightsBetweenStartEnd();
-                    EditableTour.DayAmount = EditableTour.NightAmount + 1;
 
                     if (isNew)
                     {
@@ -85,15 +90,6 @@ namespace TravelCompanyCore
             }
         }
 
-        private int CalcNightsBetweenStartEnd() 
-        {
-            int NightsAmount = 0; // Если въезд и выезд в один день, то количество ночей равно нулю, а количество дней, соответственно - единице
-
-            double totalDays = (dateTimeEnd.Value - dateTimeStart.Value).TotalDays;
-            NightsAmount = (int)Math.Floor(totalDays); // 0.0833334 - это величина, чуть большая TotalDays между 12 и 14 часами
-            return NightsAmount;
-        }
-
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -105,6 +101,8 @@ namespace TravelCompanyCore
                 return false;
             if (dateTimeEnd.Value.Date < dateTimeStart.Value.Date)
                 return false;
+            if (comboHotels.SelectedItem == null)
+                return false;
             return true;
         }
 
@@ -114,6 +112,8 @@ namespace TravelCompanyCore
                 errorProvider1.SetError(rtxtTourDescription, "Описание не должно быть длинне 500 символов!");
             else if (dateTimeEnd.Value.Date  < dateTimeStart.Value.Date)
                 errorProvider1.SetError(dateTimeEnd, "Дата отъезда не должна быть раньше даты заезда");
+            else if (comboHotels.SelectedItem==null)
+                errorProvider1.SetError(comboHotels, "Выберите (при необходимости создайте) Отель!");
             else
                 errorProvider1.Clear();
         }

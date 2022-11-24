@@ -1,4 +1,7 @@
-﻿namespace TravelCompanyCore.Models
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace TravelCompanyCore.Models
 {
     internal class Tour
     {
@@ -10,18 +13,21 @@
 
         public DateTime StartDateTime { get; set; }
 
-        public DateTime EndDateTime { get; set;  }
+        public DateTime EndDateTime { get; set; }
 
-        public int NightAmount
+        private int nights;
+        public int NightsAmount {
+            get { return (int)Math.Floor((EndDateTime - StartDateTime).TotalDays); }
+            set { nights = NightsAmount; }
+        }
+        private int days;
+        public int DaysAmount
         {
-            get;
-            set;
+            get { return NightsAmount + 1; }
+            set { days = NightsAmount; }
         }
-
-        public int DayAmount {
-            get;
-            set; 
-        }
+        [NotMapped]
+        public string DaysPerNights { get { return string.Format("{0}\\{1}", DaysAmount.ToString(), NightsAmount.ToString()); } }
 
         public Models.Food? Food { get; set; }
 
@@ -30,5 +36,6 @@
         public Single Cost { get; set; }
 
         public string Description { get; set; }
+
     }
 }

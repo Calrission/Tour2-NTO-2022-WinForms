@@ -79,5 +79,10 @@ namespace TravelCompanyCore
                 }
             }
         }
+
+        private void dgwTours_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            btnEdit_Click(sender, new EventArgs());
+        }
     }
 }

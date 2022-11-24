@@ -32,8 +32,13 @@ namespace TravelCompanyCore
             if (EditableRole != null)
             {
                 txtRoleName.Text = EditableRole.Name;
+                txtRoleName.Enabled = !EditableRole.isSystem;
+
                 rtxtRoleDescription.Text = EditableRole.Description;
+                rtxtRoleDescription.Enabled = !EditableRole.isSystem;
+
                 lblRoleNameValidation.Text = String.Empty;
+                btnOK.Enabled = !EditableRole.isSystem;
             }
             else lblRoleNameValidation.Text = "Форма загружена не правильно, обратитесь к Грише";
         }
@@ -44,7 +49,7 @@ namespace TravelCompanyCore
 
             if (isModelValid())
             {
-                if (EditableRole != null)
+                if (EditableRole != null && EditableRole.isSystem == false)
                 {
                     if (EditableRole.Id == Guid.Empty) // Создание Роли
                     {
@@ -53,6 +58,7 @@ namespace TravelCompanyCore
                     }
                     EditableRole.Name = txtRoleName.Text.Trim();
                     EditableRole.Description = rtxtRoleDescription.Text.Trim();
+                    EditableRole.isSystem = false;
 
                     using (ApplicationContext db = new ApplicationContext())
                     {

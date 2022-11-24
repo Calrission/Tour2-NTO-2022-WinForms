@@ -35,6 +35,7 @@
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RoleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RoleDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isSystem = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgwRoles)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,7 +80,8 @@
             this.dgwRoles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
             this.RoleName,
-            this.RoleDescription});
+            this.RoleDescription,
+            this.isSystem});
             this.dgwRoles.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgwRoles.Location = new System.Drawing.Point(12, 45);
             this.dgwRoles.MultiSelect = false;
@@ -116,6 +118,14 @@
             this.RoleDescription.ReadOnly = true;
             this.RoleDescription.Width = 500;
             // 
+            // isSystem
+            // 
+            this.isSystem.DataPropertyName = "isSystem";
+            this.isSystem.HeaderText = "Системная роль";
+            this.isSystem.Name = "isSystem";
+            this.isSystem.ReadOnly = true;
+            this.isSystem.Visible = false;
+            // 
             // RoleList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -144,5 +154,6 @@
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn RoleName;
         private DataGridViewTextBoxColumn RoleDescription;
+        private DataGridViewTextBoxColumn isSystem;
     }
 }

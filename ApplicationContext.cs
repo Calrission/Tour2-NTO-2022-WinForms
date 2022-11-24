@@ -43,8 +43,9 @@ namespace TravelCompanyCore
 
             // Инициализируем Роли
             modelBuilder.Entity<Models.Role>().HasData(
-                new Models.Role { Id = Guid.Parse("DA03F4BA-ED97-481B-8A47-ED885E08B6B5"), Name = "Администратор", Description = "Человек, который может ВСЁ" },
-                new Models.Role { Id = Guid.Parse("514F8200-EB0E-4241-9114-C7CBB6E5AC2F"), Name = "Менеджер", Description = "Управляющий делами отеля" }
+                new Models.Role { Id = Guid.Parse("DA03F4BA-ED97-481B-8A47-ED885E08B6B5"), Name = "Администратор", Description = "Человек, который может ВСЁ", isSystem = true },
+                new Models.Role { Id = Guid.Parse("6068F976-B092-475B-A8AB-BEA2DD2EDBBA"), Name = "Контакт клиента", Description = "Представляет интересы клиента", isSystem = true },
+                new Models.Role { Id = Guid.Parse("514F8200-EB0E-4241-9114-C7CBB6E5AC2F"), Name = "Менеджер", Description = "Управляющий делами отеля", isSystem = true }
                 );
 
             // Инициализируем Контакты
@@ -52,7 +53,7 @@ namespace TravelCompanyCore
                 new Models.Contact { Id = Guid.Parse("264FD9D1-0E27-4609-B7CD-344FB3FD044F"), LastName = "Лебедихин", FirstName = "Петр", PatronymicName = "Степанович", EmailAddress = "lebedichp@yandex.ru", PhoneNumber = "+79091256789" },
                 new Models.Contact { Id = Guid.Parse("4B37D5EF-0A58-4EDC-9E57-953C59E46BA4"), LastName = "Порожнев", FirstName = "Степан", PatronymicName = "Аркадиевич", EmailAddress = "stepaporozhnev@gmail.com", PhoneNumber = "+75376432905" },
                 new Models.Contact { Id = Guid.Parse("242B1D5F-9103-474A-AEC4-F9143E87D58B"), LastName = "Епифанов", FirstName = "Николай", PatronymicName = "Александрович", EmailAddress = "kolyaepifan@yandex.ru", PhoneNumber = "+79536789123" },
-                new Models.Contact { Id = Guid.Parse("242B1D5F-9103-474A-AEC4-F9143E87D58A"), LastName = "", FirstName = "", PatronymicName = "", EmailAddress = "", PhoneNumber = "" }
+                new Models.Contact { Id = Guid.Parse("EE91E6A7-CB38-4DB0-B702-04D0903CF231"), LastName = "Бот", FirstName = "Пахом", PatronymicName = "", EmailAddress = "", PhoneNumber = "" }
                 );
 
             // Добавляем Контакты в Роли
@@ -64,8 +65,12 @@ namespace TravelCompanyCore
                     new { ContactsId = Guid.Parse("264FD9D1-0E27-4609-B7CD-344FB3FD044F"), RolesId = Guid.Parse("514F8200-EB0E-4241-9114-C7CBB6E5AC2F") },
                     // А Степана Порожнева и Епифанова Николая - Управляющими отеля
                     new { ContactsId = Guid.Parse("4B37D5EF-0A58-4EDC-9E57-953C59E46BA4"), RolesId = Guid.Parse("514F8200-EB0E-4241-9114-C7CBB6E5AC2F") },
-                    new { ContactsId = Guid.Parse("242B1D5F-9103-474A-AEC4-F9143E87D58B"), RolesId = Guid.Parse("514F8200-EB0E-4241-9114-C7CBB6E5AC2F") }
-                    
+                    new { ContactsId = Guid.Parse("242B1D5F-9103-474A-AEC4-F9143E87D58B"), RolesId = Guid.Parse("514F8200-EB0E-4241-9114-C7CBB6E5AC2F") },
+                    // Епифанов Николай также отправляется в Контакты Клиента
+                    new { ContactsId = Guid.Parse("242B1D5F-9103-474A-AEC4-F9143E87D58B"), RolesId = Guid.Parse("6068F976-B092-475B-A8AB-BEA2DD2EDBBA") },
+                    // А Пахома - Контактом клиента
+                    new { ContactsId = Guid.Parse("EE91E6A7-CB38-4DB0-B702-04D0903CF231"), RolesId = Guid.Parse("6068F976-B092-475B-A8AB-BEA2DD2EDBBA") }
+
                     )
                 );
 
@@ -84,8 +89,9 @@ namespace TravelCompanyCore
 
             // Инициализируем Клиентов
             modelBuilder.Entity<Models.Client>().HasData(
-                new Models.Client { Id = Guid.Parse("6d97731c-8408-4430-9c71-072842173fd4"), Name = "Турагенство «Ромашка»", ContactId = Guid.Parse("264FD9D1-0E27-4609-B7CD-344FB3FD044F"), ClientTypeId = Guid.Parse("65bc9547-acd5-420e-8d60-0f037bfc4e79") },
-                new Models.Client { Id = Guid.Parse("87f50d79-1c38-47ce-acf6-0a7aa6de3fbd"), Name = "Агенство «Васильки»", ContactId = Guid.Parse("4B37D5EF-0A58-4EDC-9E57-953C59E46BA4"), ClientTypeId = Guid.Parse("65bc9547-acd5-420e-8d60-0f037bfc4e79") }
+                new Models.Client { Id = Guid.Parse("6d97731c-8408-4430-9c71-072842173fd4"), Name = "Турагенство «Ромашка»", ContactId = Guid.Parse("242B1D5F-9103-474A-AEC4-F9143E87D58B"), ClientTypeId = Guid.Parse("65bc9547-acd5-420e-8d60-0f037bfc4e79"), PhoneNumber="" },
+                new Models.Client { Id = Guid.Parse("7DC4F070-A620-4A92-AA80-D4C099B836BE"), Name = "Сидоров Сысой Свиридович", ContactId = Guid.Parse("EE91E6A7-CB38-4DB0-B702-04D0903CF231"), ClientTypeId = Guid.Parse("cd3b7458-6f73-49c3-a56b-af81101cc3cd"), PhoneNumber = "+71011121212" },
+                new Models.Client { Id = Guid.Parse("87f50d79-1c38-47ce-acf6-0a7aa6de3fbd"), Name = "Агенство «Васильки»", ContactId = Guid.Parse("242B1D5F-9103-474A-AEC4-F9143E87D58B"), ClientTypeId = Guid.Parse("65bc9547-acd5-420e-8d60-0f037bfc4e79"), PhoneNumber = "" }
                 );
 
             // Инициализируем Отели

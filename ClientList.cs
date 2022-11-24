@@ -69,5 +69,10 @@ namespace TravelCompanyCore
             btnEdit.Enabled = isEditable;
             btnDelete.Enabled = isEditable;
         }
+
+        private void dgwClients_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            btnEdit_Click(sender, new EventArgs());
+        }
     }
 }

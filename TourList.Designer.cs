@@ -36,6 +36,7 @@
             this.HotelName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StartDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EndDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DaysPerNights = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Food = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -85,11 +86,12 @@
             this.HotelName,
             this.StartDateTime,
             this.EndDateTime,
+            this.DaysPerNights,
             this.Food,
             this.Cost,
             this.Description});
             this.dgwTours.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgwTours.Location = new System.Drawing.Point(20, 39);
+            this.dgwTours.Location = new System.Drawing.Point(16, 39);
             this.dgwTours.MultiSelect = false;
             this.dgwTours.Name = "dgwTours";
             this.dgwTours.ReadOnly = true;
@@ -97,6 +99,7 @@
             this.dgwTours.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgwTours.Size = new System.Drawing.Size(832, 275);
             this.dgwTours.TabIndex = 12;
+            this.dgwTours.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwTours_CellDoubleClick);
             this.dgwTours.SelectionChanged += new System.EventHandler(this.dgwTours_SelectionChanged);
             // 
             // Id
@@ -128,7 +131,13 @@
             this.EndDateTime.HeaderText = "Дата отъезда";
             this.EndDateTime.Name = "EndDateTime";
             this.EndDateTime.ReadOnly = true;
-            this.EndDateTime.Width = 150;
+            // 
+            // DaysPerNights
+            // 
+            this.DaysPerNights.DataPropertyName = "DaysPerNights";
+            this.DaysPerNights.HeaderText = "Дней\\Ночей";
+            this.DaysPerNights.Name = "DaysPerNights";
+            this.DaysPerNights.ReadOnly = true;
             // 
             // Food
             // 
@@ -143,7 +152,7 @@
             this.Cost.HeaderText = "Цена";
             this.Cost.Name = "Cost";
             this.Cost.ReadOnly = true;
-            this.Cost.Width = 200;
+            this.Cost.Width = 50;
             // 
             // Description
             // 
@@ -151,18 +160,19 @@
             this.Description.HeaderText = "Описание";
             this.Description.Name = "Description";
             this.Description.ReadOnly = true;
+            this.Description.Width = 200;
             // 
             // TourList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(864, 355);
+            this.ClientSize = new System.Drawing.Size(864, 352);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.dgwTours);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MinimizeBox = false;
+            this.MaximizeBox = false;
             this.Name = "TourList";
             this.Text = "Список туров";
             this.Load += new System.EventHandler(this.TourList_Load);
@@ -181,6 +191,7 @@
         private DataGridViewTextBoxColumn HotelName;
         private DataGridViewTextBoxColumn StartDateTime;
         private DataGridViewTextBoxColumn EndDateTime;
+        private DataGridViewTextBoxColumn DaysPerNights;
         private DataGridViewTextBoxColumn Food;
         private DataGridViewTextBoxColumn Cost;
         private DataGridViewTextBoxColumn Description;
