@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
+using TravelCompanyCore.Models;
 
 namespace TravelCompanyCore
 {
@@ -36,23 +37,23 @@ namespace TravelCompanyCore
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                var regions = db.Regions.ToList();
-                var managers = db.Contacts.ToList().FindAll(t => t.ToString() != "");
-                comboBoxRegion.DataSource = regions;
-                comboBoxManager.DataSource = managers;
-
+                comboBoxRegion.DataSource = db.Regions.ToList();
+                // Нас интересует только Контакты с ролью "Менеджер"
+                Role ManagerRole = db.Roles.FirstOrDefault(r => r.Id == Role.ManagerId);
+                comboBoxManager.DataSource = db.Contacts.Include(c => c.Roles).Where(t => t.Roles.Contains(ManagerRole)).ToList();
+                
                 if (EditableId != null && EditableId != Guid.Empty)
                 {
                     // При редактировании дозаполняем контакт значениями из БД, поскольку из грида всего не перетащишь
-                    Models.Hotel? EditableHotel = db.Hotels.Include(c => c.Region).ToList().Find(c => c.Id == EditableId); // благодаря инклюду прилетят и роли
+                    Models.Hotel? EditableHotel = db.Hotels.Include(c => c.Region).Include(c => c.Manager).ToList().Find(c => c.Id == EditableId); // благодаря инклюду прилетят и регион и менеджер
                     CheckState toCheckOrNotToCheck = CheckState.Unchecked; // Ставить ли галочку при привязке
 
                     txtName.Text = EditableHotel.Name;
                     rtxtHotelDescription.Text = EditableHotel.Description;
                     mtxtPhone.Text = EditableHotel.PhoneNumber;
                     mtxtPhone.Text = EditableHotel.PhoneNumber.Remove(0, 2); // За вычетом первых двух символов +7
-                    comboBoxRegion.SelectedIndex = regions.IndexOf(EditableHotel.Region);
-                    comboBoxManager.SelectedIndex = managers.IndexOf(EditableHotel.Manager);
+                    comboBoxRegion.SelectedItem = EditableHotel.Region;
+                    comboBoxManager.SelectedItem = EditableHotel.Manager;
                 }
 
             }
@@ -98,14 +99,14 @@ namespace TravelCompanyCore
                 using (ApplicationContext db = new ApplicationContext())
                 {
                     Models.Hotel EditableHotel = new();
-                    if (EditableId == Guid.Empty) // Создание Контакта
+                    if (EditableId == Guid.Empty) // Создание Отеля
                     {
                         isNew = true;
                         EditableHotel.Id = Guid.NewGuid(); // Генерим новичку Id...
                     }
-                    else // Редактирование Контакта
+                    else // Редактирование Отеля
                     {
-                        EditableHotel = db.Hotels.Find(EditableId); // С ролями, то есть
+                        EditableHotel = db.Hotels.Find(EditableId);
                     }
 
                     EditableHotel.Name = txtName.Text.Trim();

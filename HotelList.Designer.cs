@@ -104,6 +104,7 @@
             this.dgwHotels.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgwHotels.Size = new System.Drawing.Size(914, 275);
             this.dgwHotels.TabIndex = 12;
+            this.dgwHotels.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgwHotels_CellMouseDoubleClick);
             this.dgwHotels.SelectionChanged += new System.EventHandler(this.dgwHotels_SelectionChanged);
             // 
             // Id

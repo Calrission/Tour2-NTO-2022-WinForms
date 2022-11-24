@@ -80,5 +80,10 @@ namespace TravelCompanyCore
                 }
             }
         }
+
+        private void dgwHotels_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            btnEdit_Click(sender, new EventArgs());
+        }
     }
 }
