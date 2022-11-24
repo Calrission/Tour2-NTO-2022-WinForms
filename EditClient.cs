@@ -43,8 +43,12 @@ namespace TravelCompanyCore
         {
             if (txtName.Text.Trim().Length == 0)
                 return false;
-            if ((Guid)comboxClientType.SelectedValue == ClientType.IndividualId && string.IsNullOrEmpty(mtxtPhone.Text.Trim()) || !phone_validation().IsMatch(mtxtPhone.Text.Trim()))
-                return false;
+            if ((Guid)comboxClientType.SelectedValue == ClientType.IndividualId)
+            {
+                if (string.IsNullOrEmpty(mtxtPhone.Text.Trim()) || !phone_validation().IsMatch(mtxtPhone.Text.Trim()))
+                    return false;
+            }
+
             if (comboContact.SelectedItem == null)
                 return false;
             return true;
