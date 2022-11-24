@@ -38,6 +38,7 @@
             this.PatronymicName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PhoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ListOfRoles = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgwContacts)).BeginInit();
             this.SuspendLayout();
             // 
@@ -85,7 +86,8 @@
             this.FirstName,
             this.PatronymicName,
             this.PhoneNumber,
-            this.Email});
+            this.Email,
+            this.ListOfRoles});
             this.dgwContacts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgwContacts.Location = new System.Drawing.Point(12, 39);
             this.dgwContacts.MultiSelect = false;
@@ -144,6 +146,13 @@
             this.Email.ReadOnly = true;
             this.Email.Width = 200;
             // 
+            // ListOfRoles
+            // 
+            this.ListOfRoles.DataPropertyName = "ListOfRoles";
+            this.ListOfRoles.HeaderText = "Роли";
+            this.ListOfRoles.Name = "ListOfRoles";
+            this.ListOfRoles.ReadOnly = true;
+            // 
             // ContactList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -175,5 +184,6 @@
         private DataGridViewTextBoxColumn PatronymicName;
         private DataGridViewTextBoxColumn PhoneNumber;
         private DataGridViewTextBoxColumn Email;
+        private DataGridViewTextBoxColumn ListOfRoles;
     }
 }

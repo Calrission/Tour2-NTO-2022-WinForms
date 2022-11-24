@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,7 +25,7 @@ namespace TravelCompanyCore
             {
                 // получаем объекты из бд и выводим в грид
                 dgwContacts.AutoGenerateColumns = false;
-                dgwContacts.DataSource = db.Contacts.ToList().FindAll(t => t.Id != Contact.BotId); // Пахома оставляем за бортом, он не редактируемый
+                dgwContacts.DataSource = db.Contacts.Include(c=>c.Roles).ToList().FindAll(t => t.Id != Contact.BotId); // Пахома оставляем за бортом, он не редактируемый
             }
         }
 
@@ -51,7 +52,7 @@ namespace TravelCompanyCore
                         db.Contacts.Remove(contact);
                         db.SaveChanges();
                     }
-                    dgwContacts.DataSource = db.Contacts.ToList().FindAll(t => t.ToString() != ""); // перепривязка
+                    dgwContacts.DataSource = db.Contacts.Include(c => c.Roles).ToList().FindAll(t => t.ToString() != ""); // перепривязка
                 }
             }
         }
@@ -64,7 +65,7 @@ namespace TravelCompanyCore
                 if (ct.ShowDialog(this) == DialogResult.OK) // если юзер сохранился, перепривязываем грид
                 {
                     using (ApplicationContext db = new ApplicationContext())
-                        dgwContacts.DataSource = db.Contacts.ToList().FindAll(t => t.ToString() != "");
+                        dgwContacts.DataSource = db.Contacts.Include(c => c.Roles).ToList().FindAll(t => t.ToString() != "");
                 }
             }
         }
@@ -77,7 +78,7 @@ namespace TravelCompanyCore
                 if (ct.ShowDialog(this) == DialogResult.OK) // если юзер сохранился, перепривязываем грид
                 {
                     using (ApplicationContext db = new ApplicationContext())
-                        dgwContacts.DataSource = db.Contacts.ToList().FindAll(t => t.ToString() != "");
+                        dgwContacts.DataSource = db.Contacts.Include(c => c.Roles).ToList().FindAll(t => t.ToString() != "");
                 }
             }
         }
