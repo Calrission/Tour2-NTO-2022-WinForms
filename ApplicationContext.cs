@@ -10,19 +10,17 @@ namespace TravelCompanyCore
 {
     internal class ApplicationContext : DbContext
     {
-        public DbSet<Models.Region> Regions => Set<Models.Region>();
-        public DbSet<Models.Role> Roles => Set<Models.Role>();
-        public DbSet<Models.Contact> Contacts => Set<Models.Contact>();
-        public DbSet<Models.Hotel> Hotels => Set<Models.Hotel>();
-
-        public DbSet<Models.Food> Foods => Set<Models.Food>();
-
-        public DbSet<Models.ClientType> ClientTypes => Set<Models.ClientType>();
-        public DbSet<Models.PaymentType> PaymentTypes => Set<Models.PaymentType>();
-
-        public DbSet<Models.Tour> Tours => Set<Models.Tour>();
-
-        public DbSet<Models.Client> Clients => Set<Models.Client>();
+        public DbSet<Models.Region> Regions => Set<Models.Region>(); // Таблица Регионов
+        public DbSet<Models.Role> Roles => Set<Models.Role>(); // Справочник ролей. Содержит, в том числе, системные роли. Ограниченно редактируемый
+        public DbSet<Models.Contact> Contacts => Set<Models.Contact>(); // Таблица Контактов
+        public DbSet<Models.Hotel> Hotels => Set<Models.Hotel>(); // Таблица Отелей
+        public DbSet<Models.Food> Foods => Set<Models.Food>(); // Справочник Tипов питания. Не редактируемый
+        public DbSet<Models.ClientType> ClientTypes => Set<Models.ClientType>(); // Справочник Типов клиентов. Не редактируемый
+        public DbSet<Models.PaymentType> PaymentTypes => Set<Models.PaymentType>(); // Справочник Типов оплаты. Не редактируемый
+        public DbSet<Models.Tour> Tours => Set<Models.Tour>(); // Таблица Туров
+        public DbSet<Models.Client> Clients => Set<Models.Client>(); // Таблица Клиентов
+        public DbSet<Models.OrderItem> OrderItems => Set<Models.OrderItem>(); // Таблица для хранения Элементов заказа тура
+        public DbSet<Models.TourOrder> TourOrder => Set<Models.TourOrder>(); // Таблица Закзаов туров
 
         public ApplicationContext() => Database.EnsureCreated();
 
