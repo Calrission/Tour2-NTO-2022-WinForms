@@ -27,7 +27,7 @@ namespace TravelCompanyCore
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                comboxClientType.DataSource = db.TypesClient.ToList();
+                comboxClientType.DataSource = db.ClientTypes.ToList();
                 if (EditableId != Guid.Empty)
                 {
                     Client client = db.Clients.Find(EditableId);

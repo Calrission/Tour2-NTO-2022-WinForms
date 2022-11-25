@@ -17,7 +17,8 @@ namespace TravelCompanyCore
 
         public DbSet<Models.Food> Foods => Set<Models.Food>();
 
-        public DbSet<Models.ClientType> TypesClient => Set<Models.ClientType>();
+        public DbSet<Models.ClientType> ClientTypes => Set<Models.ClientType>();
+        public DbSet<Models.PaymentType> PaymentTypes => Set<Models.PaymentType>();
 
         public DbSet<Models.Tour> Tours => Set<Models.Tour>();
 
@@ -123,6 +124,12 @@ namespace TravelCompanyCore
                     RegionId = Guid.Parse("8FF98E1D-F2BA-4D2B-A3F7-A794755734A8"), // Москва
                     ManagerId = Guid.Parse("4B37D5EF-0A58-4EDC-9E57-953C59E46BA4") // Степан Порожнев 
                 }
+                );
+
+            // Инициализируем Типы оплаты
+            modelBuilder.Entity<Models.ClientType>().HasData(
+                new Models.ClientType { Id = Guid.Parse("4322B228-5CBC-4291-959A-F71222949833"), Name = "Кредит" },
+                new Models.ClientType { Id = Guid.Parse("9C67C785-C4A8-4576-8D52-205DCBB4F997"), Name = "Предоплата" }
                 );
 
         }
