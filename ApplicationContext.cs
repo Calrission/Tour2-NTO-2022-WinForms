@@ -19,8 +19,8 @@ namespace TravelCompanyCore
         public DbSet<Models.PaymentType> PaymentTypes => Set<Models.PaymentType>(); // Справочник Типов оплаты. Не редактируемый
         public DbSet<Models.Tour> Tours => Set<Models.Tour>(); // Таблица Туров
         public DbSet<Models.Client> Clients => Set<Models.Client>(); // Таблица Клиентов
-        public DbSet<Models.TourOrderItem> OrderItems => Set<Models.TourOrderItem>(); // Таблица для хранения Элементов заказа тура
-        public DbSet<Models.TourOrder> TourOrder => Set<Models.TourOrder>(); // Таблица Закзаов туров
+        public DbSet<Models.TourOrderItem> TourOrderItems => Set<Models.TourOrderItem>(); // Таблица для хранения Элементов заказа тура
+        public DbSet<Models.TourOrder> TourOrders => Set<Models.TourOrder>(); // Таблица Закзаов туров
 
         public ApplicationContext() => Database.EnsureCreated();
 
