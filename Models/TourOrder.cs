@@ -24,7 +24,7 @@ namespace TravelCompanyCore.Models
         /// <summary>
         /// Список туров в Заказе
         /// </summary>
-        List<OrderItem>? ToursInCart { get; set; }
+        List<TourOrderItem>? TourOrderItems { get; set; } // один тур ко многим элементам тура
         /// <summary>
         /// Суммарная стоимость Заказа
         /// </summary>
