@@ -95,11 +95,12 @@ namespace TravelCompanyCore
                 String.Format("Вы действительно хотите удалить тур «{0}»?", dgwTourOrderItems.SelectedCells[1].Value.ToString()),
                 "Запрос на удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
-                    Models.TourOrderItem? toi = to.TourOrderItems.FirstOrDefault(to => to.Id == (Guid)dgwTourOrderItems.SelectedCells[0].Value); // Находим удаляемый объект
-                    if (toi != null) // удаляем его
-                    {
-                        to.TourOrderItems.Remove(toi);
-                        dgwTourOrderItems.DataSource = to.TourOrderItems; // перепривязка
+                Models.TourOrderItem? toi = to.TourOrderItems.FirstOrDefault(to => to.Id == (Guid)dgwTourOrderItems.SelectedCells[0].Value); // Находим удаляемый объект
+                if (toi != null) // удаляем его
+                {
+                    dgwTourOrderItems.DataSource = new List<TourOrderItem>(); // отвязка
+                    to.TourOrderItems.Remove(toi); // удаление
+                    dgwTourOrderItems.DataSource = to.TourOrderItems; // перепривязка
                 }
             }
         }
@@ -117,12 +118,13 @@ namespace TravelCompanyCore
 
         private void dgwTourOrderItems_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0) // Исключаем заголовок грида
+            if (e.RowIndex >= 0 && e.RowIndex<= dgwTourOrderItems.Rows.Count-1) // Исключаем заголовок грида
             {
                 Guid rowId = (Guid)dgwTourOrderItems.Rows[e.RowIndex].Cells[0].Value;
                 to.TourOrderItems.Find(t => t.Id == rowId).Cost = decimal.ToDouble(decimal.Parse(dgwTourOrderItems.Rows[e.RowIndex].Cells[2].Value.ToString()) * decimal.Parse(dgwTourOrderItems.Rows[e.RowIndex].Cells[3].Value.ToString()));
                 dgwTourOrderItems.DataSource = to.TourOrderItems; // перепривязка
                 dgwTourOrderItems.Invalidate();
+                lblTotalCost.Text=to.TourOrderItems.Sum(t=>t.Cost).ToString();
             }
         }
 
