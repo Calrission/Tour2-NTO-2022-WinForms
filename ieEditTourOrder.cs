@@ -82,7 +82,7 @@ namespace TravelCompanyCore
                             to.TourOrderItems.Add(new TourOrderItem() { Id=Guid.NewGuid(), TourId=t.Id, Price=t.Cost, Quantity=0, Cost=0, TourOrderId= this.TourOrderId, Tour=t, TourOrder=this.to });
                         }
                         // Перепривязываем список элементов
-                        dgwTourOrderItems.DataSource = to.TourOrderItems;
+                        dgwTourOrderItems.DataSource = to.TourOrderItems.ToList();
                     }
                 }
             }
