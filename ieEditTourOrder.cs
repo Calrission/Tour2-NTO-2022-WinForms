@@ -23,6 +23,7 @@ namespace TravelCompanyCore
 
         private void ieEditTourOrder_Load(object sender, EventArgs e)
         {
+            dgwTourOrderItems.AutoGenerateColumns = false;
             using (ApplicationContext db = new ApplicationContext())
             {
                 comboClients.DataSource = db.Clients.ToList();
