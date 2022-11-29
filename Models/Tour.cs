@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Xml.Linq;
 
 namespace TravelCompanyCore.Models
 {
@@ -36,6 +37,15 @@ namespace TravelCompanyCore.Models
         public Single Cost { get; set; }
 
         public string Description { get; set; }
-
+        public override string ToString()
+        {
+            string result;
+            if (Hotel != null)
+                result = string.Format("{0} с {1} по {2}", Hotel.Name, StartDateTime.ToShortDateString(), EndDateTime.ToShortDateString());
+            else
+                result = string.Format("Дней\\Ночей: {0} с {1} по {2}", DaysPerNights, StartDateTime.ToShortDateString(), EndDateTime.ToShortDateString());
+            
+            return result;
+        }
     }
 }

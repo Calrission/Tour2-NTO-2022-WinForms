@@ -11,11 +11,27 @@ using System.Windows.Forms;
 
 namespace TravelCompanyCore
 {
+    public enum WorkingMode
+    {
+        Normal, TourSelection
+    }
     public partial class TourList : Form
     {
         public TourList()
         {
             InitializeComponent();
+        }
+
+        public WorkingMode workingMode; // Режим работы окна - обычный (Normal) или выбор строк для другого окна (TourSelection)
+
+        private List<Guid> selTours;
+        public List<Guid> SelectedToursId // Коллекция Id выбранных в гриде туров, работает только в режиме TourSelection
+        {
+            get
+            {
+                if (workingMode == WorkingMode.Normal) return new(); // Если свойство вызовут в режиме Normal, нужно вернуть List, а не null
+                else return selTours;
+            }
         }
 
         private void TourList_Load(object sender, EventArgs e)
@@ -25,6 +41,13 @@ namespace TravelCompanyCore
             {
                 // получаем объекты из бд и выводим в грид
                 dgwTours.DataSource = db.Tours.Include(t => t.Food).Include(t => t.Hotel).ToList();
+            }
+            if (workingMode == WorkingMode.TourSelection) // Настройка внешнего вида окна и активация SelectedToursId
+            {
+                btnSelect.Visible = true;
+                dgwTours.Columns[7].Width = dgwTours.Columns[7].Width - 30;
+                dgwTours.Columns[8].Visible = true;
+                selTours = new();
             }
         }
 
@@ -83,6 +106,18 @@ namespace TravelCompanyCore
         private void dgwTours_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             btnEdit_Click(sender, new EventArgs());
+        }
+
+        private void btnSelect_Click(object sender, EventArgs e)
+        {
+            selTours.Clear(); // На всякий случай
+            foreach (DataGridViewRow tourRow in dgwTours.Rows) // Шерстим все строки
+            {
+                if ((bool)tourRow.Cells[8].FormattedValue) // Если галочка стоит,
+                    selTours.Add((Guid)tourRow.Cells[0].Value); // добавляем Id строки в колллекцию выбранных Id
+            }
+            if (selTours.Count > 0) this.DialogResult = DialogResult.OK; // Чтобы понять, что выбор состоялся
+            this.Close();
         }
     }
 }

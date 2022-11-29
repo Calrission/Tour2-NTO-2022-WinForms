@@ -49,5 +49,11 @@ namespace TravelCompanyCore
             using (ClientList cl = new())
                 cl.ShowDialog();
         }
+
+        private void btnTourOrders_Click(object sender, EventArgs e)
+        {
+            using (ieTourOrderList tol = new())
+                tol.ShowDialog();
+        }
     }
 }

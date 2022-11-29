@@ -40,6 +40,8 @@
             this.Food = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Checked = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.btnSelect = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgwTours)).BeginInit();
             this.SuspendLayout();
             // 
@@ -89,12 +91,11 @@
             this.DaysPerNights,
             this.Food,
             this.Cost,
-            this.Description});
-            this.dgwTours.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.Description,
+            this.Checked});
             this.dgwTours.Location = new System.Drawing.Point(16, 39);
             this.dgwTours.MultiSelect = false;
             this.dgwTours.Name = "dgwTours";
-            this.dgwTours.ReadOnly = true;
             this.dgwTours.RowTemplate.Height = 25;
             this.dgwTours.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgwTours.Size = new System.Drawing.Size(832, 275);
@@ -131,13 +132,15 @@
             this.EndDateTime.HeaderText = "Дата отъезда";
             this.EndDateTime.Name = "EndDateTime";
             this.EndDateTime.ReadOnly = true;
+            this.EndDateTime.Width = 104;
             // 
             // DaysPerNights
             // 
             this.DaysPerNights.DataPropertyName = "DaysPerNights";
-            this.DaysPerNights.HeaderText = "Дней\\Ночей";
+            this.DaysPerNights.HeaderText = "Дней\\ Ночей";
             this.DaysPerNights.Name = "DaysPerNights";
             this.DaysPerNights.ReadOnly = true;
+            this.DaysPerNights.Width = 46;
             // 
             // Food
             // 
@@ -145,6 +148,7 @@
             this.Food.HeaderText = "Вид питания";
             this.Food.Name = "Food";
             this.Food.ReadOnly = true;
+            this.Food.Width = 74;
             // 
             // Cost
             // 
@@ -152,7 +156,7 @@
             this.Cost.HeaderText = "Цена";
             this.Cost.Name = "Cost";
             this.Cost.ReadOnly = true;
-            this.Cost.Width = 50;
+            this.Cost.Width = 46;
             // 
             // Description
             // 
@@ -160,13 +164,32 @@
             this.Description.HeaderText = "Описание";
             this.Description.Name = "Description";
             this.Description.ReadOnly = true;
-            this.Description.Width = 200;
+            this.Description.Width = 250;
+            // 
+            // Checked
+            // 
+            this.Checked.HeaderText = "*";
+            this.Checked.Name = "Checked";
+            this.Checked.Visible = false;
+            this.Checked.Width = 30;
+            // 
+            // btnSelect
+            // 
+            this.btnSelect.Location = new System.Drawing.Point(773, 320);
+            this.btnSelect.Name = "btnSelect";
+            this.btnSelect.Size = new System.Drawing.Size(75, 23);
+            this.btnSelect.TabIndex = 16;
+            this.btnSelect.Text = "Выбрать";
+            this.btnSelect.UseVisualStyleBackColor = true;
+            this.btnSelect.Visible = false;
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
             // TourList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(864, 352);
+            this.Controls.Add(this.btnSelect);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnCreate);
@@ -187,6 +210,7 @@
         private Button btnEdit;
         private Button btnCreate;
         private DataGridView dgwTours;
+        private Button btnSelect;
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn HotelName;
         private DataGridViewTextBoxColumn StartDateTime;
@@ -195,5 +219,6 @@
         private DataGridViewTextBoxColumn Food;
         private DataGridViewTextBoxColumn Cost;
         private DataGridViewTextBoxColumn Description;
+        private DataGridViewCheckBoxColumn Checked;
     }
 }

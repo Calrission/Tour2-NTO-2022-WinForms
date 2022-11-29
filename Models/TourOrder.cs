@@ -11,8 +11,11 @@ namespace TravelCompanyCore.Models
     /// </summary>
     internal class TourOrder
     {
-        public int Id { get; set; }
-        public int ClientId { get; set; }
+        public Guid Id { get; set; }
+        /// <summary>
+        /// Клиент из справочника
+        /// </summary>
+        public Guid ClientId { get; set; }
         /// <summary>
         /// Ссылка на полное описание Клиента (нужен Include!)
         /// </summary>
@@ -20,14 +23,18 @@ namespace TravelCompanyCore.Models
         /// <summary>
         /// Тип оплаты (справочное значение)
         /// </summary>
+        public Guid PaymentTypeId { get; set; }
+        /// <summary>
+        /// Ссылка на полное описание Типа оплаты (нужен Include!)
+        /// </summary>
         public PaymentType? PaymentType { get; set; }
         /// <summary>
         /// Список туров в Заказе
         /// </summary>
-        List<TourOrderItem>? TourOrderItems { get; set; } // один тур ко многим элементам тура
+        public List<TourOrderItem>? TourOrderItems { get; set; } // один тур ко многим элементам тура
         /// <summary>
         /// Суммарная стоимость Заказа
         /// </summary>
-        Double? TotalCost { get; set; }
+        public Double? TotalCost { get; set; }
     }
 }

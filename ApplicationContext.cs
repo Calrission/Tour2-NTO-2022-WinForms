@@ -125,9 +125,9 @@ namespace TravelCompanyCore
                 );
 
             // Инициализируем Типы оплаты
-            modelBuilder.Entity<Models.ClientType>().HasData(
-                new Models.ClientType { Id = Guid.Parse("4322B228-5CBC-4291-959A-F71222949833"), Name = "Кредит" },
-                new Models.ClientType { Id = Guid.Parse("9C67C785-C4A8-4576-8D52-205DCBB4F997"), Name = "Предоплата" }
+            modelBuilder.Entity<Models.PaymentType>().HasData(
+                new Models.PaymentType { Id = Guid.Parse("4322B228-5CBC-4291-959A-F71222949833"), Name = "Кредит" },
+                new Models.PaymentType { Id = Guid.Parse("9C67C785-C4A8-4576-8D52-205DCBB4F997"), Name = "Предоплата" }
                 );
 
         }
