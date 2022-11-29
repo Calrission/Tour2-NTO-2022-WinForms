@@ -77,12 +77,13 @@ namespace TravelCompanyCore
                     {
                         List<Tour> tll = db.Tours.Include(t => t.Hotel).Where(t => tl.SelectedToursId.Contains(t.Id)).ToList();
                         // Добавляем выбранные элементы
+                        dgwTourOrderItems.DataSource = new List<TourOrderItem>();
                         foreach (Tour t in tll)
                         {
                             to.TourOrderItems.Add(new TourOrderItem() { Id=Guid.NewGuid(), TourId=t.Id, Price=t.Cost, Quantity=0, Cost=0, TourOrderId= this.TourOrderId, Tour=t, TourOrder=this.to });
                         }
                         // Перепривязываем список элементов
-                        dgwTourOrderItems.DataSource = to.TourOrderItems.ToList();
+                        dgwTourOrderItems.DataSource = to.TourOrderItems;
                     }
                 }
             }
@@ -107,8 +108,18 @@ namespace TravelCompanyCore
 
         private void btnOK_Click(object sender, EventArgs e)
         {
+            to.PaymentTypeId = (Guid) comboPaymentType.SelectedValue;
+            to.ClientId = (Guid)comboClients.SelectedValue;
+            to.TotalCost = Double.Parse(lblTotalCost.Text);
             // не забыть присвоить всем элементам тура правильный TourOrderId, а то там для нового тура пустой Guid стоять будет
-
+            using (ApplicationContext db = new())
+            {
+                Guid newIdTourOrder = db.TourOrders.Add(to).Entity.Id;
+                foreach (TourOrderItem tl in to.TourOrderItems) {
+                    tl.TourOrderId = newIdTourOrder;
+                }
+                db.SaveChanges();
+            }
         }
 
         private void dgwTourOrderItems_SelectionChanged(object sender, EventArgs e)
