@@ -32,6 +32,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgwTourOrderItems = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TourName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.comboClients = new System.Windows.Forms.ComboBox();
@@ -40,11 +43,6 @@
             this.lblTotalCost = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TourName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwTourOrderItems)).BeginInit();
             this.SuspendLayout();
@@ -74,32 +72,57 @@
             this.groupBox1.Controls.Add(this.btnAdd);
             this.groupBox1.Location = new System.Drawing.Point(21, 64);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(761, 241);
+            this.groupBox1.Size = new System.Drawing.Size(761, 256);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Туры, включённые в Заказ";
             // 
             // dgwTourOrderItems
             // 
+            this.dgwTourOrderItems.AllowUserToAddRows = false;
+            this.dgwTourOrderItems.AllowUserToDeleteRows = false;
             this.dgwTourOrderItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgwTourOrderItems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
             this.TourName,
-            this.Price,
-            this.Quantity,
             this.Cost});
             this.dgwTourOrderItems.Location = new System.Drawing.Point(18, 26);
+            this.dgwTourOrderItems.MultiSelect = false;
             this.dgwTourOrderItems.Name = "dgwTourOrderItems";
             this.dgwTourOrderItems.RowTemplate.Height = 25;
             this.dgwTourOrderItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgwTourOrderItems.Size = new System.Drawing.Size(726, 168);
+            this.dgwTourOrderItems.Size = new System.Drawing.Size(726, 178);
             this.dgwTourOrderItems.TabIndex = 8;
+            this.dgwTourOrderItems.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwTourOrderItems_CellValueChanged);
             this.dgwTourOrderItems.SelectionChanged += new System.EventHandler(this.dgwTourOrderItems_SelectionChanged);
+            // 
+            // Id
+            // 
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "ИД";
+            this.Id.Name = "Id";
+            this.Id.Visible = false;
+            // 
+            // TourName
+            // 
+            this.TourName.DataPropertyName = "Tour";
+            this.TourName.HeaderText = "Тур";
+            this.TourName.Name = "TourName";
+            this.TourName.ReadOnly = true;
+            this.TourName.Width = 400;
+            // 
+            // Cost
+            // 
+            this.Cost.DataPropertyName = "Cost";
+            this.Cost.HeaderText = "Стоимость";
+            this.Cost.Name = "Cost";
+            this.Cost.ReadOnly = true;
+            this.Cost.Width = 90;
             // 
             // btnRemove
             // 
             this.btnRemove.Enabled = false;
-            this.btnRemove.Location = new System.Drawing.Point(117, 205);
+            this.btnRemove.Location = new System.Drawing.Point(117, 218);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(96, 23);
             this.btnRemove.TabIndex = 7;
@@ -109,7 +132,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(15, 205);
+            this.btnAdd.Location = new System.Drawing.Point(15, 218);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(96, 23);
             this.btnAdd.TabIndex = 4;
@@ -142,7 +165,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(20, 323);
+            this.label3.Location = new System.Drawing.Point(20, 327);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(170, 15);
             this.label3.TabIndex = 7;
@@ -153,7 +176,7 @@
             this.lblTotalCost.AutoSize = true;
             this.lblTotalCost.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lblTotalCost.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblTotalCost.Location = new System.Drawing.Point(196, 323);
+            this.lblTotalCost.Location = new System.Drawing.Point(196, 327);
             this.lblTotalCost.Name = "lblTotalCost";
             this.lblTotalCost.Size = new System.Drawing.Size(45, 15);
             this.lblTotalCost.TabIndex = 8;
@@ -162,7 +185,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(397, 353);
+            this.btnCancel.Location = new System.Drawing.Point(397, 349);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 282;
@@ -171,7 +194,7 @@
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(316, 353);
+            this.btnOK.Location = new System.Drawing.Point(316, 349);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 281;
@@ -179,44 +202,11 @@
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
-            // Id
-            // 
-            this.Id.DataPropertyName = "Id";
-            this.Id.HeaderText = "ИД";
-            this.Id.Name = "Id";
-            this.Id.Visible = false;
-            // 
-            // TourName
-            // 
-            this.TourName.DataPropertyName = "Tour";
-            this.TourName.HeaderText = "Тур";
-            this.TourName.Name = "TourName";
-            this.TourName.ReadOnly = true;
-            // 
-            // Price
-            // 
-            this.Price.DataPropertyName = "Price";
-            this.Price.HeaderText = "Цена";
-            this.Price.Name = "Price";
-            // 
-            // Quantity
-            // 
-            this.Quantity.DataPropertyName = "Quantity";
-            this.Quantity.HeaderText = "Количество человек";
-            this.Quantity.Name = "Quantity";
-            this.Quantity.ReadOnly = true;
-            // 
-            // Cost
-            // 
-            this.Cost.DataPropertyName = "Cost";
-            this.Cost.HeaderText = "Стоимость";
-            this.Cost.Name = "Cost";
-            // 
             // ieEditTourOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(814, 630);
+            this.ClientSize = new System.Drawing.Size(814, 386);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.lblTotalCost);
@@ -254,8 +244,6 @@
         private DataGridView dgwTourOrderItems;
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn TourName;
-        private DataGridViewTextBoxColumn Price;
-        private DataGridViewTextBoxColumn Quantity;
         private DataGridViewTextBoxColumn Cost;
     }
 }

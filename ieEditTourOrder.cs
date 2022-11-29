@@ -23,6 +23,28 @@ namespace TravelCompanyCore
 
         private void ieEditTourOrder_Load(object sender, EventArgs e)
         {
+            NumericUpDownColumn col = new NumericUpDownColumn();
+            col.MaxValue = 99999999999999999;
+            col.MinValue = 0;
+            col.DecimalPlaces = 2;
+            col.Increment = 100;
+            col.DataPropertyName = "Price";
+            col.HeaderText = "Цена";
+            col.Name = "Price";
+            col.Width = 80;
+            this.dgwTourOrderItems.Columns.Insert(2,col);
+
+            col = new NumericUpDownColumn();
+            col.MaxValue = 1000;
+            col.MinValue = 0;
+            col.DecimalPlaces = 0;
+            col.Increment = 1;
+            col.DataPropertyName = "Quantity";
+            col.HeaderText = "Количество человек";
+            col.Name = "Quantity";
+            col.Width = 90;
+            this.dgwTourOrderItems.Columns.Insert(3, col);
+
             dgwTourOrderItems.AutoGenerateColumns = false;
             using (ApplicationContext db = new ApplicationContext())
             {
@@ -77,7 +99,7 @@ namespace TravelCompanyCore
                     if (toi != null) // удаляем его
                     {
                         to.TourOrderItems.Remove(toi);
-                        //dgwTourOrderItems.DataSource = to.TourOrderItems; // перепривязка
+                        dgwTourOrderItems.DataSource = to.TourOrderItems; // перепривязка
                 }
             }
         }
@@ -91,6 +113,17 @@ namespace TravelCompanyCore
         private void dgwTourOrderItems_SelectionChanged(object sender, EventArgs e)
         {
             btnRemove.Enabled = dgwTourOrderItems.SelectedRows.Count > 0;
+        }
+
+        private void dgwTourOrderItems_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0) // Исключаем заголовок грида
+            {
+                Guid rowId = (Guid)dgwTourOrderItems.Rows[e.RowIndex].Cells[0].Value;
+                to.TourOrderItems.Find(t => t.Id == rowId).Cost = decimal.ToDouble(decimal.Parse(dgwTourOrderItems.Rows[e.RowIndex].Cells[2].Value.ToString()) * decimal.Parse(dgwTourOrderItems.Rows[e.RowIndex].Cells[3].Value.ToString()));
+                dgwTourOrderItems.DataSource = to.TourOrderItems; // перепривязка
+                dgwTourOrderItems.Invalidate();
+            }
         }
 
     }
