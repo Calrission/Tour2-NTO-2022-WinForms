@@ -31,5 +31,9 @@ namespace TravelCompanyCore.Models
             }
             set { selfPhoneNumber = value; }
         }
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

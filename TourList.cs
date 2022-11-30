@@ -25,7 +25,7 @@ namespace TravelCompanyCore
         public WorkingMode workingMode; // Режим работы окна - обычный (Normal) или выбор строк для другого окна (TourSelection)
 
         private List<Guid> selTours;
-        public List<Guid> SelectedToursId // Коллекция Id выбранных в гриде туров, работает только в режиме TourSelection
+        public List<Guid> SelectedTourIds // Коллекция Id выбранных в гриде туров, работает только в режиме TourSelection
         {
             get
             {
@@ -116,8 +116,11 @@ namespace TravelCompanyCore
                 if ((bool)tourRow.Cells[8].FormattedValue) // Если галочка стоит,
                     selTours.Add((Guid)tourRow.Cells[0].Value); // добавляем Id строки в колллекцию выбранных Id
             }
-            if (selTours.Count > 0) this.DialogResult = DialogResult.OK; // Чтобы понять, что выбор состоялся
-            this.Close();
+            if (selTours.Count > 0)
+            {
+                this.DialogResult = DialogResult.OK; // Чтобы понять, что выбор состоялся
+                this.Close();
+            }
         }
     }
 }

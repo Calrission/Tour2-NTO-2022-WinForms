@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using TravelCompanyCore.Models;
 
 namespace TravelCompanyCore
@@ -53,7 +54,14 @@ namespace TravelCompanyCore
 
                 if (TourOrderId != Guid.Empty)
                 {
-                    to = db.TourOrders.Include(to => to.TourOrderItems).First(to => to.Id == TourOrderId);
+                    // Заказ с элементами и соответствующими этим элементам связями:
+                    to = db.TourOrders
+                        .Include(to => to.TourOrderItems)
+                        .ThenInclude(toi => toi.Tour)
+                        .ThenInclude(t => t.Hotel)
+                        .First(to => to.Id == TourOrderId);
+
+                    dgwTourOrderItems.DataSource = to.TourOrderItems;
                     comboClients.SelectedValue = to.ClientId;
                     comboPaymentType.SelectedValue = to.PaymentTypeId;
                 }
@@ -62,7 +70,6 @@ namespace TravelCompanyCore
                     to.TourOrderItems = new List<TourOrderItem>();
                     to.TotalCost = 0;
                 }
-                //dgwTourOrderItems.DataSource = to.TourOrderItems;
                 lblTotalCost.Text = to.TotalCost.ToString();
             }
         }
@@ -75,7 +82,7 @@ namespace TravelCompanyCore
                 {
                     using (ApplicationContext db = new ApplicationContext())
                     {
-                        List<Tour> tll = db.Tours.Include(t => t.Hotel).Where(t => tl.SelectedToursId.Contains(t.Id)).ToList();
+                        List<Tour> tll = db.Tours.Include(t => t.Hotel).Where(t => tl.SelectedTourIds.Contains(t.Id)).ToList();
                         // Добавляем выбранные элементы
                         dgwTourOrderItems.DataSource = new List<TourOrderItem>();
                         foreach (Tour t in tll)
@@ -108,18 +115,94 @@ namespace TravelCompanyCore
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            to.PaymentTypeId = (Guid) comboPaymentType.SelectedValue;
-            to.ClientId = (Guid)comboClients.SelectedValue;
-            to.TotalCost = Double.Parse(lblTotalCost.Text);
-            // не забыть присвоить всем элементам тура правильный TourOrderId, а то там для нового тура пустой Guid стоять будет
-            using (ApplicationContext db = new())
+            bool isNew = false; // флаг редактирования
+
+            if (isModelValid())
             {
-                Guid newIdTourOrder = db.TourOrders.Add(to).Entity.Id;
-                foreach (TourOrderItem tl in to.TourOrderItems) {
-                    tl.TourOrderId = newIdTourOrder;
+                // Работаем сразу в контексте
+                using (ApplicationContext db = new())
+                {
+                    TourOrder EditableTourOrder = new(); // Для сохранения создаём новый объект
+
+                    if (TourOrderId == Guid.Empty) // Создание Заказа
+                    {
+                        isNew = true;
+                        EditableTourOrder.Id = Guid.NewGuid(); // Генерим новичку Id...
+                        EditableTourOrder.TourOrderItems = new List<TourOrderItem>(); // Создаём список элементов Заказа
+                        EditableTourOrder.PaymentTypeId = (Guid)comboPaymentType.SelectedValue;
+                        EditableTourOrder.ClientId = (Guid)comboClients.SelectedValue;
+                        EditableTourOrder.TotalCost = Double.Parse(lblTotalCost.Text);
+
+                        foreach (TourOrderItem toi in to.TourOrderItems)
+                        {
+                            EditableTourOrder.TourOrderItems.Add(
+                                new TourOrderItem
+                                {
+                                    Id = toi.Id,
+                                    Cost = toi.Cost,
+                                    Price = toi.Price,
+                                    Quantity = toi.Quantity,
+                                    TourId = toi.TourId,
+                                    TourOrderId = EditableTourOrder.Id // У toi здесь был пустой Guid
+                                });
+                        }
+                        to.TourOrderItems = new(); // Очищаем список, чтобы отвязаться от БД (на всякий случай?)
+                        db.TourOrders.Add(EditableTourOrder);
+                        db.SaveChanges();
+                    }
+                    else // Редактирование Заказа
+                    {
+                        // Читаем Заказ из БД вместе с элементами
+                        EditableTourOrder = db.TourOrders.Include(t => t.TourOrderItems).Single(t => t.Id == TourOrderId);
+
+                        EditableTourOrder.PaymentTypeId = (Guid)comboPaymentType.SelectedValue;
+                        EditableTourOrder.ClientId = (Guid)comboClients.SelectedValue;
+                        EditableTourOrder.TotalCost = Double.Parse(lblTotalCost.Text);
+
+                        EditableTourOrder.TourOrderItems.RemoveAll(toi => { return true; }); // Удаляем ВСЁ
+                        //to.TourOrderItems = new(); // Очищаем список, чтобы отвязаться от БД (на всякий случай?)
+                        db.SaveChanges();
+                    }
+
+                    if (!isNew)
+                    {
+                        using (ApplicationContext db2 = new())
+                        {
+                            TourOrder EditableTourOrder2 = db2.TourOrders.Include(t => t.TourOrderItems).Single(t => t.Id == TourOrderId);
+                            //TourOrderItem[] toi4iteration = new TourOrderItem[to.TourOrderItems.Count];
+                            //to.TourOrderItems.CopyTo(toi4iteration); // Копируем(?) текущие объекты в другую коллекцию
+                            //EditableTourOrder2.TourOrderItems.AddRange(toi4iteration);
+                            //toi4iteration = Array.Empty<TourOrderItem>(); // Очищаем массив
+                            foreach (TourOrderItem toi in to.TourOrderItems)
+                            {
+                                EditableTourOrder2.TourOrderItems.Add(
+                                    new TourOrderItem
+                                    {
+                                        Id = toi.Id,
+                                        Cost = toi.Cost,
+                                        Price = toi.Price,
+                                        Quantity = toi.Quantity,
+                                        TourId = toi.TourId,
+                                        TourOrderId = EditableTourOrder2.Id // У toi здесь был пустой Guid
+                                    });
+                            }
+                            db2.TourOrders.Update(EditableTourOrder2); // редактируем
+                            db2.SaveChanges();
+                        }
+                    }
+
+                    this.DialogResult = DialogResult.OK; // Чтобы окно закрылось и последующая перепривязка данных в родительском окне состоялась
+                    this.Close();
                 }
-                db.SaveChanges();
+
             }
+        }
+
+        private bool isModelValid()
+        {
+            if (dgwTourOrderItems.Rows.Count == 0)
+                return false;
+            return true;
         }
 
         private void dgwTourOrderItems_SelectionChanged(object sender, EventArgs e)

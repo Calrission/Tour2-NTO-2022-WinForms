@@ -20,6 +20,7 @@ namespace TravelCompanyCore
 
         private void ieTourOrderList_Load(object sender, EventArgs e)
         {
+            dgwTourOrders.AutoGenerateColumns = false;
             using (ApplicationContext db = new ApplicationContext())
             {
                 // получаем объекты из бд и выводим в грид
