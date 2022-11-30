@@ -154,7 +154,7 @@ namespace TravelCompanyCore
 
             if (isModelValid())
             {
-                // Работаем сразу в конексте
+                // Работаем сразу в контексте
                 using (ApplicationContext db = new ApplicationContext())
                 {
                     Models.Contact EditableContact = new();
@@ -179,8 +179,20 @@ namespace TravelCompanyCore
                     {
                         if (!clbRoles.CheckedItems.Contains(rl)) // Если чек НЕ стоит, то роль нужно удалить. Безусловно
                         {
-                            EditableContact.Roles.Remove(db.Roles.FirstOrDefault(r => r == rl));
-                        }                            
+                            // Нет, не безусловно!
+                            // Удалить роль менеджера можно только если Контакт НЕ является менеджером какого-либо Отеля:
+                            if (rl.Id == Models.Role.ManagerId
+                                && !db.Hotels.Any(h => h.ManagerId == EditableContact.Id))
+                            {
+                                EditableContact.Roles.Remove(db.Roles.FirstOrDefault(r => r == rl));
+                            }
+                            // Аналогично роль Контакта клиента можно удалить только если Контакт НЕ является представителем какого-либо Клиента:
+                            if (rl.Id == Models.Role.ClientContactId
+                                && !db.Clients.Any(c => c.ContactId == EditableContact.Id))
+                            {
+                                EditableContact.Roles.Remove(db.Roles.FirstOrDefault(r => r == rl));
+                            }
+                        }
                         else // Если чек стоит... 
                         {
                             if (!EditableContact.Roles.Exists(c => c == rl)) // ...то если такой роли у Контакта до сих пор не было,
