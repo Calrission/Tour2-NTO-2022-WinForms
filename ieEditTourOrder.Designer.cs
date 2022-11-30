@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -43,8 +44,10 @@
             this.lblTotalCost = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwTourOrderItems)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -95,6 +98,7 @@
             this.dgwTourOrderItems.TabIndex = 8;
             this.dgwTourOrderItems.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwTourOrderItems_CellValueChanged);
             this.dgwTourOrderItems.SelectionChanged += new System.EventHandler(this.dgwTourOrderItems_SelectionChanged);
+            this.dgwTourOrderItems.Validating += new System.ComponentModel.CancelEventHandler(this.dgwTourOrderItems_Validating);
             // 
             // Id
             // 
@@ -202,6 +206,10 @@
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // ieEditTourOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -223,6 +231,7 @@
             this.Load += new System.EventHandler(this.ieEditTourOrder_Load);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgwTourOrderItems)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -245,5 +254,6 @@
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn TourName;
         private DataGridViewTextBoxColumn Cost;
+        private ErrorProvider errorProvider1;
     }
 }

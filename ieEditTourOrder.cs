@@ -185,27 +185,41 @@ namespace TravelCompanyCore
 
         private bool isModelValid()
         {
-            if (dgwTourOrderItems.Rows.Count == 0)
+            if (dgwTourOrderItems.Rows.Count == 0) // Нельзя сохранять Заказ без элементов
+                return false;
+            if (!to.TourOrderItems.All(toi => toi.Quantity > 0)) // Нельзя сохранять Заказ со строчками, в которых нет людей
                 return false;
             return true;
         }
 
         private void dgwTourOrderItems_SelectionChanged(object sender, EventArgs e)
         {
-            btnRemove.Enabled = dgwTourOrderItems.SelectedRows.Count > 0;
+            bool isEnabled = dgwTourOrderItems.SelectedRows.Count > 0;
+            btnRemove.Enabled = isEnabled;
+            btnOK.Enabled = isEnabled;
         }
 
         private void dgwTourOrderItems_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.RowIndex<= dgwTourOrderItems.Rows.Count-1) // Исключаем заголовок грида
+            if (e.RowIndex >= 0 && e.RowIndex <= dgwTourOrderItems.Rows.Count - 1) // Исключаем заголовок грида
             {
                 Guid rowId = (Guid)dgwTourOrderItems.Rows[e.RowIndex].Cells[0].Value;
-                to.TourOrderItems.Find(t => t.Id == rowId).Cost = decimal.ToDouble(decimal.Parse(dgwTourOrderItems.Rows[e.RowIndex].Cells[2].Value.ToString()) * decimal.Parse(dgwTourOrderItems.Rows[e.RowIndex].Cells[3].Value.ToString()));
+                //to.TourOrderItems.Find(t => t.Id == rowId).Cost = decimal.ToDouble(decimal.Parse(dgwTourOrderItems.Rows[e.RowIndex].Cells[2].Value.ToString()) * decimal.Parse(dgwTourOrderItems.Rows[e.RowIndex].Cells[3].Value.ToString()));
+                TourOrderItem toi = to.TourOrderItems.Find(t => t.Id == rowId);
+                toi.Cost = toi.Quantity * toi.Price;
                 dgwTourOrderItems.DataSource = to.TourOrderItems; // перепривязка
                 dgwTourOrderItems.Invalidate();
-                lblTotalCost.Text=to.TourOrderItems.Sum(t=>t.Cost).ToString();
+                lblTotalCost.Text = to.TourOrderItems.Sum(t => t.Cost).ToString();
             }
         }
-
+        private void dgwTourOrderItems_Validating(object sender, CancelEventArgs e)
+        {
+            if (dgwTourOrderItems.Rows.Count == 0)
+                errorProvider1.SetError(dgwTourOrderItems, "Нельзя сохранять Заказ без туров!");
+            else if (!to.TourOrderItems.All(toi => toi.Quantity > 0))
+                errorProvider1.SetError(dgwTourOrderItems, "Количество людей в туре должно быть больше нуля!");
+            else
+                errorProvider1.Clear();
+        }
     }
 }
