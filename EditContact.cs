@@ -177,9 +177,13 @@ namespace TravelCompanyCore
 
                     foreach (Role rl in rls)
                     {
-                        if (!clbRoles.CheckedItems.Contains(rl)) // Если чек НЕ стоит, то роль нужно удалить. Безусловно
+                        if (!clbRoles.CheckedItems.Contains(rl)) // Если чек НЕ стоит, то роль нужно удалить. Но есть нюансы:
                         {
-                            // Нет, не безусловно!
+                            // Удалить роль Администратора можно только если это не последний администратор в системе
+                            // Сомнительное правило, конечно. Но лучше пусть так, чем совсем никак:
+                            if (rl.Id == Models.Role.AdministratorId
+                                && db.Contacts.Include(c => c.Roles).ToList().Count(c => c.ListOfRoles.Contains("Администратор")) > 1)
+                                    EditableContact.Roles.Remove(db.Roles.FirstOrDefault(r => r == rl));
                             // Удалить роль менеджера можно только если Контакт НЕ является менеджером какого-либо Отеля:
                             if (rl.Id == Models.Role.ManagerId
                                 && !db.Hotels.Any(h => h.ManagerId == EditableContact.Id))
