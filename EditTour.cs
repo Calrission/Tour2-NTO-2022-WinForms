@@ -106,13 +106,13 @@ namespace TravelCompanyCore
             return true;
         }
 
-        private void rtxtTourDescription_Validating(object sender, CancelEventArgs e)
+        private void validate(object sender, CancelEventArgs e) 
         {
             if (rtxtTourDescription.Text.Length > 500)
                 errorProvider1.SetError(rtxtTourDescription, "Описание не должно быть длинне 500 символов!");
-            else if (dateTimeEnd.Value.Date  < dateTimeStart.Value.Date)
+            else if (dateTimeEnd.Value.Date < dateTimeStart.Value.Date)
                 errorProvider1.SetError(dateTimeEnd, "Дата отъезда не должна быть раньше даты заезда");
-            else if (comboHotels.SelectedItem==null)
+            else if (comboHotels.SelectedItem == null)
                 errorProvider1.SetError(comboHotels, "Выберите (при необходимости создайте) Отель!");
             else
                 errorProvider1.Clear();

@@ -84,7 +84,7 @@
             this.rtxtTourDescription.Size = new System.Drawing.Size(374, 90);
             this.rtxtTourDescription.TabIndex = 147;
             this.rtxtTourDescription.Text = "";
-            this.rtxtTourDescription.Validating += new System.ComponentModel.CancelEventHandler(this.rtxtTourDescription_Validating);
+            this.rtxtTourDescription.Validating += new System.ComponentModel.CancelEventHandler(this.validate);
             // 
             // label2
             // 
@@ -121,6 +121,7 @@
             this.dateTimeStart.Name = "dateTimeStart";
             this.dateTimeStart.Size = new System.Drawing.Size(374, 23);
             this.dateTimeStart.TabIndex = 150;
+            this.dateTimeStart.Validating += new System.ComponentModel.CancelEventHandler(this.validate);
             // 
             // label3
             // 
@@ -146,6 +147,7 @@
             this.dateTimeEnd.Name = "dateTimeEnd";
             this.dateTimeEnd.Size = new System.Drawing.Size(374, 23);
             this.dateTimeEnd.TabIndex = 152;
+            this.dateTimeEnd.Validating += new System.ComponentModel.CancelEventHandler(this.validate);
             // 
             // label5
             // 

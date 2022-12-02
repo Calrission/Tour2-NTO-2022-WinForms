@@ -93,9 +93,10 @@
             this.dgwTourOrderItems.MultiSelect = false;
             this.dgwTourOrderItems.Name = "dgwTourOrderItems";
             this.dgwTourOrderItems.RowTemplate.Height = 25;
-            this.dgwTourOrderItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgwTourOrderItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgwTourOrderItems.Size = new System.Drawing.Size(726, 178);
             this.dgwTourOrderItems.TabIndex = 8;
+            this.dgwTourOrderItems.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwTourOrderItems_CellDoubleClick);
             this.dgwTourOrderItems.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwTourOrderItems_CellValueChanged);
             this.dgwTourOrderItems.SelectionChanged += new System.EventHandler(this.dgwTourOrderItems_SelectionChanged);
             this.dgwTourOrderItems.Validating += new System.ComponentModel.CancelEventHandler(this.dgwTourOrderItems_Validating);

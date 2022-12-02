@@ -221,5 +221,11 @@ namespace TravelCompanyCore
             else
                 errorProvider1.Clear();
         }
+
+        private void dgwTourOrderItems_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // 
+            // btnAdd_Click(sender, new EventArgs());
+        }
     }
 }

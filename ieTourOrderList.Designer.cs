@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.dgwTourOrders = new System.Windows.Forms.DataGridView();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnCreate = new System.Windows.Forms.Button();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Client = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PaymentType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnCreate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgwTourOrders)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,35 +56,6 @@
             this.dgwTourOrders.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwTourOrders_CellDoubleClick);
             this.dgwTourOrders.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgwTourOrders_CellMouseClick);
             this.dgwTourOrders.SelectionChanged += new System.EventHandler(this.dgwTourOrders_SelectionChanged);
-            // 
-            // id
-            // 
-            this.id.DataPropertyName = "Id";
-            this.id.HeaderText = "id";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Visible = false;
-            // 
-            // Client
-            // 
-            this.Client.DataPropertyName = "Client";
-            this.Client.HeaderText = "Клиент";
-            this.Client.Name = "Client";
-            this.Client.ReadOnly = true;
-            // 
-            // PaymentType
-            // 
-            this.PaymentType.DataPropertyName = "PaymentType";
-            this.PaymentType.HeaderText = "Тип оплаты";
-            this.PaymentType.Name = "PaymentType";
-            this.PaymentType.ReadOnly = true;
-            // 
-            // Cost
-            // 
-            this.Cost.DataPropertyName = "TotalCost";
-            this.Cost.HeaderText = "Стоимость заказа";
-            this.Cost.Name = "Cost";
-            this.Cost.ReadOnly = true;
             // 
             // btnDelete
             // 
@@ -117,6 +88,36 @@
             this.btnCreate.Text = "Создать";
             this.btnCreate.UseVisualStyleBackColor = true;
             this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "Id";
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
+            // Client
+            // 
+            this.Client.DataPropertyName = "Client";
+            this.Client.HeaderText = "Клиент";
+            this.Client.Name = "Client";
+            this.Client.ReadOnly = true;
+            this.Client.Width = 300;
+            // 
+            // PaymentType
+            // 
+            this.PaymentType.DataPropertyName = "PaymentType";
+            this.PaymentType.HeaderText = "Вид оплаты";
+            this.PaymentType.Name = "PaymentType";
+            this.PaymentType.ReadOnly = true;
+            // 
+            // Cost
+            // 
+            this.Cost.DataPropertyName = "TotalCost";
+            this.Cost.HeaderText = "Стоимость заказа";
+            this.Cost.Name = "Cost";
+            this.Cost.ReadOnly = true;
             // 
             // ieTourOrderList
             // 
