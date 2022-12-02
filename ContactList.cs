@@ -39,7 +39,7 @@ namespace TravelCompanyCore
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show( // Удостоверяемся, что пользователь в сознании
-                String.Format("Вы действительно хотите удалить контакт «{1} {0} {2}»?", dgwContacts.SelectedCells[1].Value.ToString(),
+                String.Format("Вы действительно хотите удалить контакт «{0} {1} {2}»?", dgwContacts.SelectedCells[1].Value.ToString(),
                 dgwContacts.SelectedCells[2].Value.ToString(),
                 dgwContacts.SelectedCells[3].Value.ToString()),
                 "Запрос на удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
