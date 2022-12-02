@@ -93,10 +93,9 @@
             this.dgwTourOrderItems.MultiSelect = false;
             this.dgwTourOrderItems.Name = "dgwTourOrderItems";
             this.dgwTourOrderItems.RowTemplate.Height = 25;
-            this.dgwTourOrderItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dgwTourOrderItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgwTourOrderItems.Size = new System.Drawing.Size(726, 178);
             this.dgwTourOrderItems.TabIndex = 8;
-            this.dgwTourOrderItems.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwTourOrderItems_CellDoubleClick);
             this.dgwTourOrderItems.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwTourOrderItems_CellValueChanged);
             this.dgwTourOrderItems.SelectionChanged += new System.EventHandler(this.dgwTourOrderItems_SelectionChanged);
             this.dgwTourOrderItems.Validating += new System.ComponentModel.CancelEventHandler(this.dgwTourOrderItems_Validating);
@@ -199,6 +198,7 @@
             // 
             // btnOK
             // 
+            this.btnOK.Enabled = false;
             this.btnOK.Location = new System.Drawing.Point(316, 349);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
@@ -216,13 +216,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(814, 386);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.lblTotalCost);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.comboPaymentType);
             this.Controls.Add(this.comboClients);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;

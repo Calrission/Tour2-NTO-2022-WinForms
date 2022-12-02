@@ -92,7 +92,7 @@ namespace TravelCompanyCore
             // Implements the IDataGridViewEditingControl.EditingControlFormattedValue property.
             public object EditingControlFormattedValue
             {
-                get { return this.Value.ToString(); }
+                get { return Math.Round(this.Value, 2).ToString(); }
 
                 set
                 {
@@ -102,7 +102,7 @@ namespace TravelCompanyCore
                         {
                             // This will throw an exception of the string is
                             // null, empty, or not in the format of a date.
-                            this.Value = decimal.Parse((String)value);
+                            this.Value = Math.Round(decimal.Parse((String)value), 2);
                         }
                         catch
                         {

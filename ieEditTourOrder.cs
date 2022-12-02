@@ -72,7 +72,16 @@ namespace TravelCompanyCore
                 }
                 lblTotalCost.Text = to.TotalCost.ToString();
             }
+
+            setOKstatus();
+
         }
+
+        private void setOKstatus()
+        {
+            btnOK.Enabled = dgwTourOrderItems.Rows.Count >= 1;
+        }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
             using (TourList tl = new())
@@ -92,6 +101,8 @@ namespace TravelCompanyCore
                         // Перепривязываем список элементов
                         dgwTourOrderItems.DataSource = to.TourOrderItems;
                     }
+
+                    setOKstatus();
                 }
             }
         }
@@ -110,11 +121,14 @@ namespace TravelCompanyCore
                     to.TourOrderItems.Remove(toi); // удаление
                     dgwTourOrderItems.DataSource = to.TourOrderItems; // перепривязка
                 }
+
+                setOKstatus();
             }
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
+            dgwTourOrderItems_Validating(sender, new CancelEventArgs());
             if (isModelValid())
             {
                 // Работаем сразу в контексте
@@ -196,7 +210,7 @@ namespace TravelCompanyCore
         {
             bool isEnabled = dgwTourOrderItems.SelectedRows.Count > 0;
             btnRemove.Enabled = isEnabled;
-            btnOK.Enabled = isEnabled;
+            //btnOK.Enabled = isEnabled;
         }
 
         private void dgwTourOrderItems_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -210,6 +224,8 @@ namespace TravelCompanyCore
                 dgwTourOrderItems.DataSource = to.TourOrderItems; // перепривязка
                 dgwTourOrderItems.Invalidate();
                 lblTotalCost.Text = to.TourOrderItems.Sum(t => t.Cost).ToString();
+
+                dgwTourOrderItems_Validating(sender, new CancelEventArgs());
             }
         }
         private void dgwTourOrderItems_Validating(object sender, CancelEventArgs e)
@@ -222,10 +238,5 @@ namespace TravelCompanyCore
                 errorProvider1.Clear();
         }
 
-        private void dgwTourOrderItems_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            // 
-            // btnAdd_Click(sender, new EventArgs());
-        }
     }
 }
