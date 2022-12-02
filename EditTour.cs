@@ -109,7 +109,7 @@ namespace TravelCompanyCore
         private void validate(object sender, CancelEventArgs e) 
         {
             if (rtxtTourDescription.Text.Length > 500)
-                errorProvider1.SetError(rtxtTourDescription, "Описание не должно быть длинне 500 символов!");
+                errorProvider1.SetError(rtxtTourDescription, "Описание не должно быть длиннее 500 символов!");
             else if (dateTimeEnd.Value.Date < dateTimeStart.Value.Date)
                 errorProvider1.SetError(dateTimeEnd, "Дата отъезда не должна быть раньше даты заезда");
             else if (comboHotels.SelectedItem == null)
