@@ -35,11 +35,15 @@
             this.btnTours = new System.Windows.Forms.Button();
             this.btnClients = new System.Windows.Forms.Button();
             this.btnTourOrders = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnRegions
             // 
-            this.btnRegions.Location = new System.Drawing.Point(155, 24);
+            this.btnRegions.Location = new System.Drawing.Point(47, 33);
             this.btnRegions.Name = "btnRegions";
             this.btnRegions.Size = new System.Drawing.Size(189, 23);
             this.btnRegions.TabIndex = 0;
@@ -49,7 +53,7 @@
             // 
             // btnRoles
             // 
-            this.btnRoles.Location = new System.Drawing.Point(155, 64);
+            this.btnRoles.Location = new System.Drawing.Point(47, 73);
             this.btnRoles.Name = "btnRoles";
             this.btnRoles.Size = new System.Drawing.Size(189, 23);
             this.btnRoles.TabIndex = 1;
@@ -59,7 +63,7 @@
             // 
             // btnContacts
             // 
-            this.btnContacts.Location = new System.Drawing.Point(155, 105);
+            this.btnContacts.Location = new System.Drawing.Point(47, 114);
             this.btnContacts.Name = "btnContacts";
             this.btnContacts.Size = new System.Drawing.Size(189, 23);
             this.btnContacts.TabIndex = 2;
@@ -69,7 +73,7 @@
             // 
             // btnHotels
             // 
-            this.btnHotels.Location = new System.Drawing.Point(155, 146);
+            this.btnHotels.Location = new System.Drawing.Point(47, 155);
             this.btnHotels.Name = "btnHotels";
             this.btnHotels.Size = new System.Drawing.Size(189, 23);
             this.btnHotels.TabIndex = 3;
@@ -79,7 +83,7 @@
             // 
             // btnTours
             // 
-            this.btnTours.Location = new System.Drawing.Point(155, 186);
+            this.btnTours.Location = new System.Drawing.Point(47, 36);
             this.btnTours.Name = "btnTours";
             this.btnTours.Size = new System.Drawing.Size(189, 23);
             this.btnTours.TabIndex = 4;
@@ -89,7 +93,7 @@
             // 
             // btnClients
             // 
-            this.btnClients.Location = new System.Drawing.Point(155, 226);
+            this.btnClients.Location = new System.Drawing.Point(47, 76);
             this.btnClients.Name = "btnClients";
             this.btnClients.Size = new System.Drawing.Size(189, 23);
             this.btnClients.TabIndex = 5;
@@ -99,7 +103,7 @@
             // 
             // btnTourOrders
             // 
-            this.btnTourOrders.Location = new System.Drawing.Point(155, 267);
+            this.btnTourOrders.Location = new System.Drawing.Point(47, 117);
             this.btnTourOrders.Name = "btnTourOrders";
             this.btnTourOrders.Size = new System.Drawing.Size(189, 23);
             this.btnTourOrders.TabIndex = 6;
@@ -107,23 +111,45 @@
             this.btnTourOrders.UseVisualStyleBackColor = true;
             this.btnTourOrders.Click += new System.EventHandler(this.btnTourOrders_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnContacts);
+            this.groupBox1.Controls.Add(this.btnRegions);
+            this.groupBox1.Controls.Add(this.btnHotels);
+            this.groupBox1.Controls.Add(this.btnRoles);
+            this.groupBox1.Location = new System.Drawing.Point(89, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(277, 198);
+            this.groupBox1.TabIndex = 7;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Справочники";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.btnClients);
+            this.groupBox2.Controls.Add(this.btnTours);
+            this.groupBox2.Controls.Add(this.btnTourOrders);
+            this.groupBox2.Location = new System.Drawing.Point(89, 241);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(277, 167);
+            this.groupBox2.TabIndex = 8;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Управление продажами";
+            // 
             // StartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(503, 450);
-            this.Controls.Add(this.btnTourOrders);
-            this.Controls.Add(this.btnClients);
-            this.Controls.Add(this.btnTours);
-            this.Controls.Add(this.btnHotels);
-            this.Controls.Add(this.btnContacts);
-            this.Controls.Add(this.btnRoles);
-            this.Controls.Add(this.btnRegions);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "StartForm";
             this.Text = "Туристическое агенство «АЛЛА»";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -137,5 +163,7 @@
         private Button btnTours;
         private Button btnClients;
         private Button btnTourOrders;
+        private GroupBox groupBox1;
+        private GroupBox groupBox2;
     }
 }
