@@ -54,7 +54,6 @@
             this.dgwTourOrders.Size = new System.Drawing.Size(769, 191);
             this.dgwTourOrders.TabIndex = 0;
             this.dgwTourOrders.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwTourOrders_CellDoubleClick);
-            this.dgwTourOrders.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgwTourOrders_CellMouseClick);
             this.dgwTourOrders.SelectionChanged += new System.EventHandler(this.dgwTourOrders_SelectionChanged);
             // 
             // btnDelete

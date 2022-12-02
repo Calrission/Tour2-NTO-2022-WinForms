@@ -86,10 +86,5 @@ namespace TravelCompanyCore
         {
             btnEdit_Click(sender, new EventArgs());
         }
-
-        private void dgwTourOrders_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            btnEdit_Click(sender, new EventArgs());
-        }
     }
 }
