@@ -42,13 +42,20 @@ namespace TravelCompanyCore
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    Models.Hotel? hotel = db.Hotels.FirstOrDefault(r => r.Id == (Guid)dgwHotels.SelectedCells[0].Value); // Находим удаляемый объект
-                    if (hotel != null) // удаляем его
+                    Guid id2delete = (Guid)dgwHotels.SelectedCells[0].Value;
+                    // Если Отель входит в состав к-л Тура, его удалять нельзя:
+                    if (db.Tours.Any(t => t.HotelId == id2delete))
+                        MessageBox.Show(String.Format("Отель «{0}» входит в состав одного или нескольких Туров, его нельзя удалить", dgwHotels.SelectedCells[1].Value.ToString()));
+                    else
                     {
-                        db.Hotels.Remove(hotel);
-                        db.SaveChanges();
+                        Models.Hotel? hotel = db.Hotels.FirstOrDefault(r => r.Id == id2delete); // Находим удаляемый объект
+                        if (hotel != null) // удаляем его
+                        {
+                            db.Hotels.Remove(hotel);
+                            db.SaveChanges();
+                        }
+                        dgwHotels.DataSource = db.Hotels.Include(h => h.Region).Include(h => h.Manager).ToList(); // перепривязка
                     }
-                    dgwHotels.DataSource = db.Hotels.Include(h => h.Region).Include(h => h.Manager).ToList(); // перепривязка
                 }
             }
         }

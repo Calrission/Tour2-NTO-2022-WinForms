@@ -46,13 +46,30 @@ namespace TravelCompanyCore
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    Models.Contact? contact = db.Contacts.FirstOrDefault(r => r.Id == (Guid)dgwContacts.SelectedCells[0].Value); // Находим удаляемый объект
-                    if (contact != null) // удаляем его
+                    Guid id2delete = (Guid)dgwContacts.SelectedCells[0].Value;
+                    // Если Контакт используется к-л Клиентом или является менеджером к-л Отеля, его удалять нельзя:
+                    if (db.Clients.Any(c => c.ContactId == id2delete))
+                        MessageBox.Show(
+                            String.Format("Контакт «{0} {1} {2}» является представителем одного или нескольких Клиентов, его нельзя удалить",
+                            dgwContacts.SelectedCells[1].Value.ToString(),
+                            dgwContacts.SelectedCells[2].Value.ToString(),
+                            dgwContacts.SelectedCells[3].Value.ToString()));
+                    else if (db.Hotels.Any(h => h.ManagerId == id2delete))
+                        MessageBox.Show(
+                            String.Format("Контакт «{0} {1} {2}» является менеджером одного или нескольких Отелей, его нельзя удалить",
+                            dgwContacts.SelectedCells[1].Value.ToString(),
+                            dgwContacts.SelectedCells[2].Value.ToString(),
+                            dgwContacts.SelectedCells[3].Value.ToString()));
+                    else
                     {
-                        db.Contacts.Remove(contact);
-                        db.SaveChanges();
+                        Models.Contact? contact = db.Contacts.FirstOrDefault(r => r.Id == id2delete); // Находим удаляемый объект
+                        if (contact != null) // удаляем его
+                        {
+                            db.Contacts.Remove(contact);
+                            db.SaveChanges();
+                        }
+                        dgwContacts.DataSource = db.Contacts.Include(c => c.Roles).ToList().FindAll(t => t.Id != Contact.BotId); // перепривязка
                     }
-                    dgwContacts.DataSource = db.Contacts.Include(c => c.Roles).ToList().FindAll(t => t.Id != Contact.BotId); // перепривязка
                 }
             }
         }

@@ -42,13 +42,20 @@ namespace TravelCompanyCore
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    Models.Region? region = db.Regions.FirstOrDefault(r => r.Id == (Guid)dgwRegions.SelectedCells[0].Value); // Находим удаляемый объект
-                    if (region != null) // удаляем его
+                    Guid id2delete = (Guid)dgwRegions.SelectedCells[0].Value;
+                    // Если к Региону привязан Отель, его удалять нельзя:
+                    if (db.Hotels.Any(h => h.RegionId == id2delete))
+                        MessageBox.Show(String.Format("К региону «{0}» привязан один или несколько Отелей, его нельзя удалить", dgwRegions.SelectedCells[1].Value.ToString()));
+                    else
                     {
-                        db.Regions.Remove(region);
-                        db.SaveChanges();
+                        Models.Region? region = db.Regions.FirstOrDefault(r => r.Id == (Guid)dgwRegions.SelectedCells[0].Value); // Находим удаляемый объект
+                        if (region != null) // удаляем его
+                        {
+                            db.Regions.Remove(region);
+                            db.SaveChanges();
+                        }
+                        dgwRegions.DataSource = db.Regions.ToList(); // перепривязка
                     }
-                    dgwRegions.DataSource = db.Regions.ToList(); // перепривязка
                 }
             }
         }
