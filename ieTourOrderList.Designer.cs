@@ -29,13 +29,16 @@
         private void InitializeComponent()
         {
             this.dgwTourOrders = new System.Windows.Forms.DataGridView();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnCreate = new System.Windows.Forms.Button();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Client = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PaymentType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TourStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StatusId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnCreate = new System.Windows.Forms.Button();
+            this.btnChangeStatus = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgwTourOrders)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,7 +49,9 @@
             this.id,
             this.Client,
             this.PaymentType,
-            this.Cost});
+            this.Cost,
+            this.TourStatus,
+            this.StatusId});
             this.dgwTourOrders.Location = new System.Drawing.Point(14, 47);
             this.dgwTourOrders.Name = "dgwTourOrders";
             this.dgwTourOrders.RowTemplate.Height = 25;
@@ -55,6 +60,51 @@
             this.dgwTourOrders.TabIndex = 0;
             this.dgwTourOrders.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwTourOrders_CellDoubleClick);
             this.dgwTourOrders.SelectionChanged += new System.EventHandler(this.dgwTourOrders_SelectionChanged);
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "Id";
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
+            // Client
+            // 
+            this.Client.DataPropertyName = "Client";
+            this.Client.HeaderText = "Клиент";
+            this.Client.Name = "Client";
+            this.Client.ReadOnly = true;
+            this.Client.Width = 300;
+            // 
+            // PaymentType
+            // 
+            this.PaymentType.DataPropertyName = "PaymentType";
+            this.PaymentType.HeaderText = "Вид оплаты";
+            this.PaymentType.Name = "PaymentType";
+            this.PaymentType.ReadOnly = true;
+            // 
+            // Cost
+            // 
+            this.Cost.DataPropertyName = "TotalCost";
+            this.Cost.HeaderText = "Стоимость заказа";
+            this.Cost.Name = "Cost";
+            this.Cost.ReadOnly = true;
+            // 
+            // TourStatus
+            // 
+            this.TourStatus.DataPropertyName = "TourOrderStatus";
+            this.TourStatus.HeaderText = "Статус";
+            this.TourStatus.Name = "TourStatus";
+            this.TourStatus.ReadOnly = true;
+            // 
+            // StatusId
+            // 
+            this.StatusId.DataPropertyName = "TourOrderStatusId";
+            this.StatusId.HeaderText = "StatusId";
+            this.StatusId.Name = "StatusId";
+            this.StatusId.ReadOnly = true;
+            this.StatusId.Visible = false;
             // 
             // btnDelete
             // 
@@ -88,41 +138,23 @@
             this.btnCreate.UseVisualStyleBackColor = true;
             this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
             // 
-            // id
+            // btnChangeStatus
             // 
-            this.id.DataPropertyName = "Id";
-            this.id.HeaderText = "id";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Visible = false;
-            // 
-            // Client
-            // 
-            this.Client.DataPropertyName = "Client";
-            this.Client.HeaderText = "Клиент";
-            this.Client.Name = "Client";
-            this.Client.ReadOnly = true;
-            this.Client.Width = 300;
-            // 
-            // PaymentType
-            // 
-            this.PaymentType.DataPropertyName = "PaymentType";
-            this.PaymentType.HeaderText = "Вид оплаты";
-            this.PaymentType.Name = "PaymentType";
-            this.PaymentType.ReadOnly = true;
-            // 
-            // Cost
-            // 
-            this.Cost.DataPropertyName = "TotalCost";
-            this.Cost.HeaderText = "Стоимость заказа";
-            this.Cost.Name = "Cost";
-            this.Cost.ReadOnly = true;
+            this.btnChangeStatus.Enabled = false;
+            this.btnChangeStatus.Location = new System.Drawing.Point(257, 248);
+            this.btnChangeStatus.Name = "btnChangeStatus";
+            this.btnChangeStatus.Size = new System.Drawing.Size(75, 23);
+            this.btnChangeStatus.TabIndex = 19;
+            this.btnChangeStatus.Text = "Статус...";
+            this.btnChangeStatus.UseVisualStyleBackColor = true;
+            this.btnChangeStatus.Click += new System.EventHandler(this.btnChangeStatus_Click);
             // 
             // ieTourOrderList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 281);
+            this.Controls.Add(this.btnChangeStatus);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnCreate);
@@ -147,5 +179,8 @@
         private DataGridViewTextBoxColumn Client;
         private DataGridViewTextBoxColumn PaymentType;
         private DataGridViewTextBoxColumn Cost;
+        private DataGridViewTextBoxColumn TourStatus;
+        private DataGridViewTextBoxColumn StatusId;
+        private Button btnChangeStatus;
     }
 }

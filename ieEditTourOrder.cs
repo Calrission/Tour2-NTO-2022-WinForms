@@ -33,7 +33,7 @@ namespace TravelCompanyCore
             col.HeaderText = "Цена";
             col.Name = "Price";
             col.Width = 80;
-            this.dgwTourOrderItems.Columns.Insert(2,col);
+            this.dgwTourOrderItems.Columns.Insert(2, col);
 
             col = new NumericUpDownColumn();
             col.MaxValue = 1000;
@@ -60,6 +60,14 @@ namespace TravelCompanyCore
                         .ThenInclude(toi => toi.Tour)
                         .ThenInclude(t => t.Hotel)
                         .First(to => to.Id == TourOrderId);
+                    // Не дадим редактировать Заказ со статусом, отличным от Черновика
+                    bool isDraft = to.TourOrderStatusId == TourOrderStatus.DraftId;
+                    comboClients.Enabled = isDraft;
+                    comboPaymentType.Enabled = isDraft;
+                    dgwTourOrderItems.Enabled = isDraft;
+                    btnAdd.Enabled = isDraft;
+                    btnRemove.Enabled = isDraft;
+                    btnOK.Enabled = isDraft;
 
                     dgwTourOrderItems.DataSource = to.TourOrderItems;
                     comboClients.SelectedValue = to.ClientId;
@@ -143,6 +151,8 @@ namespace TravelCompanyCore
                         EditableTourOrder.PaymentTypeId = (Guid)comboPaymentType.SelectedValue;
                         EditableTourOrder.ClientId = (Guid)comboClients.SelectedValue;
                         EditableTourOrder.TotalCost = Double.Parse(lblTotalCost.Text);
+                        EditableTourOrder.TourOrderStatusId = TourOrderStatus.DraftId; // При создании статус всегда - Черновик
+                        EditableTourOrder.TourOrderStatusReasonId = TourOrderStatusReason.NoReasonId; // Для Черновика причины нет
 
                         foreach (TourOrderItem toi in to.TourOrderItems)
                         {

@@ -32,13 +32,6 @@ namespace TravelCompanyCore
             dateTimeStart.Value = new DateTime(dtNow.Year, dtNow.Month, dtNow.Day, 12, 0, 0, 0); // Расчётный час заезда - 12:00
             dateTimeEnd.Value = new DateTime(dtNow.Year, dtNow.Month, dtNow.Day, 14, 0, 0, 0); // Расчётный час выезда - 14:00
 
-            // ИМХО это мудрёж ненужный - никто не считает время заезда/выезда с такой точностью
-            //dateTimeStart.Format = DateTimePickerFormat.Custom;
-            //dateTimeStart.CustomFormat = "MM/dd/yyyy hh:mm:ss";
-
-            //dateTimeEnd.Format = DateTimePickerFormat.Custom;
-            //dateTimeEnd.CustomFormat = "MM/dd/yyyy hh:mm:ss";
-
             using (ApplicationContext db = new ApplicationContext()){
                 comboFoods.DataSource = db.Foods.ToList();
                 comboHotels.DataSource = db.Hotels.ToList();
