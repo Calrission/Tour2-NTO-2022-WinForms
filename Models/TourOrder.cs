@@ -36,5 +36,19 @@ namespace TravelCompanyCore.Models
         /// Суммарная стоимость Заказа
         /// </summary>
         public Double? TotalCost { get; set; }
+        /// <summary>
+        /// Текущий статус Заказа
+        /// </summary>
+        public Guid TourOrderStatusId { get; set; }
+        /// <summary>
+        /// Ссылка на полное описание Статуса (нужен Include!)
+        /// </summary>
+        public TourOrderStatus? TourOrderStatus { get; set; }
+        /// <summary>
+        /// Дата последней смены статуса
+        /// </summary>
+        public DateTime? TourOrderStatusShiftDate { get; set; }
+        public Guid TourOrderStatusReasonId { get; set; }
+        public TourOrderStatusReason TourOrderStatusReason { get; set; }
     }
 }

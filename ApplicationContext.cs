@@ -20,7 +20,11 @@ namespace TravelCompanyCore
         public DbSet<Models.Tour> Tours => Set<Models.Tour>(); // Таблица Туров
         public DbSet<Models.Client> Clients => Set<Models.Client>(); // Таблица Клиентов
         public DbSet<Models.TourOrderItem> TourOrderItems => Set<Models.TourOrderItem>(); // Таблица для хранения Элементов заказа тура
-        public DbSet<Models.TourOrder> TourOrders => Set<Models.TourOrder>(); // Таблица Закзаов туров
+        public DbSet<Models.TourOrder> TourOrders => Set<Models.TourOrder>(); // Таблица Заказов туров
+        public DbSet<Models.TourOrderStatusReason> TourOrderStatusReasons => Set<Models.TourOrderStatusReason>(); // Таблица причин смены статуса Заказа. Не редактируемая
+        public DbSet<Models.TourOrderStatus> TourOrderStatuses => Set<Models.TourOrderStatus>(); // Таблица Статусов Заказов. Не редактируемая
+        public DbSet<Models.TourOrderPayment> TourOrderPayments => Set<Models.TourOrderPayment>(); // Таблица оплат Заказов
+        public DbSet<Models.TourOrderRealization> TourOrderRealizations => Set<Models.TourOrderRealization>(); // Таблица продаж Заказов
 
         public ApplicationContext() => Database.EnsureCreated();
 
@@ -88,7 +92,7 @@ namespace TravelCompanyCore
 
             // Инициализируем Клиентов
             modelBuilder.Entity<Models.Client>().HasData(
-                new Models.Client { Id = Guid.Parse("6d97731c-8408-4430-9c71-072842173fd4"), Name = "Турагенство «Ромашка»", ContactId = Guid.Parse("242B1D5F-9103-474A-AEC4-F9143E87D58B"), ClientTypeId = Guid.Parse("65bc9547-acd5-420e-8d60-0f037bfc4e79"), PhoneNumber="" },
+                new Models.Client { Id = Guid.Parse("6d97731c-8408-4430-9c71-072842173fd4"), Name = "Турагенство «Ромашка»", ContactId = Guid.Parse("242B1D5F-9103-474A-AEC4-F9143E87D58B"), ClientTypeId = Guid.Parse("65bc9547-acd5-420e-8d60-0f037bfc4e79"), PhoneNumber = "" },
                 new Models.Client { Id = Guid.Parse("7DC4F070-A620-4A92-AA80-D4C099B836BE"), Name = "Сидоров Сысой Свиридович", ContactId = Guid.Parse("EE91E6A7-CB38-4DB0-B702-04D0903CF231"), ClientTypeId = Guid.Parse("cd3b7458-6f73-49c3-a56b-af81101cc3cd"), PhoneNumber = "+71011121212" },
                 new Models.Client { Id = Guid.Parse("87f50d79-1c38-47ce-acf6-0a7aa6de3fbd"), Name = "Агенство «Васильки»", ContactId = Guid.Parse("242B1D5F-9103-474A-AEC4-F9143E87D58B"), ClientTypeId = Guid.Parse("65bc9547-acd5-420e-8d60-0f037bfc4e79"), PhoneNumber = "" }
                 );
@@ -130,6 +134,24 @@ namespace TravelCompanyCore
                 new Models.PaymentType { Id = Guid.Parse("9C67C785-C4A8-4576-8D52-205DCBB4F997"), Name = "Предоплата" }
                 );
 
+            // Инициализируем Причины смены статуса
+            modelBuilder.Entity<Models.TourOrderStatusReason>().HasData(
+                new Models.TourOrderStatusReason { Id = Guid.Parse("12C563CD-03EA-41EF-9377-6955387F8702"), Name = "Беспричинно" }, // Для статусов, не требующих причины
+                new Models.TourOrderStatusReason { Id = Guid.Parse("7C8D58AB-92EA-4059-A097-5D3E5928C3CB"), Name = "Отказ клиента" },
+                new Models.TourOrderStatusReason { Id = Guid.Parse("2B5E1848-E7C3-48BE-8472-7387798C5818"), Name = "Истечение срока бронирования" },
+                new Models.TourOrderStatusReason { Id = Guid.Parse("9D4B962C-460B-4BD5-B8A5-F8636FA82284"), Name = "Отказ Отеля" }
+                );
+
+            // Инициализируем Статусы заказа
+            modelBuilder.Entity<Models.TourOrderStatus>().HasData(
+                new Models.TourOrderStatus { Id = Guid.Parse("DDEB0FF0-7E89-425D-AF37-7D97F5571F5B"), Name = "Черновик" }, // Исходный статус
+                new Models.TourOrderStatus { Id = Guid.Parse("5F24C6F9-704A-403A-B30B-04E2F361A403"), Name = "Бронь" },
+                new Models.TourOrderStatus { Id = Guid.Parse("0A593624-6F2F-4FEA-BFF3-0A67904DE4E1"), Name = "Отмена" },
+                new Models.TourOrderStatus { Id = Guid.Parse("D40D224C-D35A-4E2E-9D85-4EFAF3CA701E"), Name = "Оплачен" },
+                new Models.TourOrderStatus { Id = Guid.Parse("4A31DF95-6013-4AC7-AA88-C7E9ED348E02"), Name = "Продан" },
+                new Models.TourOrderStatus { Id = Guid.Parse("47E57AA5-7BFE-45BE-A017-C41903F40068"), Name = "Действует" },
+                new Models.TourOrderStatus { Id = Guid.Parse("DFFE7872-A3C0-436E-84BA-29BDCB3FAF94"), Name = "Завершён" }
+                );
         }
     }
 }
