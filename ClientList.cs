@@ -52,13 +52,20 @@ namespace TravelCompanyCore
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    Models.Client? client = db.Clients.FirstOrDefault(r => r.Id == (Guid)dgwClients.SelectedCells[0].Value); // Находим удаляемый объект
-                    if (client != null) // удаляем его
+                    Guid id2delete = (Guid)dgwClients.SelectedCells[0].Value;
+                    // Если Клиент имеет заказы, его удалять нельзя:
+                    if (db.TourOrders.Any(to => to.ClientId == id2delete))
+                        MessageBox.Show(String.Format("Клиент «{0}» сделал один или несколько Заказов, его нельзя удалить", dgwClients.SelectedCells[1].Value.ToString()));
+                    else
                     {
-                        db.Clients.Remove(client);
-                        db.SaveChanges();
+                        Models.Client? client = db.Clients.FirstOrDefault(r => r.Id == id2delete); // Находим удаляемый объект
+                        if (client != null) // удаляем его
+                        {
+                            db.Clients.Remove(client);
+                            db.SaveChanges();
+                        }
+                        dgwClients.DataSource = db.Clients.Include(t => t.Contact).Include(t => t.ClientType).ToList(); // перепривязка
                     }
-                    dgwClients.DataSource = db.Clients.Include(t => t.Contact).Include(t => t.ClientType).ToList(); // перепривязка
                 }
             }
         }

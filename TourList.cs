@@ -79,13 +79,20 @@ namespace TravelCompanyCore
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    Models.Tour? tour = db.Tours.FirstOrDefault(r => r.Id == (Guid)dgwTours.SelectedCells[0].Value); // Находим удаляемый объект
-                    if (tour != null) // удаляем его
+                    Guid id2delete = (Guid)dgwTours.SelectedCells[0].Value;
+                    // Если Тур входит в Заказ, его удалять нельзя:
+                    if (db.TourOrderItems.Any(toi => toi.TourId == id2delete))
+                        MessageBox.Show(String.Format("Тур в отель «{0}» входит в состав одного или нескольких Заказов, его нельзя удалить", dgwTours.SelectedCells[1].Value.ToString()));
+                    else
                     {
-                        db.Tours.Remove(tour);
-                        db.SaveChanges();
+                        Models.Tour? tour = db.Tours.FirstOrDefault(r => r.Id == (Guid)dgwTours.SelectedCells[0].Value); // Находим удаляемый объект
+                        if (tour != null) // удаляем его
+                        {
+                            db.Tours.Remove(tour);
+                            db.SaveChanges();
+                        }
+                        dgwTours.DataSource = db.Tours.Include(t => t.Food).Include(t => t.Hotel).ToList(); // перепривязка
                     }
-                    dgwTours.DataSource = db.Tours.Include(t => t.Food).Include(t => t.Hotel).ToList(); // перепривязка
                 }
             }
         }
