@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rbtnRealized = new System.Windows.Forms.RadioButton();
             this.chkHotelConfirmation = new System.Windows.Forms.CheckBox();
             this.lblReason = new System.Windows.Forms.Label();
             this.comboReasons = new System.Windows.Forms.ComboBox();
@@ -37,7 +38,8 @@
             this.rbtnBooking = new System.Windows.Forms.RadioButton();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
-            this.rbtnRealized = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblCurrentStatus = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,12 +52,23 @@
             this.groupBox1.Controls.Add(this.rbtnPaid);
             this.groupBox1.Controls.Add(this.rbtnCancel);
             this.groupBox1.Controls.Add(this.rbtnBooking);
-            this.groupBox1.Location = new System.Drawing.Point(13, 18);
+            this.groupBox1.Location = new System.Drawing.Point(13, 42);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(436, 181);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Статус";
+            this.groupBox1.Text = "Сменить статус";
+            // 
+            // rbtnRealized
+            // 
+            this.rbtnRealized.AutoSize = true;
+            this.rbtnRealized.Location = new System.Drawing.Point(23, 135);
+            this.rbtnRealized.Name = "rbtnRealized";
+            this.rbtnRealized.Size = new System.Drawing.Size(67, 19);
+            this.rbtnRealized.TabIndex = 6;
+            this.rbtnRealized.TabStop = true;
+            this.rbtnRealized.Text = "Продан";
+            this.rbtnRealized.UseVisualStyleBackColor = true;
             // 
             // chkHotelConfirmation
             // 
@@ -126,38 +139,50 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(231, 205);
+            this.btnCancel.Location = new System.Drawing.Point(231, 234);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 282;
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(150, 205);
+            this.btnOK.Location = new System.Drawing.Point(150, 234);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 281;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
-            // rbtnRealized
+            // label1
             // 
-            this.rbtnRealized.AutoSize = true;
-            this.rbtnRealized.Location = new System.Drawing.Point(23, 135);
-            this.rbtnRealized.Name = "rbtnRealized";
-            this.rbtnRealized.Size = new System.Drawing.Size(67, 19);
-            this.rbtnRealized.TabIndex = 6;
-            this.rbtnRealized.TabStop = true;
-            this.rbtnRealized.Text = "Продан";
-            this.rbtnRealized.UseVisualStyleBackColor = true;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(18, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(96, 15);
+            this.label1.TabIndex = 283;
+            this.label1.Text = "Текущий статус:";
+            // 
+            // lblCurrentStatus
+            // 
+            this.lblCurrentStatus.AutoSize = true;
+            this.lblCurrentStatus.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblCurrentStatus.Location = new System.Drawing.Point(122, 16);
+            this.lblCurrentStatus.Name = "lblCurrentStatus";
+            this.lblCurrentStatus.Size = new System.Drawing.Size(40, 15);
+            this.lblCurrentStatus.TabIndex = 284;
+            this.lblCurrentStatus.Text = "label2";
             // 
             // ChangeTourOrderStatus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(461, 270);
+            this.ClientSize = new System.Drawing.Size(461, 268);
+            this.Controls.Add(this.lblCurrentStatus);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.groupBox1);
@@ -169,6 +194,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -184,5 +210,7 @@
         private Button btnCancel;
         private Button btnOK;
         private RadioButton rbtnRealized;
+        private Label label1;
+        private Label lblCurrentStatus;
     }
 }

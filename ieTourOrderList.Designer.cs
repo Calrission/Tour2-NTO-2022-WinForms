@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.dgwTourOrders = new System.Windows.Forms.DataGridView();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnCreate = new System.Windows.Forms.Button();
+            this.btnChangeStatus = new System.Windows.Forms.Button();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Client = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PaymentType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TourStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StatusId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnCreate = new System.Windows.Forms.Button();
-            this.btnChangeStatus = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgwTourOrders)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,51 +60,6 @@
             this.dgwTourOrders.TabIndex = 0;
             this.dgwTourOrders.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwTourOrders_CellDoubleClick);
             this.dgwTourOrders.SelectionChanged += new System.EventHandler(this.dgwTourOrders_SelectionChanged);
-            // 
-            // id
-            // 
-            this.id.DataPropertyName = "Id";
-            this.id.HeaderText = "id";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Visible = false;
-            // 
-            // Client
-            // 
-            this.Client.DataPropertyName = "Client";
-            this.Client.HeaderText = "Клиент";
-            this.Client.Name = "Client";
-            this.Client.ReadOnly = true;
-            this.Client.Width = 300;
-            // 
-            // PaymentType
-            // 
-            this.PaymentType.DataPropertyName = "PaymentType";
-            this.PaymentType.HeaderText = "Вид оплаты";
-            this.PaymentType.Name = "PaymentType";
-            this.PaymentType.ReadOnly = true;
-            // 
-            // Cost
-            // 
-            this.Cost.DataPropertyName = "TotalCost";
-            this.Cost.HeaderText = "Стоимость заказа";
-            this.Cost.Name = "Cost";
-            this.Cost.ReadOnly = true;
-            // 
-            // TourStatus
-            // 
-            this.TourStatus.DataPropertyName = "TourOrderStatus";
-            this.TourStatus.HeaderText = "Статус";
-            this.TourStatus.Name = "TourStatus";
-            this.TourStatus.ReadOnly = true;
-            // 
-            // StatusId
-            // 
-            this.StatusId.DataPropertyName = "TourOrderStatusId";
-            this.StatusId.HeaderText = "StatusId";
-            this.StatusId.Name = "StatusId";
-            this.StatusId.ReadOnly = true;
-            this.StatusId.Visible = false;
             // 
             // btnDelete
             // 
@@ -149,6 +104,51 @@
             this.btnChangeStatus.UseVisualStyleBackColor = true;
             this.btnChangeStatus.Click += new System.EventHandler(this.btnChangeStatus_Click);
             // 
+            // id
+            // 
+            this.id.DataPropertyName = "Id";
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
+            // Client
+            // 
+            this.Client.DataPropertyName = "Client";
+            this.Client.HeaderText = "Клиент";
+            this.Client.Name = "Client";
+            this.Client.ReadOnly = true;
+            this.Client.Width = 300;
+            // 
+            // PaymentType
+            // 
+            this.PaymentType.DataPropertyName = "PaymentType";
+            this.PaymentType.HeaderText = "Вид оплаты";
+            this.PaymentType.Name = "PaymentType";
+            this.PaymentType.ReadOnly = true;
+            // 
+            // Cost
+            // 
+            this.Cost.DataPropertyName = "TotalCost";
+            this.Cost.HeaderText = "Стоимость заказа";
+            this.Cost.Name = "Cost";
+            this.Cost.ReadOnly = true;
+            // 
+            // TourStatus
+            // 
+            this.TourStatus.DataPropertyName = "StatusWitnReasonDescription";
+            this.TourStatus.HeaderText = "Статус";
+            this.TourStatus.Name = "TourStatus";
+            this.TourStatus.ReadOnly = true;
+            // 
+            // StatusId
+            // 
+            this.StatusId.DataPropertyName = "TourOrderStatusId";
+            this.StatusId.HeaderText = "StatusId";
+            this.StatusId.Name = "StatusId";
+            this.StatusId.ReadOnly = true;
+            this.StatusId.Visible = false;
+            // 
             // ieTourOrderList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -175,12 +175,12 @@
         private Button btnDelete;
         private Button btnEdit;
         private Button btnCreate;
+        private Button btnChangeStatus;
         private DataGridViewTextBoxColumn id;
         private DataGridViewTextBoxColumn Client;
         private DataGridViewTextBoxColumn PaymentType;
         private DataGridViewTextBoxColumn Cost;
         private DataGridViewTextBoxColumn TourStatus;
         private DataGridViewTextBoxColumn StatusId;
-        private Button btnChangeStatus;
     }
 }
