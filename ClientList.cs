@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TravelCompanyCore.Models;
 
 namespace TravelCompanyCore
 {
@@ -14,6 +15,7 @@ namespace TravelCompanyCore
             dgwClients.AutoGenerateColumns = false;
             using (ApplicationContext db = new ApplicationContext())
             {
+                comboxClientType.DataSource = db.ClientTypes.ToList().Prepend(new ClientType { Id = Guid.Empty, Name = "Все" }).ToList();
                 dgwClients.DataSource = db.Clients.Include(t => t.Contact).Include(t => t.ClientType).ToList();
             }
         }
@@ -80,6 +82,44 @@ namespace TravelCompanyCore
         private void dgwClients_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             btnEdit_Click(sender, new EventArgs());
+        }
+
+        private void bthSearch_Click(object sender, EventArgs e)
+        {
+            string text2search = txtSearchString.Text.Trim();
+
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                if (!string.IsNullOrEmpty(text2search)) // фильтруем по тексту
+                {
+                    if ((Guid)comboxClientType.SelectedValue != Guid.Empty) // И по типу
+                    {
+                        dgwClients.DataSource = db.Clients.Include(t => t.Contact).Include(t => t.ClientType).ToList() // Придётся так, чтобы работал IgnoreCase :(
+                            .Where(
+                            t => (t.Name.Contains(text2search, StringComparison.InvariantCultureIgnoreCase)
+                            || t.Contact.FirstName.Contains(text2search, StringComparison.InvariantCultureIgnoreCase)
+                            || t.Contact.LastName.Contains(text2search, StringComparison.InvariantCultureIgnoreCase)
+                            )
+                            && t.ClientTypeId == (Guid)comboxClientType.SelectedValue)
+                            .ToList();
+                    }
+                    else // или без типа
+                    {
+                        dgwClients.DataSource = db.Clients.Include(t => t.Contact).Include(t => t.ClientType).ToList() // Придётся так, чтобы работал IgnoreCase :(
+                            .Where(
+                            t => t.Name.Contains(text2search, StringComparison.InvariantCultureIgnoreCase)
+                            || t.Contact.FirstName.Contains(text2search, StringComparison.InvariantCultureIgnoreCase)
+                            || t.Contact.LastName.Contains(text2search, StringComparison.InvariantCultureIgnoreCase)
+                            ).ToList();
+                    }
+                }
+                else if ((Guid)comboxClientType.SelectedValue != Guid.Empty) // Только по типу
+                    dgwClients.DataSource = db.Clients.Include(t => t.Contact).Include(t => t.ClientType)
+                        .Where(t => t.ClientTypeId == (Guid)comboxClientType.SelectedValue)
+                        .ToList();
+                else // Вообще не фильтруем
+                    dgwClients.DataSource = db.Clients.Include(t => t.Contact).Include(t => t.ClientType).ToList();
+            }
         }
     }
 }
