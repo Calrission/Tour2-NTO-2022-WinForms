@@ -16,6 +16,7 @@ namespace TravelCompanyCore
     {
         public Guid TourOrderId { get; set; }
         private TourOrder to = new();
+        private TourOrderRealization tr = null;
         public ChangeTourOrderStatus()
         {
             InitializeComponent();
@@ -38,6 +39,12 @@ namespace TravelCompanyCore
                     setStatusAvailability(to.TourOrderStatusId);
 
                     rbtnCheckChanged(sender, e);
+
+                    if (to.TourOrderStatusId == TourOrderStatus.RealizedId)
+                    {
+                        tr = db.TourOrderRealizations.Single(t => t.TourOrderId == TourOrderId);
+                        chkHotelConfirmation.Checked = tr.BookingConfirmation;
+                    }
                 }
                 else
                 {
@@ -71,6 +78,13 @@ namespace TravelCompanyCore
                 rbtnRealized.Enabled = false;
             }
             else if (currentStatus == TourOrderStatus.PaidId)
+            {
+                rbtnBooking.Enabled = false;
+                rbtnCancel.Enabled = false;
+                rbtnPaid.Enabled = false;
+                rbtnRealized.Enabled = true;
+            }
+            else if (currentStatus == TourOrderStatus.RealizedId) 
             {
                 rbtnBooking.Enabled = false;
                 rbtnCancel.Enabled = false;
@@ -119,29 +133,58 @@ namespace TravelCompanyCore
             // Оплатить можно только Бронь
             if (rbtnPaid.Enabled && rbtnPaid.Checked && to.TourOrderStatusId == TourOrderStatus.BookingId)
                 newStatusId = TourOrderStatus.PaidId;
-
+             
             // Продать можно только Оплату
-            if (rbtnRealized.Enabled && rbtnRealized.Checked && to.TourOrderStatusId == TourOrderStatus.PaidId)
-                newStatusId = TourOrderStatus.PaidId;
+            if (rbtnRealized.Enabled && rbtnRealized.Checked && (to.TourOrderStatusId == TourOrderStatus.PaidId || to.TourOrderStatusId == TourOrderStatus.RealizedId))
+                newStatusId = TourOrderStatus.RealizedId;
 
-            if ((newStatusId == TourOrderStatus.CancellationId && newReasonId != to.TourOrderStatusReasonId) // Если мы изменяем причину Отмены
-                || (newStatusId != Guid.Empty && to.TourOrderStatusId != newStatusId)) //  Или если новый статус отличается от старого
+            if (newStatusId != Guid.Empty)
             {
-                using (ApplicationContext db = new ApplicationContext())
+                if ((newStatusId == TourOrderStatus.CancellationId && newReasonId != to.TourOrderStatusReasonId) // Если мы изменяем причину Отмены
+                || (tr != null && tr.BookingConfirmation != chkHotelConfirmation.Checked)       // Если статус продано, но изменено потверждение брони
+                    || to.TourOrderStatusId != newStatusId) //  Или если новый статус отличается от старого
                 {
-                    // Заново получаем объект в текущем контексте:
-                    TourOrder EditableTO = db.TourOrders.First(to => to.Id == TourOrderId);
-                    // Обновляем поля:
-                    EditableTO.TourOrderStatusId = newStatusId;
-                    EditableTO.TourOrderStatusReasonId = newReasonId;
-                    EditableTO.TourOrderStatusShiftDate = DateTime.Now;
+                    using (ApplicationContext db = new ApplicationContext())
+                    {
+                        // Заново получаем объект в текущем контексте:
+                        TourOrder EditableTO = db.TourOrders.First(to => to.Id == TourOrderId);
+                        // Обновляем поля:
+                        EditableTO.TourOrderStatusId = newStatusId;
+                        EditableTO.TourOrderStatusReasonId = newReasonId;
+                        EditableTO.TourOrderStatusShiftDate = DateTime.Now;
 
-                    db.TourOrders.Update(EditableTO);
-                    db.SaveChanges();
+                        db.TourOrders.Update(EditableTO);
+
+                        if (newStatusId == TourOrderStatus.PaidId)
+                        {
+                            db.TourOrderPayments.Add(new TourOrderPayment
+                            {
+                                TourOrderId = EditableTO.Id,
+                                TotalCost = EditableTO.TotalCost,
+                                PaymentDate = DateTime.Now
+                            });
+                        }
+                        else if (newStatusId == TourOrderStatus.RealizedId && tr == null)
+                        {
+                            db.TourOrderRealizations.Add(EditableTO.convertToTourOrderRelalization(chkHotelConfirmation.Checked));
+                        }
+                        else if (tr != null) 
+                        {
+                            tr = db.TourOrderRealizations.Single(t => t.Id == tr.Id);
+                            tr.BookingConfirmation = chkHotelConfirmation.Checked;
+                            db.Update(tr);
+                        }
+
+                        db.SaveChanges();
+                    }
+                    this.DialogResult = DialogResult.OK; // Чтобы окно закрылось и последующая перепривязка данных в родительском окне состоялась
                 }
-                this.DialogResult = DialogResult.OK; // Чтобы окно закрылось и последующая перепривязка данных в родительском окне состоялась
             }
+        }
 
+        private void rbtnRealized_CheckedChanged(object sender, EventArgs e)
+        {
+            chkHotelConfirmation.Enabled = true;
         }
     }
 }
