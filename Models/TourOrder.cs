@@ -69,5 +69,20 @@ namespace TravelCompanyCore.Models
                 else return "нет привязки";
             }
         }
+
+        public TourOrderRealization convertToTourOrderRelalization(bool bookingConfiguration)
+        {
+            return new TourOrderRealization
+            {
+                Id = Guid.NewGuid(),
+                TourOrderId = this.Id,
+                ClientId = this.ClientId,
+                PaymentTypeId = this.PaymentTypeId,
+                TourOrderItems = this.TourOrderItems,
+                TotalCost = this.TotalCost,
+                RealizationDate = DateTime.Now,
+                BookingConfirmation = bookingConfiguration
+            };
+        }
     }
 }

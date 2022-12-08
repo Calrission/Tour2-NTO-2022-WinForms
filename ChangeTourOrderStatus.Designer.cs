@@ -69,6 +69,7 @@
             this.rbtnRealized.TabStop = true;
             this.rbtnRealized.Text = "Продан";
             this.rbtnRealized.UseVisualStyleBackColor = true;
+            this.rbtnRealized.CheckedChanged += new System.EventHandler(this.rbtnRealized_CheckedChanged);
             // 
             // chkHotelConfirmation
             // 
@@ -162,7 +163,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(18, 16);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(96, 15);
+            this.label1.Size = new System.Drawing.Size(97, 15);
             this.label1.TabIndex = 283;
             this.label1.Text = "Текущий статус:";
             // 
