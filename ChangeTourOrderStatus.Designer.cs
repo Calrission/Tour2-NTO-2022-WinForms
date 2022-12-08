@@ -57,7 +57,7 @@
             this.groupBox1.Size = new System.Drawing.Size(436, 181);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Сменить статус";
+            this.groupBox1.Text = "Смена статуса";
             // 
             // rbtnRealized
             // 

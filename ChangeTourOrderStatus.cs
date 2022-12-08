@@ -30,10 +30,10 @@ namespace TravelCompanyCore
                 if (TourOrderId != Guid.Empty)
                 {
                     to = db.TourOrders
-                        .Include(to => to.TourOrderStatus) // Чтобы отобразить текущий статус
+                        .Include(to => to.TourOrderStatus).Include(to => to.TourOrderStatusReason) // Чтобы отобразить текущий статус
                         .First(to => to.Id == TourOrderId);
 
-                    lblCurrentStatus.Text = to.TourOrderStatus.Name;
+                    lblCurrentStatus.Text = String.Format("{0} от {1}", to.StatusWitnReasonDescription, to.TourOrderStatusShiftDate.Value.ToString());
 
                     setStatusAvailability(to.TourOrderStatusId);
 
@@ -109,7 +109,8 @@ namespace TravelCompanyCore
                 newStatusId = TourOrderStatus.BookingId;
 
             // Отменить можно только Бронь или саму Отмену (для смены причины)
-            if (rbtnCancel.Enabled && rbtnCancel.Checked && (to.TourOrderStatusId == TourOrderStatus.BookingId || to.TourOrderStatusId == TourOrderStatus.CancellationId))
+            if (rbtnCancel.Enabled && rbtnCancel.Checked
+                && (to.TourOrderStatusId == TourOrderStatus.BookingId || to.TourOrderStatusId == TourOrderStatus.CancellationId))
             {
                 newStatusId = TourOrderStatus.CancellationId;
                 newReasonId = (Guid)comboReasons.SelectedValue;
