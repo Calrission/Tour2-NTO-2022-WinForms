@@ -37,6 +37,11 @@
             this.ContactName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PhoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TypeClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bthSearch = new System.Windows.Forms.Button();
+            this.txtSearchString = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboxClientType = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgwClients)).BeginInit();
             this.SuspendLayout();
             // 
@@ -143,11 +148,66 @@
             this.TypeClient.ReadOnly = true;
             this.TypeClient.Width = 150;
             // 
+            // bthSearch
+            // 
+            this.bthSearch.Location = new System.Drawing.Point(767, 11);
+            this.bthSearch.Name = "bthSearch";
+            this.bthSearch.Size = new System.Drawing.Size(75, 23);
+            this.bthSearch.TabIndex = 22;
+            this.bthSearch.Text = "Поиск";
+            this.bthSearch.UseVisualStyleBackColor = true;
+            this.bthSearch.Click += new System.EventHandler(this.bthSearch_Click);
+            // 
+            // txtSearchString
+            // 
+            this.txtSearchString.AccessibleDescription = "";
+            this.txtSearchString.Location = new System.Drawing.Point(63, 11);
+            this.txtSearchString.Name = "txtSearchString";
+            this.txtSearchString.PlaceholderText = "Введите часть Названия клиента или Контактного лица";
+            this.txtSearchString.Size = new System.Drawing.Size(409, 23);
+            this.txtSearchString.TabIndex = 21;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(48, 15);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "Фильтр";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(478, 15);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(74, 15);
+            this.label2.TabIndex = 23;
+            this.label2.Text = "Тип клиента";
+            // 
+            // comboxClientType
+            // 
+            this.comboxClientType.DisplayMember = "Name";
+            this.comboxClientType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboxClientType.FormattingEnabled = true;
+            this.comboxClientType.Location = new System.Drawing.Point(558, 12);
+            this.comboxClientType.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboxClientType.Name = "comboxClientType";
+            this.comboxClientType.Size = new System.Drawing.Size(196, 23);
+            this.comboxClientType.TabIndex = 146;
+            this.comboxClientType.ValueMember = "Id";
+            // 
             // ClientList
             // 
+            this.AcceptButton = this.bthSearch;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(856, 358);
+            this.Controls.Add(this.comboxClientType);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.bthSearch);
+            this.Controls.Add(this.txtSearchString);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnCreate);
@@ -160,6 +220,7 @@
             this.Load += new System.EventHandler(this.ClientList_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgwClients)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -174,5 +235,10 @@
         private DataGridViewTextBoxColumn ContactName;
         private DataGridViewTextBoxColumn PhoneNumber;
         private DataGridViewTextBoxColumn TypeClient;
+        private Button bthSearch;
+        private TextBox txtSearchString;
+        private Label label1;
+        private Label label2;
+        private ComboBox comboxClientType;
     }
 }
