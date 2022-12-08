@@ -21,11 +21,11 @@ namespace TravelCompanyCore
 
         private void ContactList_Load(object sender, EventArgs e)
         {
+            dgwContacts.AutoGenerateColumns = false;
             using (ApplicationContext db = new ApplicationContext())
             {
-                // получаем объекты из бд и выводим в грид
-                dgwContacts.AutoGenerateColumns = false;
-                dgwContacts.DataSource = db.Contacts.Include(c=>c.Roles).ToList().FindAll(t => t.Id != Contact.BotId); // Пахома оставляем за бортом, он не редактируемый
+                // получаем объекты из бд и выводим в грид                
+                dgwContacts.DataSource = db.Contacts.Where(t => t.Id != Contact.BotId).Include(c => c.Roles).ToList(); // Пахома оставляем за бортом, он не редактируемый
             }
         }
 
@@ -68,7 +68,8 @@ namespace TravelCompanyCore
                             db.Contacts.Remove(contact);
                             db.SaveChanges();
                         }
-                        dgwContacts.DataSource = db.Contacts.Include(c => c.Roles).ToList().FindAll(t => t.Id != Contact.BotId); // перепривязка
+                        txtSearchString.Text = string.Empty;
+                        dgwContacts.DataSource = db.Contacts.Where(t => t.Id != Contact.BotId).Include(c => c.Roles).ToList(); // перепривязка
                     }
                 }
             }
@@ -81,8 +82,9 @@ namespace TravelCompanyCore
                 ct.EditableId = Guid.Empty;
                 if (ct.ShowDialog(this) == DialogResult.OK) // если юзер сохранился, перепривязываем грид
                 {
+                    txtSearchString.Text = string.Empty;
                     using (ApplicationContext db = new ApplicationContext())
-                        dgwContacts.DataSource = db.Contacts.Include(c => c.Roles).ToList().FindAll(t => t.Id != Contact.BotId);
+                        dgwContacts.DataSource = db.Contacts.Where(t => t.Id != Contact.BotId).Include(c => c.Roles).ToList();
                 }
             }
         }
@@ -91,11 +93,12 @@ namespace TravelCompanyCore
         {
             using (EditContact ct = new())
             {
-                ct.EditableId= (Guid)dgwContacts.SelectedCells[0].Value;
+                ct.EditableId = (Guid)dgwContacts.SelectedCells[0].Value;
                 if (ct.ShowDialog(this) == DialogResult.OK) // если юзер сохранился, перепривязываем грид
                 {
+                    txtSearchString.Text = string.Empty;
                     using (ApplicationContext db = new ApplicationContext())
-                        dgwContacts.DataSource = db.Contacts.Include(c => c.Roles).ToList().FindAll(t => t.Id != Contact.BotId);
+                        dgwContacts.DataSource = db.Contacts.Where(t => t.Id != Contact.BotId).Include(c => c.Roles).ToList();
                 }
             }
         }
@@ -103,6 +106,26 @@ namespace TravelCompanyCore
         private void dgwContacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             btnEdit_Click(sender, new EventArgs());
+        }
+
+        private void bthSearch_Click(object sender, EventArgs e)
+        {
+            string text2search = txtSearchString.Text.Trim();
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                if (!string.IsNullOrEmpty(text2search)) // Если есть что искать
+                {
+                    dgwContacts.DataSource = db.Contacts.Include(c => c.Roles).ToList() // Придётся так, чтобы работал IgnoreCase :(
+                        .Where(t => t.Id != Contact.BotId // Отсечь Пахома
+                        && (t.LastName.Contains(text2search, StringComparison.InvariantCultureIgnoreCase)
+                        || t.FirstName.Contains(text2search, StringComparison.InvariantCultureIgnoreCase)
+                        || t.EmailAddress.Contains(text2search, StringComparison.InvariantCultureIgnoreCase)
+                        ))
+                        .ToList();
+                }
+                else
+                    dgwContacts.DataSource = db.Contacts.Where(t => t.Id != Contact.BotId).Include(c => c.Roles).ToList();
+            }
         }
     }
 }
