@@ -17,6 +17,7 @@ namespace TravelCompanyCore
     {
         public Guid TourOrderId { get; set; }
         private TourOrder to = new();
+        bool isDraft = false; // Пу умолчанию это НЕ черновик
         public ieEditTourOrder()
         {
             InitializeComponent();
@@ -60,14 +61,8 @@ namespace TravelCompanyCore
                         .ThenInclude(toi => toi.Tour)
                         .ThenInclude(t => t.Hotel)
                         .First(to => to.Id == TourOrderId);
-                    // Не дадим редактировать Заказ со статусом, отличным от Черновика
-                    bool isDraft = to.TourOrderStatusId == TourOrderStatus.DraftId;
-                    comboClients.Enabled = isDraft;
-                    comboPaymentType.Enabled = isDraft;
-                    dgwTourOrderItems.Enabled = isDraft;
-                    btnAdd.Enabled = isDraft;
-                    btnRemove.Enabled = isDraft;
-                    btnOK.Enabled = isDraft;
+
+                    isDraft = to.TourOrderStatusId == TourOrderStatus.DraftId;
 
                     dgwTourOrderItems.DataSource = to.TourOrderItems;
                     comboClients.SelectedValue = to.ClientId;
@@ -77,7 +72,17 @@ namespace TravelCompanyCore
                 {
                     to.TourOrderItems = new List<TourOrderItem>();
                     to.TotalCost = 0;
+                    isDraft = true; // При создании это черновик
                 }
+
+                // Не дадим редактировать Заказ со статусом, отличным от Черновика!
+                comboClients.Enabled = isDraft;
+                comboPaymentType.Enabled = isDraft;
+                dgwTourOrderItems.Enabled = isDraft;
+                btnAdd.Enabled = isDraft;
+                btnRemove.Enabled = isDraft;
+                btnOK.Enabled = isDraft;
+
                 lblTotalCost.Text = to.TotalCost.ToString();
             }
 
@@ -87,7 +92,7 @@ namespace TravelCompanyCore
 
         private void setOKstatus()
         {
-            btnOK.Enabled = dgwTourOrderItems.Rows.Count >= 1;
+            btnOK.Enabled = isDraft && dgwTourOrderItems.Rows.Count > 0;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -153,6 +158,7 @@ namespace TravelCompanyCore
                         EditableTourOrder.TotalCost = Double.Parse(lblTotalCost.Text);
                         EditableTourOrder.TourOrderStatusId = TourOrderStatus.DraftId; // При создании статус всегда - Черновик
                         EditableTourOrder.TourOrderStatusReasonId = TourOrderStatusReason.NoReasonId; // Для Черновика причины нет
+                        EditableTourOrder.TourOrderStatusShiftDate= DateTime.Now;
 
                         foreach (TourOrderItem toi in to.TourOrderItems)
                         {
@@ -218,9 +224,9 @@ namespace TravelCompanyCore
 
         private void dgwTourOrderItems_SelectionChanged(object sender, EventArgs e)
         {
-            bool isEnabled = dgwTourOrderItems.SelectedRows.Count > 0;
+            bool isEnabled = isDraft && dgwTourOrderItems.SelectedRows.Count > 0;
             btnRemove.Enabled = isEnabled;
-            //btnOK.Enabled = isEnabled;
+            btnOK.Enabled = isEnabled;
         }
 
         private void dgwTourOrderItems_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -228,7 +234,6 @@ namespace TravelCompanyCore
             if (e.RowIndex >= 0 && e.RowIndex <= dgwTourOrderItems.Rows.Count - 1) // Исключаем заголовок грида
             {
                 Guid rowId = (Guid)dgwTourOrderItems.Rows[e.RowIndex].Cells[0].Value;
-                //to.TourOrderItems.Find(t => t.Id == rowId).Cost = decimal.ToDouble(decimal.Parse(dgwTourOrderItems.Rows[e.RowIndex].Cells[2].Value.ToString()) * decimal.Parse(dgwTourOrderItems.Rows[e.RowIndex].Cells[3].Value.ToString()));
                 TourOrderItem toi = to.TourOrderItems.Find(t => t.Id == rowId);
                 toi.Cost = toi.Quantity * toi.Price;
                 dgwTourOrderItems.DataSource = to.TourOrderItems; // перепривязка

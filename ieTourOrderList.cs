@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TravelCompanyCore.Models;
 
 namespace TravelCompanyCore
 {
@@ -28,39 +29,56 @@ namespace TravelCompanyCore
                     .Include(h => h.TourOrderItems)
                     .Include(h => h.Client)
                     .Include(h => h.PaymentType)
-                    .Include(tos=>tos.TourOrderStatus).ToList();
+                    .Include(tos=>tos.TourOrderStatus)
+                    .Include(tos => tos.TourOrderStatusReason).ToList();
             }
         }
 
         private void dgwTourOrders_SelectionChanged(object sender, EventArgs e)
         {
             bool isEditable = dgwTourOrders.SelectedRows.Count > 0; // флаг активации кнопок "Удалить" и "Изменить"
-            btnEdit.Enabled = isEditable; // Редактировать можно, но окно должно быть ReadOnly!!!
-            btnDelete.Enabled = isEditable; // Удалить тоже можно только Черновик!!!
-            btnChangeStatus.Enabled= isEditable; // Но на самом деле это зависит ещё и от текущего статуса!!!
+
+            btnEdit.Enabled = isEditable;
+            btnChangeStatus.Enabled = isEditable;
+
+            if (isEditable && (Guid)dgwTourOrders.SelectedCells[5].Value == TourOrderStatus.DraftId) // Черновик
+            {
+                btnEdit.Text = "Изменить";
+                btnDelete.Enabled = isEditable;
+            }
+            else // А здесь есть чего:
+            { 
+                btnEdit.Text = "Просмотр";
+                btnDelete.Enabled = false;
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show( // Удостоверяемся, что пользователь в сознании
+            if ((Guid)dgwTourOrders.SelectedCells[5].Value == TourOrderStatus.DraftId) // Удалить можно только Черновик!!!
+            {
+                if (MessageBox.Show( // Удостоверяемся, что пользователь в сознании
                 String.Format("Вы действительно хотите удалить заказ клиента «{0}»?", dgwTourOrders.SelectedCells[1].Value.ToString()),
                 "Запрос на удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-            {
-                using (ApplicationContext db = new ApplicationContext())
                 {
-                    Models.TourOrder? to = db.TourOrders.FirstOrDefault(r => r.Id == (Guid)dgwTourOrders.SelectedCells[0].Value); // Находим удаляемый объект
-                    if (to != null) // удаляем его
+                    using (ApplicationContext db = new ApplicationContext())
                     {
-                        db.TourOrders.Remove(to);
-                        db.SaveChanges();
+                        Models.TourOrder? to = db.TourOrders.FirstOrDefault(r => r.Id == (Guid)dgwTourOrders.SelectedCells[0].Value); // Находим удаляемый объект
+                        if (to != null) // удаляем его
+                        {
+                            db.TourOrders.Remove(to);
+                            db.SaveChanges();
+                        }
+                        dgwTourOrders.DataSource = db.TourOrders
+                            .Include(h => h.TourOrderItems)
+                            .Include(h => h.Client)
+                            .Include(h => h.PaymentType)
+                            .Include(tos => tos.TourOrderStatus)
+                            .Include(tos => tos.TourOrderStatusReason).ToList(); // перепривязка
                     }
-                    dgwTourOrders.DataSource = db.TourOrders
-                        .Include(h => h.TourOrderItems)
-                        .Include(h => h.Client)
-                        .Include(h => h.PaymentType)
-                        .Include(tos => tos.TourOrderStatus).ToList(); // перепривязка
                 }
             }
+            else MessageBox.Show("Удалить можно только «Черновик»!");
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -76,7 +94,8 @@ namespace TravelCompanyCore
                             .Include(h => h.TourOrderItems)
                             .Include(h => h.Client)
                             .Include(h => h.PaymentType)
-                            .Include(tos => tos.TourOrderStatus).ToList();
+                            .Include(tos => tos.TourOrderStatus)
+                            .Include(tos => tos.TourOrderStatusReason).ToList();
                 }
             }
         }
@@ -94,7 +113,8 @@ namespace TravelCompanyCore
                             .Include(h => h.TourOrderItems)
                             .Include(h => h.Client)
                             .Include(h => h.PaymentType)
-                            .Include(tos => tos.TourOrderStatus).ToList();
+                            .Include(tos => tos.TourOrderStatus)
+                            .Include(tos => tos.TourOrderStatusReason).ToList();
                 }
             }
         }
@@ -116,7 +136,8 @@ namespace TravelCompanyCore
                             .Include(h => h.TourOrderItems)
                             .Include(h => h.Client)
                             .Include(h => h.PaymentType)
-                            .Include(tos => tos.TourOrderStatus).ToList();
+                            .Include(tos => tos.TourOrderStatus)
+                            .Include(tos => tos.TourOrderStatusReason).ToList();
                 }
             }
         }

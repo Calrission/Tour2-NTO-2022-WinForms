@@ -29,14 +29,13 @@ namespace TravelCompanyCore
 
                 if (TourOrderId != Guid.Empty)
                 {
-                    // Заказ с элементами и соответствующими этим элементам связями:
                     to = db.TourOrders
-                        .Include(to => to.TourOrderItems)
-                        .ThenInclude(toi => toi.Tour)
-                        .ThenInclude(t => t.Hotel)
+                        .Include(to => to.TourOrderStatus) // Чтобы отобразить текущий статус
                         .First(to => to.Id == TourOrderId);
-                    // Не дадим редактировать Заказ со статусом, отличным от Черновика
-                    bool isDraft = to.TourOrderStatusId == TourOrderStatus.DraftId;
+
+                    lblCurrentStatus.Text = to.TourOrderStatus.Name;
+
+                    setStatusAvailability(to.TourOrderStatusId);
 
                     rbtnCheckChanged(sender, e);
                 }
@@ -46,11 +45,102 @@ namespace TravelCompanyCore
                 }
             }
         }
+
+        private void setStatusAvailability(Guid currentStatus)
+        {
+            if (currentStatus == TourOrderStatus.DraftId)
+            {
+                rbtnBooking.Enabled = true;
+                rbtnCancel.Enabled = false;
+                rbtnPaid.Enabled = false;
+                rbtnRealized.Enabled = false;
+            }
+            else if (currentStatus == TourOrderStatus.BookingId)
+            {
+                rbtnBooking.Enabled = false;
+                rbtnCancel.Enabled = true;
+                rbtnPaid.Enabled = true;
+                rbtnRealized.Enabled = false;
+            }
+            else if (currentStatus == TourOrderStatus.CancellationId)
+            {
+                rbtnBooking.Enabled = false;
+                rbtnCancel.Enabled = true; // Можно поменять причину
+                comboReasons.SelectedValue = to.TourOrderStatusReasonId; // Выставляем текущую причину
+                rbtnPaid.Enabled = false;
+                rbtnRealized.Enabled = false;
+            }
+            else if (currentStatus == TourOrderStatus.PaidId)
+            {
+                rbtnBooking.Enabled = false;
+                rbtnCancel.Enabled = false;
+                rbtnPaid.Enabled = false;
+                rbtnRealized.Enabled = true;
+            }
+            else // Во всех остальных статусах ничо нельзя
+            {
+                rbtnBooking.Enabled = false;
+                rbtnCancel.Enabled = false;
+                rbtnPaid.Enabled = false;
+                rbtnRealized.Enabled = false;
+            }
+        }
+
         private void rbtnCheckChanged(object sender, EventArgs e)
         {
             comboReasons.Enabled = rbtnCancel.Checked;
             lblReason.Enabled = rbtnCancel.Checked;
             chkHotelConfirmation.Enabled = rbtnRealized.Checked;
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            Guid newReasonId = TourOrderStatusReason.NoReasonId; // По умолчанию беспричинно
+            Guid newStatusId = Guid.Empty;
+            this.DialogResult = DialogResult.Cancel; // По умолчанию перепривязка данных в родительском окне не нужна - типа ничего не изменилось
+
+            // Бронь можно установить только на Черновик
+            if (rbtnBooking.Enabled && rbtnBooking.Checked && to.TourOrderStatusId == TourOrderStatus.DraftId)
+                newStatusId = TourOrderStatus.BookingId;
+
+            // Отменить можно только Бронь или саму Отмену (для смены причины)
+            if (rbtnCancel.Enabled && rbtnCancel.Checked && (to.TourOrderStatusId == TourOrderStatus.BookingId || to.TourOrderStatusId == TourOrderStatus.CancellationId))
+            {
+                newStatusId = TourOrderStatus.CancellationId;
+                newReasonId = (Guid)comboReasons.SelectedValue;
+            }
+
+            // Оплатить можно только Бронь
+            if (rbtnPaid.Enabled && rbtnPaid.Checked && to.TourOrderStatusId == TourOrderStatus.BookingId)
+                newStatusId = TourOrderStatus.PaidId;
+
+            // Продать можно только Оплату
+            if (rbtnRealized.Enabled && rbtnRealized.Checked && to.TourOrderStatusId == TourOrderStatus.PaidId)
+                newStatusId = TourOrderStatus.PaidId;
+
+            if ((newStatusId == TourOrderStatus.CancellationId && newReasonId != to.TourOrderStatusReasonId) // Если мы изменяем причину Отмены
+                || (newStatusId != Guid.Empty && to.TourOrderStatusId != newStatusId)) //  Или если новый статус отличается от старого
+            {
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    // Заново получаем объект в текущем контексте:
+                    TourOrder EditableTO = db.TourOrders.First(to => to.Id == TourOrderId);
+                    // Обновляем поля:
+                    EditableTO.TourOrderStatusId = newStatusId;
+                    EditableTO.TourOrderStatusReasonId = newReasonId;
+                    EditableTO.TourOrderStatusShiftDate = DateTime.Now;
+
+                    db.TourOrders.Update(EditableTO);
+                    db.SaveChanges();
+                }
+                this.DialogResult = DialogResult.OK; // Чтобы окно закрылось и последующая перепривязка данных в родительском окне состоялась
+            }
+
         }
     }
 }

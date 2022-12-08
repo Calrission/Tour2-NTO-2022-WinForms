@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,5 +51,23 @@ namespace TravelCompanyCore.Models
         public DateTime? TourOrderStatusShiftDate { get; set; }
         public Guid TourOrderStatusReasonId { get; set; }
         public TourOrderStatusReason TourOrderStatusReason { get; set; }
+        /// <summary>
+        /// Ссылка на расширенное описание Статуса (нужен Include к Причинам!)
+        /// </summary>
+        [NotMapped]
+        public string StatusWitnReasonDescription
+        {
+            get
+            {
+                if (this.TourOrderStatus != null && TourOrderStatusReason != null)
+                {
+                    if (TourOrderStatusId == TourOrderStatus.CancellationId)
+                        return String.Format("{0} ({1})", TourOrderStatus.Name, TourOrderStatusReason.Name);
+                    else
+                        return TourOrderStatus.Name;
+                }
+                else return "нет привязки";
+            }
+        }
     }
 }

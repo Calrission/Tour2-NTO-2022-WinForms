@@ -11,7 +11,6 @@ namespace TravelCompanyCore.Models
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public Guid ReasonId { get; set; }
         /// <summary>
         /// Черновик
         /// </summary>
