@@ -39,6 +39,9 @@
             this.PhoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ListOfRoles = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtSearchString = new System.Windows.Forms.TextBox();
+            this.bthSearch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgwContacts)).BeginInit();
             this.SuspendLayout();
             // 
@@ -153,11 +156,45 @@
             this.ListOfRoles.Name = "ListOfRoles";
             this.ListOfRoles.ReadOnly = true;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(16, 11);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(48, 15);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Фильтр";
+            // 
+            // txtSearchString
+            // 
+            this.txtSearchString.AccessibleDescription = "Введите часть Фамилии или часть Имени или часть Email для поиска по этим реквизит" +
+    "ам";
+            this.txtSearchString.Location = new System.Drawing.Point(67, 9);
+            this.txtSearchString.Name = "txtSearchString";
+            this.txtSearchString.PlaceholderText = "Введите часть Фамилии или часть Имени или часть Email для поиска по этим реквизит" +
+    "ам";
+            this.txtSearchString.Size = new System.Drawing.Size(508, 23);
+            this.txtSearchString.TabIndex = 13;
+            // 
+            // bthSearch
+            // 
+            this.bthSearch.Location = new System.Drawing.Point(581, 9);
+            this.bthSearch.Name = "bthSearch";
+            this.bthSearch.Size = new System.Drawing.Size(75, 23);
+            this.bthSearch.TabIndex = 14;
+            this.bthSearch.Text = "Поиск";
+            this.bthSearch.UseVisualStyleBackColor = true;
+            this.bthSearch.Click += new System.EventHandler(this.bthSearch_Click);
+            // 
             // ContactList
             // 
+            this.AcceptButton = this.bthSearch;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(856, 354);
+            this.Controls.Add(this.bthSearch);
+            this.Controls.Add(this.txtSearchString);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnCreate);
@@ -169,6 +206,7 @@
             this.Load += new System.EventHandler(this.ContactList_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgwContacts)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -185,5 +223,8 @@
         private DataGridViewTextBoxColumn PhoneNumber;
         private DataGridViewTextBoxColumn Email;
         private DataGridViewTextBoxColumn ListOfRoles;
+        private Label label1;
+        private TextBox txtSearchString;
+        private Button bthSearch;
     }
 }
