@@ -181,7 +181,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(478, 15);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 15);
+            this.label2.Size = new System.Drawing.Size(75, 15);
             this.label2.TabIndex = 23;
             this.label2.Text = "Тип клиента";
             // 
