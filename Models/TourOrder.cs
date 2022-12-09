@@ -78,7 +78,6 @@ namespace TravelCompanyCore.Models
                 TourOrderId = this.Id,
                 ClientId = this.ClientId,
                 PaymentTypeId = this.PaymentTypeId,
-                TourOrderItems = this.TourOrderItems,
                 TotalCost = this.TotalCost,
                 RealizationDate = DateTime.Now,
                 BookingConfirmation = bookingConfiguration
