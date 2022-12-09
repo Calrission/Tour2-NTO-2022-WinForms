@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\va200\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\va200\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_TravelCompanyCore.-1376748426.00" t="ExcludeRecursive" />
+    <e p="D:\VisualStudioProjects\TravelCompanyCore" t="IncludeRecursive">
+      <e p=".gitattributes" t="Include" />
+      <e p=".gitignore" t="Include" />
+      <e p="ApplicationContext.cs" t="Include" />
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="ClientList.cs" t="Include" />
+      <e p="ClientList.Designer.cs" t="Include" />
+      <e p="ClientList.resx" t="Include" />
+      <e p="ContactList.cs" t="Include" />
+      <e p="ContactList.Designer.cs" t="Include" />
+      <e p="ContactList.resx" t="Include" />
+      <e p="EditClient.cs" t="Include" />
+      <e p="EditClient.Designer.cs" t="Include" />
+      <e p="EditClient.resx" t="Include" />
+      <e p="EditContact.cs" t="Include" />
+      <e p="EditContact.Designer.cs" t="Include" />
+      <e p="EditContact.resx" t="Include" />
+      <e p="EditHotel.cs" t="Include" />
+      <e p="EditHotel.Designer.cs" t="Include" />
+      <e p="EditHotel.resx" t="Include" />
+      <e p="EditRegion.cs" t="Include" />
+      <e p="EditRegion.Designer.cs" t="Include" />
+      <e p="EditRegion.resx" t="Include" />
+      <e p="EditRole.cs" t="Include" />
+      <e p="EditRole.Designer.cs" t="Include" />
+      <e p="EditRole.resx" t="Include" />
+      <e p="EditTour.cs" t="Include" />
+      <e p="EditTour.Designer.cs" t="Include" />
+      <e p="EditTour.resx" t="Include" />
+      <e p="HotelList.cs" t="Include" />
+      <e p="HotelList.Designer.cs" t="Include" />
+      <e p="HotelList.resx" t="Include" />
+      <e p="ieEditTourOrder.cs" t="Include" />
+      <e p="ieEditTourOrder.Designer.cs" t="Include" />
+      <e p="ieEditTourOrder.resx" t="Include" />
+      <e p="ieTourOrderList.cs" t="Include" />
+      <e p="ieTourOrderList.Designer.cs" t="Include" />
+      <e p="ieTourOrderList.resx" t="Include" />
+      <e p="Models" t="Include">
+        <e p="Client.cs" t="Include" />
+        <e p="ClientType.cs" t="Include" />
+        <e p="Contact.cs" t="Include" />
+        <e p="Food.cs" t="Include" />
+        <e p="Hotel.cs" t="Include" />
+        <e p="PaymentType.cs" t="Include" />
+        <e p="Region.cs" t="Include" />
+        <e p="Role.cs" t="Include" />
+        <e p="Tour.cs" t="Include" />
+        <e p="TourOrder.cs" t="Include" />
+        <e p="TourOrderItem.cs" t="Include" />
+      </e>
+      <e p="NumericUpDownForGrid.cs" t="Include" />
+      <e p="obj" t="ExcludeRecursive">
+        <e p="Debug" t="Include">
+          <e p="net6.0-windows" t="Include">
+            <e p="TravelCompanyCore.AssemblyInfo.cs" t="Include" />
+            <e p="TravelCompanyCore.GlobalUsings.g.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Program.cs" t="Include" />
+      <e p="Properties" t="Include">
+        <e p="DataSources" t="Include">
+          <e p="FakePlayer.datasource" t="Include" />
+        </e>
+        <e p="PublishProfiles" t="Include">
+          <e p="FolderProfile.pubxml" t="Include" />
+        </e>
+      </e>
+      <e p="RegionList.cs" t="Include" />
+      <e p="RegionList.Designer.cs" t="Include" />
+      <e p="RegionList.resx" t="Include" />
+      <e p="RoleList.cs" t="Include" />
+      <e p="RoleList.Designer.cs" t="Include" />
+      <e p="RoleList.resx" t="Include" />
+      <e p="StartForm.cs" t="Include" />
+      <e p="StartForm.Designer.cs" t="Include" />
+      <e p="StartForm.resx" t="Include" />
+      <e p="TourList.cs" t="Include" />
+      <e p="TourList.Designer.cs" t="Include" />
+      <e p="TourList.resx" t="Include" />
+      <e p="TravelCompanyCore.csproj" t="IncludeRecursive" />
+      <e p="TravelCompanyCore.sln" t="IncludeFlat" />
+      <e p="Дневник.txt" t="Include" />
+      <e p="Пояснительная записка.txt" t="Include" />
+    </e>
+  </component>
+</project>

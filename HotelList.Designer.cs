@@ -43,6 +43,11 @@
             this.ManagerId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hotelListBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fakeDataSourceBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.comboxRegion = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.bthSearch = new System.Windows.Forms.Button();
+            this.txtSearchString = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgwHotels)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hotelListBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fakeDataSourceBindingSource)).BeginInit();
@@ -102,7 +107,7 @@
             this.dgwHotels.ReadOnly = true;
             this.dgwHotels.RowTemplate.Height = 25;
             this.dgwHotels.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgwHotels.Size = new System.Drawing.Size(914, 275);
+            this.dgwHotels.Size = new System.Drawing.Size(866, 275);
             this.dgwHotels.TabIndex = 12;
             this.dgwHotels.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgwHotels_CellMouseDoubleClick);
             this.dgwHotels.SelectionChanged += new System.EventHandler(this.dgwHotels_SelectionChanged);
@@ -169,11 +174,65 @@
             this.ManagerId.ReadOnly = true;
             this.ManagerId.Visible = false;
             // 
+            // comboxRegion
+            // 
+            this.comboxRegion.DisplayMember = "Name";
+            this.comboxRegion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboxRegion.FormattingEnabled = true;
+            this.comboxRegion.Location = new System.Drawing.Point(593, 13);
+            this.comboxRegion.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboxRegion.Name = "comboxRegion";
+            this.comboxRegion.Size = new System.Drawing.Size(197, 23);
+            this.comboxRegion.TabIndex = 151;
+            this.comboxRegion.ValueMember = "Id";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(480, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(108, 15);
+            this.label2.TabIndex = 150;
+            this.label2.Text = "Местонахождение";
+            // 
+            // bthSearch
+            // 
+            this.bthSearch.Location = new System.Drawing.Point(802, 12);
+            this.bthSearch.Name = "bthSearch";
+            this.bthSearch.Size = new System.Drawing.Size(76, 23);
+            this.bthSearch.TabIndex = 149;
+            this.bthSearch.Text = "Поиск";
+            this.bthSearch.UseVisualStyleBackColor = true;
+            this.bthSearch.Click += new System.EventHandler(this.bthSearch_Click);
+            // 
+            // txtSearchString
+            // 
+            this.txtSearchString.AccessibleDescription = "";
+            this.txtSearchString.Location = new System.Drawing.Point(65, 12);
+            this.txtSearchString.Name = "txtSearchString";
+            this.txtSearchString.PlaceholderText = "Введите часть Названия отеля";
+            this.txtSearchString.Size = new System.Drawing.Size(409, 23);
+            this.txtSearchString.TabIndex = 148;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(14, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(48, 15);
+            this.label1.TabIndex = 147;
+            this.label1.Text = "Фильтр";
+            // 
             // HotelList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(988, 360);
+            this.ClientSize = new System.Drawing.Size(901, 360);
+            this.Controls.Add(this.comboxRegion);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.bthSearch);
+            this.Controls.Add(this.txtSearchString);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnCreate);
@@ -187,6 +246,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.hotelListBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fakeDataSourceBindingSource)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -206,5 +266,10 @@
         private DataGridViewTextBoxColumn Description;
         private DataGridViewTextBoxColumn RegionId;
         private DataGridViewTextBoxColumn ManagerId;
+        private ComboBox comboxRegion;
+        private Label label2;
+        private Button bthSearch;
+        private TextBox txtSearchString;
+        private Label label1;
     }
 }

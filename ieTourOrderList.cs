@@ -31,6 +31,9 @@ namespace TravelCompanyCore
                     .Include(h => h.PaymentType)
                     .Include(tos=>tos.TourOrderStatus)
                     .Include(tos => tos.TourOrderStatusReason).ToList();
+
+                comboBoxStatus.DataSource = db.TourOrderStatuses.ToList().Prepend(new TourOrderStatus { Id = Guid.Empty, Name = "Все" }).ToList();
+                comboxPayType.DataSource = db.PaymentTypes.ToList().Prepend(new PaymentType { Id = Guid.Empty, Name = "Все" }).ToList();
             }
         }
 
@@ -140,6 +143,30 @@ namespace TravelCompanyCore
                             .Include(tos => tos.TourOrderStatusReason).ToList();
                 }
             }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bthSearch_Click(object sender, EventArgs e)
+        {
+            string SearchText = txtSearchString.Text;
+            using (ApplicationContext db = new()) { 
+                dgwTourOrders.DataSource = db.TourOrders.Include(h => h.TourOrderItems)
+                    .Include(h => h.Client)
+                    .Include(h => h.PaymentType)
+                    .Include(tos => tos.TourOrderStatus)
+                    .Include(tos => tos.TourOrderStatusReason)
+                    .ToList()
+                    .Where(t => (
+                        (t.Client.Name.Contains(SearchText, StringComparison.InvariantCultureIgnoreCase)) &&
+                        ((Guid)comboBoxStatus.SelectedValue == Guid.Empty || ((Guid)comboBoxStatus.SelectedValue != Guid.Empty && (Guid) comboBoxStatus.SelectedValue == t.TourOrderStatusId)) &&
+                        ((Guid)comboxPayType.SelectedValue == Guid.Empty || ((Guid)comboxPayType.SelectedValue != Guid.Empty && (Guid)comboxPayType.SelectedValue == t.PaymentTypeId))
+                    ))
+                    .ToList();
+            };
         }
     }
 }
