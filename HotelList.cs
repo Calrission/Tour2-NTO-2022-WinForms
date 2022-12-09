@@ -24,6 +24,7 @@ namespace TravelCompanyCore
             {
                 // получаем объекты из бд и выводим в грид
                 dgwHotels.DataSource = db.Hotels.Include(h => h.Region).Include(h => h.Manager).ToList();
+                comboxRegion.DataSource = db.Regions.ToList().Prepend(new Models.Region { Id = Guid.Empty, Name = "Все" }).ToList();
             }
         }
 
@@ -62,14 +63,14 @@ namespace TravelCompanyCore
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            using (EditHotel eh = new()) 
+            using (EditHotel eh = new())
             {
                 eh.EditableId = (Guid)dgwHotels.SelectedCells[0].Value;
 
                 if (eh.ShowDialog(this) == DialogResult.OK) // если юзер сохранился, перепривязываем грид
                 {
                     using (ApplicationContext db = new ApplicationContext())
-                        dgwHotels.DataSource = db.Hotels.Include(h => h.Region).Include(h => h.Manager).ToList(); 
+                        dgwHotels.DataSource = db.Hotels.Include(h => h.Region).Include(h => h.Manager).ToList();
                 }
             }
         }
@@ -91,6 +92,23 @@ namespace TravelCompanyCore
         private void dgwHotels_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             btnEdit_Click(sender, new EventArgs());
+        }
+
+        private void bthSearch_Click(object sender, EventArgs e)
+        {
+            string TextSearch = txtSearchString.Text;
+            using (ApplicationContext db = new())
+            {
+                dgwHotels.DataSource = db.Hotels
+                    .Include(h => h.Region)
+                    .Include(h => h.Manager)
+                    .ToList()
+                    .Where(t => (
+                        t.Name.Contains(TextSearch, StringComparison.InvariantCultureIgnoreCase) &&
+                        ((Guid)comboxRegion.SelectedValue == Guid.Empty || ((Guid)comboxRegion.SelectedValue != Guid.Empty && t.RegionId == (Guid)comboxRegion.SelectedValue))
+                    ))
+                    .ToList();
+            };
         }
     }
 }
