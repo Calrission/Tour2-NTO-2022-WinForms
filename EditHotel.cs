@@ -41,7 +41,7 @@ namespace TravelCompanyCore
                 // Нас интересует только Контакты с ролью "Менеджер"
                 Role ManagerRole = db.Roles.FirstOrDefault(r => r.Id == Role.ManagerId);
                 comboBoxManager.DataSource = db.Contacts.Include(c => c.Roles).Where(t => t.Roles.Contains(ManagerRole)).ToList();
-                
+
                 if (EditableId != null && EditableId != Guid.Empty)
                 {
                     // При редактировании дозаполняем контакт значениями из БД, поскольку из грида всего не перетащишь
@@ -125,6 +125,6 @@ namespace TravelCompanyCore
             }
         }
 
-        
+
     }
 }

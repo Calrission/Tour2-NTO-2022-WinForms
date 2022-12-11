@@ -1,13 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using TravelCompanyCore.Models;
 
 namespace TravelCompanyCore
@@ -84,7 +76,7 @@ namespace TravelCompanyCore
                 rbtnPaid.Enabled = false;
                 rbtnRealized.Enabled = true;
             }
-            else if (currentStatus == TourOrderStatus.RealizedId) 
+            else if (currentStatus == TourOrderStatus.RealizedId)
             {
                 rbtnBooking.Enabled = false;
                 rbtnCancel.Enabled = false;
@@ -133,7 +125,7 @@ namespace TravelCompanyCore
             // Оплатить можно только Бронь
             if (rbtnPaid.Enabled && rbtnPaid.Checked && to.TourOrderStatusId == TourOrderStatus.BookingId)
                 newStatusId = TourOrderStatus.PaidId;
-             
+
             // Продать можно только Оплату
             if (rbtnRealized.Enabled && rbtnRealized.Checked && (to.TourOrderStatusId == TourOrderStatus.PaidId || to.TourOrderStatusId == TourOrderStatus.RealizedId))
                 newStatusId = TourOrderStatus.RealizedId;
@@ -168,7 +160,7 @@ namespace TravelCompanyCore
                         {
                             db.TourOrderRealizations.Add(EditableTO.convertToTourOrderRelalization(chkHotelConfirmation.Checked));
                         }
-                        else if (tr != null) 
+                        else if (tr != null)
                         {
                             tr = db.TourOrderRealizations.Single(t => t.Id == tr.Id);
                             tr.BookingConfirmation = chkHotelConfirmation.Checked;

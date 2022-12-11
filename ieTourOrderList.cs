@@ -1,13 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using TravelCompanyCore.Models;
 
 namespace TravelCompanyCore
@@ -29,7 +21,7 @@ namespace TravelCompanyCore
                     .Include(h => h.TourOrderItems)
                     .Include(h => h.Client)
                     .Include(h => h.PaymentType)
-                    .Include(tos=>tos.TourOrderStatus)
+                    .Include(tos => tos.TourOrderStatus)
                     .Include(tos => tos.TourOrderStatusReason).ToList();
 
                 comboBoxStatus.DataSource = db.TourOrderStatuses.ToList().Prepend(new TourOrderStatus { Id = Guid.Empty, Name = "Все" }).ToList();
@@ -50,7 +42,7 @@ namespace TravelCompanyCore
                 btnDelete.Enabled = isEditable;
             }
             else // А здесь есть чего:
-            { 
+            {
                 btnEdit.Text = "Просмотр";
                 btnDelete.Enabled = false;
             }
@@ -153,7 +145,8 @@ namespace TravelCompanyCore
         private void bthSearch_Click(object sender, EventArgs e)
         {
             string SearchText = txtSearchString.Text;
-            using (ApplicationContext db = new()) { 
+            using (ApplicationContext db = new())
+            {
                 dgwTourOrders.DataSource = db.TourOrders.Include(h => h.TourOrderItems)
                     .Include(h => h.Client)
                     .Include(h => h.PaymentType)
@@ -162,7 +155,7 @@ namespace TravelCompanyCore
                     .ToList()
                     .Where(t => (
                         (t.Client.Name.Contains(SearchText, StringComparison.InvariantCultureIgnoreCase)) &&
-                        ((Guid)comboBoxStatus.SelectedValue == Guid.Empty || ((Guid)comboBoxStatus.SelectedValue != Guid.Empty && (Guid) comboBoxStatus.SelectedValue == t.TourOrderStatusId)) &&
+                        ((Guid)comboBoxStatus.SelectedValue == Guid.Empty || ((Guid)comboBoxStatus.SelectedValue != Guid.Empty && (Guid)comboBoxStatus.SelectedValue == t.TourOrderStatusId)) &&
                         ((Guid)comboxPayType.SelectedValue == Guid.Empty || ((Guid)comboxPayType.SelectedValue != Guid.Empty && (Guid)comboxPayType.SelectedValue == t.PaymentTypeId))
                     ))
                     .ToList();

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TravelCompanyCore.Models
+﻿namespace TravelCompanyCore.Models
 {
     /// <summary>
     /// Элемент заказа тура
@@ -14,7 +7,7 @@ namespace TravelCompanyCore.Models
     {
         public Guid Id { get; set; }
         public Guid TourOrderId { get; set; } // Для реализации связи один (тур) ко многим (элементам тура)
-        public TourOrder? TourOrder { get;set; } // Для реализации связи один (тур) ко многим (элементам тура)
+        public TourOrder? TourOrder { get; set; } // Для реализации связи один (тур) ко многим (элементам тура)
         public Guid TourId { get; set; }
         /// <summary>
         /// Ссылка на полное описание Тура

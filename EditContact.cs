@@ -1,23 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using TravelCompanyCore.Models;
 
 namespace TravelCompanyCore
 {
     public partial class EditContact : Form
     {
-        List<Role>rls=new List<Role>(); // Здесь бесссылочно будет храниться строковый список имен ролей в системе
+        List<Role> rls = new List<Role>(); // Здесь бесссылочно будет храниться строковый список имен ролей в системе
         public Guid? EditableId { get; set; }
 
         public EditContact()
@@ -42,7 +32,7 @@ namespace TravelCompanyCore
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                rls=db.Roles.ToList();
+                rls = db.Roles.ToList();
 
                 if (EditableId != null && EditableId != Guid.Empty)
                 {
@@ -183,7 +173,7 @@ namespace TravelCompanyCore
                             // Сомнительное правило, конечно. Но лучше пусть так, чем совсем никак:
                             if (rl.Id == Models.Role.AdministratorId
                                 && db.Contacts.Include(c => c.Roles).ToList().Count(c => c.ListOfRoles.Contains("Администратор")) > 1)
-                                    EditableContact.Roles.Remove(db.Roles.FirstOrDefault(r => r == rl));
+                                EditableContact.Roles.Remove(db.Roles.FirstOrDefault(r => r == rl));
                             // Удалить роль менеджера можно только если Контакт НЕ является менеджером какого-либо Отеля:
                             if (rl.Id == Models.Role.ManagerId
                                 && !db.Hotels.Any(h => h.ManagerId == EditableContact.Id))
@@ -206,13 +196,13 @@ namespace TravelCompanyCore
 
                     if (isNew) db.Contacts.Add(EditableContact); // создаём
                     else db.Contacts.Update(EditableContact); // редактируем
-                    db.SaveChanges();                    
+                    db.SaveChanges();
                 }
 
                 this.DialogResult = DialogResult.OK; // Чтобы окно закрылось и последующая перепривязка данных в родительском окне состоялась
                 this.Close();
             }
-    }
+        }
 
         private void txtLastName_TextChanged(object sender, EventArgs e)
         {

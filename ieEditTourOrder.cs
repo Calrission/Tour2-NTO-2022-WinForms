@@ -1,14 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml.Linq;
 using TravelCompanyCore.Models;
 
 namespace TravelCompanyCore
@@ -109,7 +101,7 @@ namespace TravelCompanyCore
                         dgwTourOrderItems.DataSource = new List<TourOrderItem>();
                         foreach (Tour t in tll)
                         {
-                            to.TourOrderItems.Add(new TourOrderItem() { Id=Guid.NewGuid(), TourId=t.Id, Price=t.Cost, Quantity=0, Cost=0, TourOrderId= this.TourOrderId, Tour=t, TourOrder=this.to });
+                            to.TourOrderItems.Add(new TourOrderItem() { Id = Guid.NewGuid(), TourId = t.Id, Price = t.Cost, Quantity = 0, Cost = 0, TourOrderId = this.TourOrderId, Tour = t, TourOrder = this.to });
                         }
                         // Перепривязываем список элементов
                         dgwTourOrderItems.DataSource = to.TourOrderItems;
@@ -158,7 +150,7 @@ namespace TravelCompanyCore
                         EditableTourOrder.TotalCost = Double.Parse(lblTotalCost.Text);
                         EditableTourOrder.TourOrderStatusId = TourOrderStatus.DraftId; // При создании статус всегда - Черновик
                         EditableTourOrder.TourOrderStatusReasonId = TourOrderStatusReason.NoReasonId; // Для Черновика причины нет
-                        EditableTourOrder.TourOrderStatusShiftDate= DateTime.Now;
+                        EditableTourOrder.TourOrderStatusShiftDate = DateTime.Now;
 
                         foreach (TourOrderItem toi in to.TourOrderItems)
                         {

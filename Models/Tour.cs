@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Xml.Linq;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TravelCompanyCore.Models
 {
@@ -17,7 +15,8 @@ namespace TravelCompanyCore.Models
         public DateTime EndDateTime { get; set; }
 
         private int nights;
-        public int NightsAmount {
+        public int NightsAmount
+        {
             get { return (int)Math.Floor((EndDateTime - StartDateTime).TotalDays); }
             set { nights = NightsAmount; }
         }
@@ -44,7 +43,7 @@ namespace TravelCompanyCore.Models
                 result = string.Format("{0} с {1} по {2}", Hotel.Name, StartDateTime.ToShortDateString(), EndDateTime.ToShortDateString());
             else
                 result = string.Format("Дней\\Ночей: {0} с {1} по {2}", DaysPerNights, StartDateTime.ToShortDateString(), EndDateTime.ToShortDateString());
-            
+
             return result;
         }
     }

@@ -1,5 +1,3 @@
-using Microsoft.VisualBasic.ApplicationServices;
-
 namespace TravelCompanyCore
 {
     public partial class StartForm : Form
@@ -16,7 +14,7 @@ namespace TravelCompanyCore
 
         private void btnRegions_Click(object sender, EventArgs e)
         {
-            using (RegionList rl = new()) 
+            using (RegionList rl = new())
                 rl.ShowDialog();
         }
 
@@ -54,6 +52,12 @@ namespace TravelCompanyCore
         {
             using (ieTourOrderList tol = new())
                 tol.ShowDialog();
+        }
+
+        private void btnReports_Click(object sender, EventArgs e)
+        {
+            using (Reports r = new())
+                r.ShowDialog();
         }
     }
 }

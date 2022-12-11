@@ -37,8 +37,11 @@
             this.btnTourOrders = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnReports = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnRegions
@@ -117,7 +120,7 @@
             this.groupBox1.Controls.Add(this.btnRegions);
             this.groupBox1.Controls.Add(this.btnHotels);
             this.groupBox1.Controls.Add(this.btnRoles);
-            this.groupBox1.Location = new System.Drawing.Point(89, 12);
+            this.groupBox1.Location = new System.Drawing.Point(89, 6);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(277, 198);
             this.groupBox1.TabIndex = 7;
@@ -129,18 +132,39 @@
             this.groupBox2.Controls.Add(this.btnClients);
             this.groupBox2.Controls.Add(this.btnTours);
             this.groupBox2.Controls.Add(this.btnTourOrders);
-            this.groupBox2.Location = new System.Drawing.Point(89, 241);
+            this.groupBox2.Location = new System.Drawing.Point(89, 212);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(277, 167);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Управление продажами";
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.btnReports);
+            this.groupBox3.Location = new System.Drawing.Point(89, 387);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(277, 51);
+            this.groupBox3.TabIndex = 9;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Отчётность";
+            // 
+            // btnReports
+            // 
+            this.btnReports.Location = new System.Drawing.Point(44, 18);
+            this.btnReports.Name = "btnReports";
+            this.btnReports.Size = new System.Drawing.Size(189, 23);
+            this.btnReports.TabIndex = 7;
+            this.btnReports.Text = "Отчёты";
+            this.btnReports.UseVisualStyleBackColor = true;
+            this.btnReports.Click += new System.EventHandler(this.btnReports_Click);
+            // 
             // StartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(462, 450);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -150,6 +174,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -165,5 +190,7 @@
         private Button btnTourOrders;
         private GroupBox groupBox1;
         private GroupBox groupBox2;
+        private GroupBox groupBox3;
+        private Button btnReports;
     }
 }

@@ -1,14 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using TravelCompanyCore.Models;
+﻿using System.ComponentModel;
 
 namespace TravelCompanyCore
 {
@@ -32,7 +22,8 @@ namespace TravelCompanyCore
             dateTimeStart.Value = new DateTime(dtNow.Year, dtNow.Month, dtNow.Day, 12, 0, 0, 0); // Расчётный час заезда - 12:00
             dateTimeEnd.Value = new DateTime(dtNow.Year, dtNow.Month, dtNow.Day, 14, 0, 0, 0); // Расчётный час выезда - 14:00
 
-            using (ApplicationContext db = new ApplicationContext()){
+            using (ApplicationContext db = new ApplicationContext())
+            {
                 comboFoods.DataSource = db.Foods.ToList();
                 comboHotels.DataSource = db.Hotels.ToList();
 
@@ -46,7 +37,7 @@ namespace TravelCompanyCore
                     dateTimeStart.Value = EditableTour.StartDateTime;
                     dateTimeEnd.Value = EditableTour.EndDateTime;
                 }
-                else 
+                else
                 {
                     EditableTour = new Models.Tour();
                 }
@@ -99,7 +90,7 @@ namespace TravelCompanyCore
             return true;
         }
 
-        private void validate(object sender, CancelEventArgs e) 
+        private void validate(object sender, CancelEventArgs e)
         {
             if (rtxtTourDescription.Text.Length > 500)
                 errorProvider1.SetError(rtxtTourDescription, "Описание не должно быть длиннее 500 символов!");

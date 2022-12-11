@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TravelCompanyCore
+﻿namespace TravelCompanyCore
 {
     public class NumericUpDownColumn : DataGridViewColumn
     {
@@ -15,7 +9,7 @@ namespace TravelCompanyCore
 
         public NumericUpDownColumn() : base(new NumericUpDownCell())
         {
-            
+
         }
 
         public override DataGridViewCell CellTemplate
@@ -36,7 +30,7 @@ namespace TravelCompanyCore
         {
             public NumericUpDownCell() : base()
             {
-                
+
             }
 
             public override void InitializeEditingControl(int rowIndex, object initialFormattedValue, DataGridViewCellStyle dataGridViewCellStyle)
@@ -56,8 +50,8 @@ namespace TravelCompanyCore
                     NumericUpDownColumn nudc = (NumericUpDownColumn)this.OwningColumn;
                     ctl.Minimum = nudc.MinValue;
                     ctl.Maximum = nudc.MaxValue;
-                    ctl.Increment= nudc.Increment;
-                    ctl.DecimalPlaces= nudc.DecimalPlaces;
+                    ctl.Increment = nudc.Increment;
+                    ctl.DecimalPlaces = nudc.DecimalPlaces;
                     ctl.Value = decimal.Parse(this.Value.ToString());
                 }
             }
