@@ -1,0 +1,9 @@
+﻿
+select h.Name || ' ' || (cast(DaysAmount as text) || ' дней/') || (cast(NightsAmount as text) || ' ночей c ')  || (cast(StartDateTime as text)) as TourName,
+tos.Name as StatusName
+from tourorderitems as toi
+inner join TourOrders as tt on tt.Id=toi.TourOrderId
+inner join Tours t on t.Id=toi.TourId
+inner join Hotels h on h.Id=t.HotelId
+inner join TourOrderStatuses tos on tos.Id=tt.TourOrderStatusId
+

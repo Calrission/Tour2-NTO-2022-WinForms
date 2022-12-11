@@ -22,7 +22,7 @@
         /// <summary>
         /// Список туров в Заказе
         /// </summary>
-        public List<TourOrderItem>? TourOrderItems { get; set; } // один тур ко многим элементам тура
+        //public List<TourOrderItem>? TourOrderItems { get; set; } // один тур ко многим элементам тура
         /// <summary>
         /// Суммарная стоимость Заказа
         /// </summary>

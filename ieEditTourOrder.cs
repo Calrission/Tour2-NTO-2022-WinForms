@@ -72,7 +72,7 @@ namespace TravelCompanyCore
                 comboPaymentType.Enabled = isDraft;
                 dgwTourOrderItems.Enabled = isDraft;
                 btnAdd.Enabled = isDraft;
-                btnRemove.Enabled = isDraft;
+                //btnRemove.Enabled = isDraft;
                 btnOK.Enabled = isDraft;
 
                 lblTotalCost.Text = to.TotalCost.ToString();
