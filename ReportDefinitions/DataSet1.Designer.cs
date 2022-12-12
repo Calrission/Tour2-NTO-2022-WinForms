@@ -279,7 +279,7 @@ namespace TravelCompanyCore.ReportDefinitions {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class DataSet222DataTable : global::System.Data.TypedTableBase<DataSet222Row> {
             
-            private global::System.Data.DataColumn columnTourName;
+            private global::System.Data.DataColumn columnТур;
             
             private global::System.Data.DataColumn columnОтменено;
             
@@ -324,9 +324,9 @@ namespace TravelCompanyCore.ReportDefinitions {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn TourNameColumn {
+            public global::System.Data.DataColumn ТурColumn {
                 get {
-                    return this.columnTourName;
+                    return this.columnТур;
                 }
             }
             
@@ -399,10 +399,10 @@ namespace TravelCompanyCore.ReportDefinitions {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public DataSet222Row AddDataSet222Row(string TourName, string Отменено, string Забронировано, string Оплачено, string Продано) {
+            public DataSet222Row AddDataSet222Row(string Тур, string Отменено, string Забронировано, string Оплачено, string Продано) {
                 DataSet222Row rowDataSet222Row = ((DataSet222Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        TourName,
+                        Тур,
                         Отменено,
                         Забронировано,
                         Оплачено,
@@ -429,7 +429,7 @@ namespace TravelCompanyCore.ReportDefinitions {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             internal void InitVars() {
-                this.columnTourName = base.Columns["TourName"];
+                this.columnТур = base.Columns["Тур"];
                 this.columnОтменено = base.Columns["Отменено"];
                 this.columnЗабронировано = base.Columns["Забронировано"];
                 this.columnОплачено = base.Columns["Оплачено"];
@@ -439,8 +439,8 @@ namespace TravelCompanyCore.ReportDefinitions {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             private void InitClass() {
-                this.columnTourName = new global::System.Data.DataColumn("TourName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnTourName);
+                this.columnТур = new global::System.Data.DataColumn("Тур", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnТур);
                 this.columnОтменено = new global::System.Data.DataColumn("Отменено", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnОтменено);
                 this.columnЗабронировано = new global::System.Data.DataColumn("Забронировано", typeof(string), null, global::System.Data.MappingType.Element);
@@ -591,17 +591,17 @@ namespace TravelCompanyCore.ReportDefinitions {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string TourName {
+            public string Тур {
                 get {
                     try {
-                        return ((string)(this[this.tableDataSet222.TourNameColumn]));
+                        return ((string)(this[this.tableDataSet222.ТурColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Значение для столбца \'TourName\' в таблице \'DataSet222\' равно DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'Тур\' в таблице \'DataSet222\' равно DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDataSet222.TourNameColumn] = value;
+                    this[this.tableDataSet222.ТурColumn] = value;
                 }
             }
             
@@ -671,14 +671,14 @@ namespace TravelCompanyCore.ReportDefinitions {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsTourNameNull() {
-                return this.IsNull(this.tableDataSet222.TourNameColumn);
+            public bool IsТурNull() {
+                return this.IsNull(this.tableDataSet222.ТурColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetTourNameNull() {
-                this[this.tableDataSet222.TourNameColumn] = global::System.Convert.DBNull;
+            public void SetТурNull() {
+                this[this.tableDataSet222.ТурColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

@@ -17,8 +17,8 @@
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
-        <Field Name="TourName">
-          <DataField>TourName</DataField>
+        <Field Name="Тур">
+          <DataField>Тур</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Отменено">
@@ -84,7 +84,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Tour Name</Value>
+                                  <Value>Название тура</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -232,21 +232,21 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="TourName">
+                        <Textbox Name="Тур">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!TourName.Value</Value>
+                                  <Value>=Fields!Тур.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>TourName</rd:DefaultName>
+                          <rd:DefaultName>Тур</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
