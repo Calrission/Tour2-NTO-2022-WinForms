@@ -1,13 +1,8 @@
-﻿using FastMember;
-using Microsoft.Data.Sqlite;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.Reporting.WinForms;
 using System.Data;
-using System.Data.Common;
-using System.Reflection;
 using TravelCompanyCore.Models;
-using TravelCompanyCore.ReportDefinitions;
 
 namespace TravelCompanyCore
 {
