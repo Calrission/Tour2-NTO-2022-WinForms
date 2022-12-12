@@ -29,7 +29,8 @@ namespace TravelCompanyCore
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show( // Удостоверяемся, что пользователь в сознании
+            if (dgwHotels.SelectedCells != null
+                && MessageBox.Show( // Удостоверяемся, что пользователь в сознании
                 String.Format("Вы действительно хотите удалить отель «{0}»?", dgwHotels.SelectedCells[1].Value.ToString()),
                 "Запрос на удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
@@ -55,14 +56,17 @@ namespace TravelCompanyCore
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            using (EditHotel eh = new())
+            if (dgwHotels.SelectedCells != null)
             {
-                eh.EditableId = (Guid)dgwHotels.SelectedCells[0].Value;
-
-                if (eh.ShowDialog(this) == DialogResult.OK) // если юзер сохранился, перепривязываем грид
+                using (EditHotel eh = new())
                 {
-                    using (ApplicationContext db = new ApplicationContext())
-                        dgwHotels.DataSource = db.Hotels.Include(h => h.Region).Include(h => h.Manager).ToList();
+                    eh.EditableId = (Guid)dgwHotels.SelectedCells[0].Value;
+
+                    if (eh.ShowDialog(this) == DialogResult.OK) // если юзер сохранился, перепривязываем грид
+                    {
+                        using (ApplicationContext db = new ApplicationContext())
+                            dgwHotels.DataSource = db.Hotels.Include(h => h.Region).Include(h => h.Manager).ToList();
+                    }
                 }
             }
         }

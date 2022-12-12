@@ -52,7 +52,8 @@ namespace TravelCompanyCore
         {
             if ((Guid)dgwTourOrders.SelectedCells[5].Value == TourOrderStatus.DraftId) // Удалить можно только Черновик!!!
             {
-                if (MessageBox.Show( // Удостоверяемся, что пользователь в сознании
+                if (dgwTourOrders.SelectedCells != null
+                && MessageBox.Show( // Удостоверяемся, что пользователь в сознании
                 String.Format("Вы действительно хотите удалить заказ клиента «{0}»?", dgwTourOrders.SelectedCells[1].Value.ToString()),
                 "Запрос на удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                 {
@@ -78,19 +79,22 @@ namespace TravelCompanyCore
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            using (ieEditTourOrder eto = new())
+            if (dgwTourOrders.SelectedCells != null)
             {
-                eto.TourOrderId = (Guid)dgwTourOrders.SelectedCells[0].Value;
-
-                if (eto.ShowDialog(this) == DialogResult.OK) // если юзер сохранился, перепривязываем грид
+                using (ieEditTourOrder eto = new())
                 {
-                    using (ApplicationContext db = new ApplicationContext())
-                        dgwTourOrders.DataSource = db.TourOrders
-                            .Include(h => h.TourOrderItems)
-                            .Include(h => h.Client)
-                            .Include(h => h.PaymentType)
-                            .Include(tos => tos.TourOrderStatus)
-                            .Include(tos => tos.TourOrderStatusReason).ToList();
+                    eto.TourOrderId = (Guid)dgwTourOrders.SelectedCells[0].Value;
+
+                    if (eto.ShowDialog(this) == DialogResult.OK) // если юзер сохранился, перепривязываем грид
+                    {
+                        using (ApplicationContext db = new ApplicationContext())
+                            dgwTourOrders.DataSource = db.TourOrders
+                                .Include(h => h.TourOrderItems)
+                                .Include(h => h.Client)
+                                .Include(h => h.PaymentType)
+                                .Include(tos => tos.TourOrderStatus)
+                                .Include(tos => tos.TourOrderStatusReason).ToList();
+                    }
                 }
             }
         }

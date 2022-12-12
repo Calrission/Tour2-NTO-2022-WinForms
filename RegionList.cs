@@ -25,7 +25,8 @@
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show( // Удостоверяемся, что пользователь в сознании
+            if (dgwRegions.SelectedCells != null
+                && MessageBox.Show( // Удостоверяемся, что пользователь в сознании
                 String.Format("Вы действительно хотите удалить регион «{0}»?", dgwRegions.SelectedCells[1].Value.ToString()),
                 "Запрос на удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
@@ -68,17 +69,20 @@
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            using (EditRegion er = new())
+            if (dgwRegions.SelectedCells != null)
             {
-                er.EditableRegion = new();
-                er.EditableRegion.Id = (Guid)dgwRegions.SelectedCells[0].Value; // Существующий Id - признак того, что регион редактируется
-                er.EditableRegion.Name = dgwRegions.SelectedCells[1].Value.ToString();
-                er.EditableRegion.Description = dgwRegions.SelectedCells[2].Value.ToString();
-
-                if (er.ShowDialog(this) == DialogResult.OK) // если юзер сохранился, перепривязываем грид
+                using (EditRegion er = new())
                 {
-                    using (ApplicationContext db = new ApplicationContext())
-                        dgwRegions.DataSource = db.Regions.ToList();
+                    er.EditableRegion = new();
+                    er.EditableRegion.Id = (Guid)dgwRegions.SelectedCells[0].Value; // Существующий Id - признак того, что регион редактируется
+                    er.EditableRegion.Name = dgwRegions.SelectedCells[1].Value.ToString();
+                    er.EditableRegion.Description = dgwRegions.SelectedCells[2].Value.ToString();
+
+                    if (er.ShowDialog(this) == DialogResult.OK) // если юзер сохранился, перепривязываем грид
+                    {
+                        using (ApplicationContext db = new ApplicationContext())
+                            dgwRegions.DataSource = db.Regions.ToList();
+                    }
                 }
             }
         }

@@ -30,7 +30,8 @@ namespace TravelCompanyCore
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show( // Удостоверяемся, что пользователь в сознании
+            if (dgwContacts.SelectedCells != null
+                && MessageBox.Show( // Удостоверяемся, что пользователь в сознании
                 String.Format("Вы действительно хотите удалить контакт «{0} {1} {2}»?", dgwContacts.SelectedCells[1].Value.ToString(),
                 dgwContacts.SelectedCells[2].Value.ToString(),
                 dgwContacts.SelectedCells[3].Value.ToString()),
@@ -83,14 +84,17 @@ namespace TravelCompanyCore
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            using (EditContact ct = new())
+            if (dgwContacts.SelectedCells != null)
             {
-                ct.EditableId = (Guid)dgwContacts.SelectedCells[0].Value;
-                if (ct.ShowDialog(this) == DialogResult.OK) // если юзер сохранился, перепривязываем грид
+                using (EditContact ct = new())
                 {
-                    txtSearchString.Text = string.Empty;
-                    using (ApplicationContext db = new ApplicationContext())
-                        dgwContacts.DataSource = db.Contacts.Where(t => t.Id != Contact.BotId).Include(c => c.Roles).ToList();
+                    ct.EditableId = (Guid)dgwContacts.SelectedCells[0].Value;
+                    if (ct.ShowDialog(this) == DialogResult.OK) // если юзер сохранился, перепривязываем грид
+                    {
+                        txtSearchString.Text = string.Empty;
+                        using (ApplicationContext db = new ApplicationContext())
+                            dgwContacts.DataSource = db.Contacts.Where(t => t.Id != Contact.BotId).Include(c => c.Roles).ToList();
+                    }
                 }
             }
         }

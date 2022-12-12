@@ -25,7 +25,8 @@
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if ((bool)dgwRoles.SelectedCells[3].Value == false && // Предотвращение удаления системных ролей
+            if (dgwRoles.SelectedCells != null && 
+                (bool)dgwRoles.SelectedCells[3].Value == false && // Предотвращение удаления системных ролей
                 MessageBox.Show( // Удостоверяемся, что пользователь в сознании
                 String.Format("Вы действительно хотите удалить роль «{0}»?", dgwRoles.SelectedCells[1].Value.ToString()),
                 "Запрос на удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
@@ -63,7 +64,7 @@
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if ((bool)dgwRoles.SelectedCells[3].Value == false) // Предотвращение редактирования системных ролей
+            if (dgwRoles.SelectedCells != null && (bool)dgwRoles.SelectedCells[3].Value == false) // Предотвращение редактирования системных ролей
             {
                 using (EditRole er = new())
                 {

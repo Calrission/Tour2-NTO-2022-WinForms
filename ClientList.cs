@@ -22,13 +22,16 @@ namespace TravelCompanyCore
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            using (EditClient ec = new())
+            if (dgwClients.SelectedCells != null)
             {
-                ec.EditableId = (Guid)dgwClients.SelectedCells[0].Value;
-                if (ec.ShowDialog(this) == DialogResult.OK) // если юзер сохранился, перепривязываем грид
+                using (EditClient ec = new())
                 {
-                    using (ApplicationContext db = new ApplicationContext())
-                        dgwClients.DataSource = db.Clients.Include(t => t.Contact).Include(t => t.ClientType).ToList();
+                    ec.EditableId = (Guid)dgwClients.SelectedCells[0].Value;
+                    if (ec.ShowDialog(this) == DialogResult.OK) // если юзер сохранился, перепривязываем грид
+                    {
+                        using (ApplicationContext db = new ApplicationContext())
+                            dgwClients.DataSource = db.Clients.Include(t => t.Contact).Include(t => t.ClientType).ToList();
+                    }
                 }
             }
         }
@@ -48,7 +51,8 @@ namespace TravelCompanyCore
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show( // Удостоверяемся, что пользователь в сознании
+            if (dgwClients.SelectedCells != null
+                && MessageBox.Show( // Удостоверяемся, что пользователь в сознании
                 String.Format("Вы действительно хотите удалить клиента «{0}»?", dgwClients.SelectedCells[1].Value.ToString()),
                 "Запрос на удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {

@@ -64,7 +64,8 @@ namespace TravelCompanyCore
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show( // Удостоверяемся, что пользователь в сознании
+            if (dgwTours.SelectedCells != null
+                && MessageBox.Show( // Удостоверяемся, что пользователь в сознании
                 String.Format("Вы действительно хотите удалить тур в отель «{0}»?", dgwTours.SelectedCells[1].Value.ToString()),
                 "Запрос на удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
@@ -90,13 +91,16 @@ namespace TravelCompanyCore
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            using (EditTour et = new())
+            if (dgwTours.SelectedCells != null)
             {
-                et.EditableId = (Guid)dgwTours.SelectedCells[0].Value;
-                if (et.ShowDialog(this) == DialogResult.OK) // если юзер сохранился, перепривязываем грид
+                using (EditTour et = new())
                 {
-                    using (ApplicationContext db = new ApplicationContext())
-                        dgwTours.DataSource = db.Tours.Include(t => t.Food).Include(t => t.Hotel).ToList();
+                    et.EditableId = (Guid)dgwTours.SelectedCells[0].Value;
+                    if (et.ShowDialog(this) == DialogResult.OK) // если юзер сохранился, перепривязываем грид
+                    {
+                        using (ApplicationContext db = new ApplicationContext())
+                            dgwTours.DataSource = db.Tours.Include(t => t.Food).Include(t => t.Hotel).ToList();
+                    }
                 }
             }
         }

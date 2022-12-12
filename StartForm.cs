@@ -9,7 +9,15 @@ namespace TravelCompanyCore
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            // В принципе нужно один раз, чтобы все неинициализируемые таблицы создались (а то отчёт свалится)
+            using(ApplicationContext db=new())
+            {
+                db.Tours.ToList();
+                db.TourOrders.ToList();
+                db.TourOrderItems.ToList();
+                db.TourOrderPayments.ToList();
+                db.TourOrderRealizations.ToList();
+            }
         }
 
         private void btnRegions_Click(object sender, EventArgs e)
