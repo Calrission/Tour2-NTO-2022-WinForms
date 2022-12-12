@@ -1,51 +1,19 @@
-﻿
-select h.Name || ' ' || (cast(DaysAmount as text) || ' дней/') || (cast(NightsAmount as text) || ' ночей c ')  || (cast(StartDateTime as text)) as TourName,
-tos.Name as StatusName
-from tourorderitems as toi
-inner join TourOrders as tt on tt.Id=toi.TourOrderId
-inner join Tours t on t.Id=toi.TourId
-inner join Hotels h on h.Id=t.HotelId
-inner join TourOrderStatuses tos on tos.Id=tt.TourOrderStatusId
-
-select TourId, TourName, count(TourName) as Отмена from (
-select t.Id as TourId, h.Name || ' ' || (cast(DaysAmount as text) || ' дней/') || (cast(NightsAmount as text) || ' ночей c ')  || (cast(StartDateTime as text)) as TourName,
-tos.Name as StatusName
-from tourorderitems as toi
-inner join TourOrders as tt on tt.Id=toi.TourOrderId
-inner join Tours t on t.Id=toi.TourId
-inner join Hotels h on h.Id=t.HotelId
-inner join TourOrderStatuses tos on tos.Id=tt.TourOrderStatusId
-)
-group by TourName having StatusName = 'Продан'
-
-select TourId, TourName, Отмена from
+﻿SELECT
+	TourName,
+	SUM (CASE StatusName WHEN 'Отмена' THEN 1 ELSE 0 END) AS "Отменено",
+	SUM (CASE StatusName WHEN 'Бронь' THEN 1 ELSE 0 END) AS "Забронировано",
+	SUM (CASE StatusName WHEN 'Оплата' THEN 1 ELSE 0 END) AS "Оплачено",
+	SUM (CASE StatusName WHEN 'Продан' THEN 1 ELSE 0 END) AS "Продано"
+FROM 
 (
-select * from (
-select TourId, TourName, count(TourName) as Отмена from (
-select t.Id as TourId, h.Name || ' ' || (cast(DaysAmount as text) || ' дней/') || (cast(NightsAmount as text) || ' ночей c ')  || (cast(StartDateTime as text)) as TourName,
-tos.Name as StatusName
+select
+ t.Id as TourId,
+ h.Name || ' ' || (cast(DaysAmount as text) || ' дней/') || (cast(NightsAmount as text) || ' ночей c ')  || (cast(StartDateTime as text)) as TourName, 
+ tos.Name as StatusName
 from tourorderitems as toi
 inner join TourOrders as tt on tt.Id=toi.TourOrderId
 inner join Tours t on t.Id=toi.TourId
 inner join Hotels h on h.Id=t.HotelId
 inner join TourOrderStatuses tos on tos.Id=tt.TourOrderStatusId
-group by TourName having StatusName = 'Отмена') as Отмены
 )
-) as Cancellations
-JOIN
-select TourId, Продан from
-(
-select * from (
-select TourId, TourName, count(TourName) as Продан from (
-select t.Id as TourId, h.Name || ' ' || (cast(DaysAmount as text) || ' дней/') || (cast(NightsAmount as text) || ' ночей c ')  || (cast(StartDateTime as text)) as TourName,
-tos.Name as StatusName
-from tourorderitems as toi
-inner join TourOrders as tt on tt.Id=toi.TourOrderId
-inner join Tours t on t.Id=toi.TourId
-inner join Hotels h on h.Id=t.HotelId
-inner join TourOrderStatuses tos on tos.Id=tt.TourOrderStatusId
-group by TourName having StatusName = 'Продан') as Продажи
-)
-) as Sales
-on Cancellations.TourId=Sales.TourId
-)
+GROUP BY TourName

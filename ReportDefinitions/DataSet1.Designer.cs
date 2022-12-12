@@ -279,17 +279,15 @@ namespace TravelCompanyCore.ReportDefinitions {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class DataSet222DataTable : global::System.Data.TypedTableBase<DataSet222Row> {
             
-            private global::System.Data.DataColumn columnId;
+            private global::System.Data.DataColumn columnTourName;
             
-            private global::System.Data.DataColumn columnName;
+            private global::System.Data.DataColumn columnОтменено;
             
-            private global::System.Data.DataColumn columnDescription;
+            private global::System.Data.DataColumn columnЗабронировано;
             
-            private global::System.Data.DataColumn columnPhoneNumber;
+            private global::System.Data.DataColumn columnОплачено;
             
-            private global::System.Data.DataColumn columnRegionId;
-            
-            private global::System.Data.DataColumn columnManagerId;
+            private global::System.Data.DataColumn columnПродано;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -326,49 +324,41 @@ namespace TravelCompanyCore.ReportDefinitions {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn IdColumn {
+            public global::System.Data.DataColumn TourNameColumn {
                 get {
-                    return this.columnId;
+                    return this.columnTourName;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn NameColumn {
+            public global::System.Data.DataColumn ОтмененоColumn {
                 get {
-                    return this.columnName;
+                    return this.columnОтменено;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn DescriptionColumn {
+            public global::System.Data.DataColumn ЗабронированоColumn {
                 get {
-                    return this.columnDescription;
+                    return this.columnЗабронировано;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn PhoneNumberColumn {
+            public global::System.Data.DataColumn ОплаченоColumn {
                 get {
-                    return this.columnPhoneNumber;
+                    return this.columnОплачено;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn RegionIdColumn {
+            public global::System.Data.DataColumn ПроданоColumn {
                 get {
-                    return this.columnRegionId;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn ManagerIdColumn {
-                get {
-                    return this.columnManagerId;
+                    return this.columnПродано;
                 }
             }
             
@@ -409,25 +399,17 @@ namespace TravelCompanyCore.ReportDefinitions {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public DataSet222Row AddDataSet222Row(string Id, string Name, string Description, string PhoneNumber, string RegionId, string ManagerId) {
+            public DataSet222Row AddDataSet222Row(string TourName, string Отменено, string Забронировано, string Оплачено, string Продано) {
                 DataSet222Row rowDataSet222Row = ((DataSet222Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        Id,
-                        Name,
-                        Description,
-                        PhoneNumber,
-                        RegionId,
-                        ManagerId};
+                        TourName,
+                        Отменено,
+                        Забронировано,
+                        Оплачено,
+                        Продано};
                 rowDataSet222Row.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDataSet222Row);
                 return rowDataSet222Row;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public DataSet222Row FindById(string Id) {
-                return ((DataSet222Row)(this.Rows.Find(new object[] {
-                            Id})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -447,33 +429,26 @@ namespace TravelCompanyCore.ReportDefinitions {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             internal void InitVars() {
-                this.columnId = base.Columns["Id"];
-                this.columnName = base.Columns["Name"];
-                this.columnDescription = base.Columns["Description"];
-                this.columnPhoneNumber = base.Columns["PhoneNumber"];
-                this.columnRegionId = base.Columns["RegionId"];
-                this.columnManagerId = base.Columns["ManagerId"];
+                this.columnTourName = base.Columns["TourName"];
+                this.columnОтменено = base.Columns["Отменено"];
+                this.columnЗабронировано = base.Columns["Забронировано"];
+                this.columnОплачено = base.Columns["Оплачено"];
+                this.columnПродано = base.Columns["Продано"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             private void InitClass() {
-                this.columnId = new global::System.Data.DataColumn("Id", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnId);
-                this.columnName = new global::System.Data.DataColumn("Name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnName);
-                this.columnDescription = new global::System.Data.DataColumn("Description", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDescription);
-                this.columnPhoneNumber = new global::System.Data.DataColumn("PhoneNumber", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPhoneNumber);
-                this.columnRegionId = new global::System.Data.DataColumn("RegionId", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnRegionId);
-                this.columnManagerId = new global::System.Data.DataColumn("ManagerId", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnManagerId);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnId}, true));
-                this.columnId.AllowDBNull = false;
-                this.columnId.Unique = true;
+                this.columnTourName = new global::System.Data.DataColumn("TourName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTourName);
+                this.columnОтменено = new global::System.Data.DataColumn("Отменено", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnОтменено);
+                this.columnЗабронировано = new global::System.Data.DataColumn("Забронировано", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnЗабронировано);
+                this.columnОплачено = new global::System.Data.DataColumn("Оплачено", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnОплачено);
+                this.columnПродано = new global::System.Data.DataColumn("Продано", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnПродано);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -616,153 +591,142 @@ namespace TravelCompanyCore.ReportDefinitions {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string Id {
-                get {
-                    return ((string)(this[this.tableDataSet222.IdColumn]));
-                }
-                set {
-                    this[this.tableDataSet222.IdColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string Name {
+            public string TourName {
                 get {
                     try {
-                        return ((string)(this[this.tableDataSet222.NameColumn]));
+                        return ((string)(this[this.tableDataSet222.TourNameColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Значение для столбца \'Name\' в таблице \'DataSet222\' равно DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'TourName\' в таблице \'DataSet222\' равно DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDataSet222.NameColumn] = value;
+                    this[this.tableDataSet222.TourNameColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string Description {
+            public string Отменено {
                 get {
                     try {
-                        return ((string)(this[this.tableDataSet222.DescriptionColumn]));
+                        return ((string)(this[this.tableDataSet222.ОтмененоColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Значение для столбца \'Description\' в таблице \'DataSet222\' равно DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'Отменено\' в таблице \'DataSet222\' равно DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDataSet222.DescriptionColumn] = value;
+                    this[this.tableDataSet222.ОтмененоColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string PhoneNumber {
+            public string Забронировано {
                 get {
                     try {
-                        return ((string)(this[this.tableDataSet222.PhoneNumberColumn]));
+                        return ((string)(this[this.tableDataSet222.ЗабронированоColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Значение для столбца \'PhoneNumber\' в таблице \'DataSet222\' равно DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'Забронировано\' в таблице \'DataSet222\' равно DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDataSet222.PhoneNumberColumn] = value;
+                    this[this.tableDataSet222.ЗабронированоColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string RegionId {
+            public string Оплачено {
                 get {
                     try {
-                        return ((string)(this[this.tableDataSet222.RegionIdColumn]));
+                        return ((string)(this[this.tableDataSet222.ОплаченоColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Значение для столбца \'RegionId\' в таблице \'DataSet222\' равно DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'Оплачено\' в таблице \'DataSet222\' равно DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDataSet222.RegionIdColumn] = value;
+                    this[this.tableDataSet222.ОплаченоColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string ManagerId {
+            public string Продано {
                 get {
                     try {
-                        return ((string)(this[this.tableDataSet222.ManagerIdColumn]));
+                        return ((string)(this[this.tableDataSet222.ПроданоColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Значение для столбца \'ManagerId\' в таблице \'DataSet222\' равно DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'Продано\' в таблице \'DataSet222\' равно DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDataSet222.ManagerIdColumn] = value;
+                    this[this.tableDataSet222.ПроданоColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsNameNull() {
-                return this.IsNull(this.tableDataSet222.NameColumn);
+            public bool IsTourNameNull() {
+                return this.IsNull(this.tableDataSet222.TourNameColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetNameNull() {
-                this[this.tableDataSet222.NameColumn] = global::System.Convert.DBNull;
+            public void SetTourNameNull() {
+                this[this.tableDataSet222.TourNameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsDescriptionNull() {
-                return this.IsNull(this.tableDataSet222.DescriptionColumn);
+            public bool IsОтмененоNull() {
+                return this.IsNull(this.tableDataSet222.ОтмененоColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetDescriptionNull() {
-                this[this.tableDataSet222.DescriptionColumn] = global::System.Convert.DBNull;
+            public void SetОтмененоNull() {
+                this[this.tableDataSet222.ОтмененоColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsPhoneNumberNull() {
-                return this.IsNull(this.tableDataSet222.PhoneNumberColumn);
+            public bool IsЗабронированоNull() {
+                return this.IsNull(this.tableDataSet222.ЗабронированоColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetPhoneNumberNull() {
-                this[this.tableDataSet222.PhoneNumberColumn] = global::System.Convert.DBNull;
+            public void SetЗабронированоNull() {
+                this[this.tableDataSet222.ЗабронированоColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsRegionIdNull() {
-                return this.IsNull(this.tableDataSet222.RegionIdColumn);
+            public bool IsОплаченоNull() {
+                return this.IsNull(this.tableDataSet222.ОплаченоColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetRegionIdNull() {
-                this[this.tableDataSet222.RegionIdColumn] = global::System.Convert.DBNull;
+            public void SetОплаченоNull() {
+                this[this.tableDataSet222.ОплаченоColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsManagerIdNull() {
-                return this.IsNull(this.tableDataSet222.ManagerIdColumn);
+            public bool IsПроданоNull() {
+                return this.IsNull(this.tableDataSet222.ПроданоColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetManagerIdNull() {
-                this[this.tableDataSet222.ManagerIdColumn] = global::System.Convert.DBNull;
+            public void SetПроданоNull() {
+                this[this.tableDataSet222.ПроданоColumn] = global::System.Convert.DBNull;
             }
         }
         
