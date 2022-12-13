@@ -20,6 +20,8 @@ namespace TravelCompanyCore
         public DbSet<Models.TourOrderPayment> TourOrderPayments => Set<Models.TourOrderPayment>(); // Таблица оплат Заказов
         public DbSet<Models.TourOrderRealization> TourOrderRealizations => Set<Models.TourOrderRealization>(); // Таблица продаж Заказов
 
+        public DbSet<Models.ReportType> ReportType => Set<Models.ReportType>(); // Таблица Типов Отчётов .Не редактируемая
+
         public ApplicationContext() => Database.EnsureCreated();
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -138,13 +140,26 @@ namespace TravelCompanyCore
 
             // Инициализируем Статусы заказа
             modelBuilder.Entity<Models.TourOrderStatus>().HasData(
-                new Models.TourOrderStatus { Id = Guid.Parse("DDEB0FF0-7E89-425D-AF37-7D97F5571F5B"), Name = "Черновик" }, // Исходный статус
+                new Models.TourOrderStatus { Id = Guid.Parse("DDEB0FF0-7E89-425D-AF37-7D97F5571F5B"), Name = "Черновик",  }, // Исходный статус
                 new Models.TourOrderStatus { Id = Guid.Parse("5F24C6F9-704A-403A-B30B-04E2F361A403"), Name = "Бронь" },
                 new Models.TourOrderStatus { Id = Guid.Parse("0A593624-6F2F-4FEA-BFF3-0A67904DE4E1"), Name = "Отмена" },
                 new Models.TourOrderStatus { Id = Guid.Parse("D40D224C-D35A-4E2E-9D85-4EFAF3CA701E"), Name = "Оплачен" },
                 new Models.TourOrderStatus { Id = Guid.Parse("4A31DF95-6013-4AC7-AA88-C7E9ED348E02"), Name = "Продан" },
                 new Models.TourOrderStatus { Id = Guid.Parse("47E57AA5-7BFE-45BE-A017-C41903F40068"), Name = "Действует" },
                 new Models.TourOrderStatus { Id = Guid.Parse("DFFE7872-A3C0-436E-84BA-29BDCB3FAF94"), Name = "Завершён" }
+                );
+
+            // Инициализируем Типы Отчётов
+            modelBuilder.Entity<Models.ReportType>().HasData(
+                new Models.ReportType { Id = Guid.Parse("f4da189c-0f32-42ad-8ffd-53e968ea35db"), Name = "Год", Position=1 },
+                new Models.ReportType { Id = Guid.Parse("5284777a-437f-4c44-a7a1-7132360ee4f3"), Name = "1 полугодие", Position=2 },
+                new Models.ReportType { Id = Guid.Parse("0f4e75d3-b4bb-4471-98fb-9b2f780ca89a"), Name = "2 полугодие", Position=3 },
+                new Models.ReportType { Id = Guid.Parse("e28b8daf-dd56-46cc-b247-40222edf5ef0"), Name = "I квартал", Position=4 },
+                new Models.ReportType { Id = Guid.Parse("0ddf2d23-bbdc-4feb-a888-69348e8e0294"), Name = "II квартал", Position=5 },
+                new Models.ReportType { Id = Guid.Parse("45ac4a18-ab11-4829-9460-4246c2d2a1bb"), Name = "III квартал", Position=6 },
+                new Models.ReportType { Id = Guid.Parse("65708730-4534-40da-9365-5b5431fa732c"), Name = "IV квартал", Position=7 },
+                new Models.ReportType { Id = Guid.Parse("ee4cab7b-c5b2-4f7f-ba2b-6852b9c81e94"), Name = "Месяц", Position=8 },
+                new Models.ReportType { Id = Guid.Parse("964c6b36-6afc-4d40-b6dc-ca55cc964171"), Name = "Неделя", Position=9 }
                 );
         }
     }
