@@ -115,7 +115,8 @@ namespace TravelCompanyCore
         private void btnRemove_Click(object sender, EventArgs e)
         {
             // Никаких сохранений! Сохраняться будем только по кнопке OK!
-            if (MessageBox.Show( // Удостоверяемся, что пользователь в сознании
+            if (dgwTourOrderItems.SelectedCells != null
+                && MessageBox.Show( // Удостоверяемся, что пользователь в сознании
                 String.Format("Вы действительно хотите удалить тур «{0}»?", dgwTourOrderItems.SelectedCells[1].Value.ToString()),
                 "Запрос на удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
