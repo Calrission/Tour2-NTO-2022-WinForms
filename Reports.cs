@@ -38,6 +38,8 @@ namespace TravelCompanyCore
 
             DateTime StartDateTime = dateTimePickerStart.Value;
             DateTime EndDateTime = dateTimePickerEnd.Value;
+            StartDateTime = new DateTime(StartDateTime.Year, StartDateTime.Month, StartDateTime.Day, 0, 0, 0);
+            EndDateTime = new DateTime(EndDateTime.Year, EndDateTime.Month, EndDateTime.Day, 0, 0, 0);
 
             double? TotalAmount = 0;
             double? PeriodAmount = 0;
@@ -52,7 +54,11 @@ namespace TravelCompanyCore
                 var allOrders = db.TourOrders
                     .Include(t => t.TourOrderItems)
                     .ToList()
-                    .Where(t => t.TourOrderStatusShiftDate >= StartDateTime && t.TourOrderStatusShiftDate <= EndDateTime)
+                    .Where(t => {
+                        DateTime date = (DateTime)t.TourOrderStatusShiftDate;
+                        date = new DateTime(date.Year, date.Month, date.Day, 0, 0, 0);
+                        return date >= StartDateTime && date <= EndDateTime;
+                    })
                     .ToList();
 
                 db.Tours
