@@ -20,7 +20,21 @@ inner join TourOrderStatuses tos on tos.Id=tt.TourOrderStatusId
 GROUP BY TourName
 
 
-SELECT TourName, SUM (CASE StatusName WHEN 'Отмена' THEN 1 ELSE 0 END) AS 'Отменено', SUM (CASE StatusName WHEN 'Бронь' THEN 1 ELSE 0 END) AS 'Забронировано', SUM (CASE StatusName WHEN 'Оплата' THEN 1 ELSE 0 END) AS 'Оплачено', SUM (CASE StatusName WHEN 'Продан' THEN 1 ELSE 0 END) AS 'Продано', SUM (CASE StatusName WHEN 'Продан' THEN TotalCost ELSE 0 END) AS 'Сумма проданных' FROM (select t.Id as TourId, TotalCost, h.Name || ' ' || cast(DaysAmount as text) || ' дней, ' || cast(NightsAmount as text) || ' ночей c ' || strftime('%d.%m.%Y', StartDateTime) as TourName, tos.Name as StatusName from tourorderitems as toi inner join TourOrders as tt on tt.Id=toi.TourOrderId inner join Tours t on t.Id=toi.TourId inner join Hotels h on h.Id=t.HotelId inner join TourOrderStatuses tos on tos.Id=tt.TourOrderStatusId where StatusName IN ('Отмена','Бронь','Оплата','Продан')) GROUP BY TourName
+SELECT
+ TourName,
+ SUM (CASE StatusName WHEN 'Отмена' THEN 1 ELSE 0 END) AS 'Отменено',
+ SUM (CASE StatusName WHEN 'Бронь' THEN 1 ELSE 0 END) AS 'Забронировано',
+ SUM (CASE StatusName WHEN 'Оплачен' THEN 1 ELSE 0 END) AS 'Оплачено',
+ SUM (CASE StatusName WHEN 'Продан' THEN 1 ELSE 0 END) AS 'Продано',
+ MAX (CASE StatusName WHEN 'Продан' THEN TotalCost ELSE 0 END) AS 'Сумма проданных',
+ MAX (CASE StatusName WHEN 'Отмена' THEN TotalCost ELSE 0 END) AS 'Сумма отменённых',
+ MAX (CASE StatusName WHEN 'Бронь' THEN TotalCost ELSE 0 END) AS 'Сумма забронированных',
+ MAX (CASE StatusName WHEN 'Оплачен' THEN TotalCost ELSE 0 END) AS 'Сумма оплаченных'
+FROM
+ (select t.Id as TourId, TotalCost, h.Name || ' ' || cast(DaysAmount as text) || ' дней, ' || cast(NightsAmount as text) || ' ночей c ' || strftime('%d.%m.%Y', StartDateTime) as TourName, tos.Name as StatusName
+ from tourorderitems as toi inner join TourOrders as tt on tt.Id=toi.TourOrderId inner join Tours t on t.Id=toi.TourId inner join Hotels h on h.Id=t.HotelId inner join TourOrderStatuses tos on tos.Id=tt.TourOrderStatusId
+ where StatusName IN ('Отмена','Бронь','Оплачен','Продан'))
+GROUP BY TourName
 
 
 
