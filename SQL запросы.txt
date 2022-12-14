@@ -1,13 +1,14 @@
 ﻿SELECT
-	TourName,
+	TourName
 	SUM (CASE StatusName WHEN 'Отмена' THEN 1 ELSE 0 END) AS "Отменено",
 	SUM (CASE StatusName WHEN 'Бронь' THEN 1 ELSE 0 END) AS "Забронировано",
 	SUM (CASE StatusName WHEN 'Оплата' THEN 1 ELSE 0 END) AS "Оплачено",
-	SUM (CASE StatusName WHEN 'Продан' THEN 1 ELSE 0 END) AS "Продано"
+	SUM (CASE StatusName WHEN 'Продан' THEN 1 ELSE 0 END) AS "Продано",
+	SUM (CASE StatusName WHEN 'Продан' THEN TotalCost ELSE 0 END) AS 'Сумма проданных',
 FROM 
 (
 select
- t.Id as TourId,
+ t.Id as TourId, TotalCost
  h.Name || ' ' || (cast(DaysAmount as text) || ' дней/') || (cast(NightsAmount as text) || ' ночей c ')  || (cast(StartDateTime as text)) as TourName, 
  tos.Name as StatusName
 from tourorderitems as toi
@@ -17,3 +18,10 @@ inner join Hotels h on h.Id=t.HotelId
 inner join TourOrderStatuses tos on tos.Id=tt.TourOrderStatusId
 )
 GROUP BY TourName
+
+
+SELECT TourName, SUM (CASE StatusName WHEN 'Отмена' THEN 1 ELSE 0 END) AS 'Отменено', SUM (CASE StatusName WHEN 'Бронь' THEN 1 ELSE 0 END) AS 'Забронировано', SUM (CASE StatusName WHEN 'Оплата' THEN 1 ELSE 0 END) AS 'Оплачено', SUM (CASE StatusName WHEN 'Продан' THEN 1 ELSE 0 END) AS 'Продано', SUM (CASE StatusName WHEN 'Продан' THEN TotalCost ELSE 0 END) AS 'Сумма проданных' FROM (select t.Id as TourId, TotalCost, h.Name || ' ' || cast(DaysAmount as text) || ' дней, ' || cast(NightsAmount as text) || ' ночей c ' || strftime('%d.%m.%Y', StartDateTime) as TourName, tos.Name as StatusName from tourorderitems as toi inner join TourOrders as tt on tt.Id=toi.TourOrderId inner join Tours t on t.Id=toi.TourId inner join Hotels h on h.Id=t.HotelId inner join TourOrderStatuses tos on tos.Id=tt.TourOrderStatusId where StatusName IN ('Отмена','Бронь','Оплата','Продан')) GROUP BY TourName
+
+
+
+select tosr.Name as ReasonName, SUM (CASE tosr.Name WHEN 'Истечение срока бронирования' THEN 1 ELSE 0 END) AS 'Истечение срока бронирования', SUM (CASE tosr.Name WHEN 'Бронь' THEN 1 ELSE 0 END) AS 'Отказ клиента', SUM (CASE tosr.Name WHEN 'Отказ Отеля' THEN 1 ELSE 0 END) AS 'Отказ Отеля', TotalCost, PaymentTypeId from TourOrders tt inner join TourOrderStatusReasons tosr on tosr.Id=tt.TourOrderStatusReasonId where TourOrderStatusId='0A593624-6F2F-4FEA-BFF3-0A67904DE4E1' GROUP BY ReasonName
