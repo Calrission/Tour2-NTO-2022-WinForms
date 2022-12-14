@@ -1,8 +1,6 @@
-﻿using Microsoft.Data.Sqlite;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.Reporting.WinForms;
-using Microsoft.ReportingServices.Interfaces;
 using System.Data;
 using TravelCompanyCore.Models;
 
@@ -17,7 +15,7 @@ namespace TravelCompanyCore
 
         private void Reports_Load(object sender, EventArgs e)
         {
-            var reportTypes = new List<String>() { "Свой вариант", "Год", "1 полугодие", "2 полугодие", "I квартал", "II квартал", "III квартал", "IV квартал", "Месяц", "Неделя" };
+            var reportTypes = new List<String>() { "Свой вариант", "Текущий год", "1 полугодие", "2 полугодие", "I квартал", "II квартал", "III квартал", "IV квартал", "Текущий месяц", "Текущяя неделя" };
             using(ApplicationContext db = new())
             {
                 comboBoxTypeReport.DataSource = reportTypes;
@@ -27,6 +25,9 @@ namespace TravelCompanyCore
 
         private void btnShowReport_Click(object sender, EventArgs e)
         {
+            reportViewer1.LocalReport.DataSources.Clear();
+            reportViewer1.Clear();
+
             DataTable dataTable = new DataTable();
 
             dataTable.Columns.Add("TourName");
@@ -40,7 +41,11 @@ namespace TravelCompanyCore
 
             double? TotalAmount = 0;
             double? PeriodAmount = 0;
-            int CountBooking = 0;
+
+            double? MoneyBooking = 0;
+            double? MoneyPay = 0;
+            double? MoneyLost = 0;
+            double? MoneyRealization = 0;
 
             using (ApplicationContext db = new())
             {
@@ -68,11 +73,33 @@ namespace TravelCompanyCore
                 var pays = db.TourOrderPayments.ToList();
                 TotalAmount = pays.ConvertAll(t => t.TotalCost).ToList().Sum();
                 PeriodAmount = pays.Where(t => t.PaymentDate >= StartDateTime && t.PaymentDate <= EndDateTime).ToList().ConvertAll(t => t.TotalCost).ToList().Sum();
+
+                MoneyBooking = allOrders
+                    .Where(t => t.TourOrderStatusId == Guid.Parse("5F24C6F9-704A-403A-B30B-04E2F361A403"))
+                    .Sum(t => t.TotalCost);
+
+                MoneyPay = allOrders
+                    .Where(t => t.TourOrderStatusId == Guid.Parse("D40D224C-D35A-4E2E-9D85-4EFAF3CA701E"))
+                    .Sum(t => t.TotalCost);
+
+                MoneyLost = allOrders
+                    .Where(t => t.TourOrderStatusId == Guid.Parse("0A593624-6F2F-4FEA-BFF3-0A67904DE4E1"))
+                    .Sum(t => t.TotalCost);
+
+                MoneyRealization = allOrders
+                    .Where(t => t.TourOrderStatusId == Guid.Parse("4A31DF95-6013-4AC7-AA88-C7E9ED348E02"))
+                    .Sum(t => t.TotalCost);
+
             }
             reportViewer1.LocalReport.ReportEmbeddedResource = "TravelCompanyCore.ReportDefinitions.SalesAndOrders.rdlc";
 
             reportViewer1.LocalReport.SetParameters(new ReportParameter("Period", string.Format("Заказы за период с {0} по {1}", dateTimePickerStart.Value.ToLongDateString(), dateTimePickerEnd.Value.ToLongDateString())));
             reportViewer1.LocalReport.SetParameters(new ReportParameter("Debet", string.Format("Всего средств на счету: {0} рублей.\nПоступления за выбранный период: {1} рублей.", TotalAmount.ToString(), PeriodAmount.ToString())));
+            
+            reportViewer1.LocalReport.SetParameters(new ReportParameter("MoneyBooking", string.Format("Потенциальный доход: {0}", MoneyBooking)));
+            reportViewer1.LocalReport.SetParameters(new ReportParameter("MoneyPay", string.Format("Потенциальный доход: {0}", MoneyPay)));
+            reportViewer1.LocalReport.SetParameters(new ReportParameter("MoneyLost", string.Format("Потеряно: {0}", MoneyLost)));
+            reportViewer1.LocalReport.SetParameters(new ReportParameter("MoneyRealization", string.Format("Доход: {0}", MoneyRealization)));
 
             ReportDataSource rds = new ReportDataSource("DataSet222", dataTable);
             reportViewer1.LocalReport.DataSources.Add(rds);
@@ -98,7 +125,7 @@ namespace TravelCompanyCore
             var Year = now.Year;
             var Month = now.Month;
 
-            if (Name == "Год")
+            if (Name == "Текущий год")
             {
                 return Tuple.Create(new DateTime(Year, 1, 1), new DateTime(Year, 12, 31));
             }
@@ -126,11 +153,11 @@ namespace TravelCompanyCore
             {
                 return Tuple.Create(new DateTime(Year, 10, 1), new DateTime(Year, 12, 31));
             }
-            else if (Name == "Месяц")
+            else if (Name == "Текущий месяц")
             {
                 return Tuple.Create(new DateTime(Year, Month, 1), new DateTime(Year, Month, DateTime.DaysInMonth(Year, Month)));
             }
-            else if (Name == "Неделя")
+            else if (Name == "Текущяя неделя")
             {
                 int DayOfWeek = ((int)DateTime.Now.DayOfWeek == 0) ? 6 : (int)DateTime.Now.DayOfWeek - 1;
                 var start = DateTime.Now.AddDays(-DayOfWeek);
