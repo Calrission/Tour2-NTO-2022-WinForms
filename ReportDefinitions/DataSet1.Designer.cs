@@ -399,7 +399,7 @@ namespace TravelCompanyCore.ReportDefinitions {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public DataSet222Row AddDataSet222Row(string Тур, string Отменено, string Забронировано, string Оплачено, string Продано) {
+            public DataSet222Row AddDataSet222Row(string Тур, int Отменено, string Забронировано, string Оплачено, string Продано) {
                 DataSet222Row rowDataSet222Row = ((DataSet222Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Тур,
@@ -441,7 +441,7 @@ namespace TravelCompanyCore.ReportDefinitions {
             private void InitClass() {
                 this.columnТур = new global::System.Data.DataColumn("Тур", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnТур);
-                this.columnОтменено = new global::System.Data.DataColumn("Отменено", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnОтменено = new global::System.Data.DataColumn("Отменено", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnОтменено);
                 this.columnЗабронировано = new global::System.Data.DataColumn("Забронировано", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnЗабронировано);
@@ -607,10 +607,10 @@ namespace TravelCompanyCore.ReportDefinitions {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string Отменено {
+            public int Отменено {
                 get {
                     try {
-                        return ((string)(this[this.tableDataSet222.ОтмененоColumn]));
+                        return ((int)(this[this.tableDataSet222.ОтмененоColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("Значение для столбца \'Отменено\' в таблице \'DataSet222\' равно DBNull.", e);

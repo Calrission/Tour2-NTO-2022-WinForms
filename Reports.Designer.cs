@@ -30,10 +30,11 @@
         {
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.label1 = new System.Windows.Forms.Label();
-            this.dtpFromDate = new System.Windows.Forms.DateTimePicker();
-            this.dtpToDate = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerStart = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerEnd = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.btnShowReport = new System.Windows.Forms.Button();
+            this.comboBoxTypeReport = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // reportViewer1
@@ -52,30 +53,30 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 11);
+            this.label1.Location = new System.Drawing.Point(148, 11);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(101, 15);
             this.label1.TabIndex = 1;
             this.label1.Text = "Начало периода:";
             // 
-            // dtpFromDate
+            // dateTimePickerStart
             // 
-            this.dtpFromDate.Location = new System.Drawing.Point(112, 8);
-            this.dtpFromDate.Name = "dtpFromDate";
-            this.dtpFromDate.Size = new System.Drawing.Size(200, 23);
-            this.dtpFromDate.TabIndex = 2;
+            this.dateTimePickerStart.Location = new System.Drawing.Point(255, 8);
+            this.dateTimePickerStart.Name = "dateTimePickerStart";
+            this.dateTimePickerStart.Size = new System.Drawing.Size(146, 23);
+            this.dateTimePickerStart.TabIndex = 2;
             // 
-            // dtpToDate
+            // dateTimePickerEnd
             // 
-            this.dtpToDate.Location = new System.Drawing.Point(436, 8);
-            this.dtpToDate.Name = "dtpToDate";
-            this.dtpToDate.Size = new System.Drawing.Size(200, 23);
-            this.dtpToDate.TabIndex = 4;
+            this.dateTimePickerEnd.Location = new System.Drawing.Point(514, 8);
+            this.dateTimePickerEnd.Name = "dateTimePickerEnd";
+            this.dateTimePickerEnd.Size = new System.Drawing.Size(142, 23);
+            this.dateTimePickerEnd.TabIndex = 4;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(329, 11);
+            this.label2.Location = new System.Drawing.Point(407, 11);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(93, 15);
             this.label2.TabIndex = 3;
@@ -83,7 +84,7 @@
             // 
             // btnShowReport
             // 
-            this.btnShowReport.Location = new System.Drawing.Point(649, 8);
+            this.btnShowReport.Location = new System.Drawing.Point(662, 8);
             this.btnShowReport.Name = "btnShowReport";
             this.btnShowReport.Size = new System.Drawing.Size(137, 23);
             this.btnShowReport.TabIndex = 5;
@@ -91,15 +92,25 @@
             this.btnShowReport.UseVisualStyleBackColor = true;
             this.btnShowReport.Click += new System.EventHandler(this.btnShowReport_Click);
             // 
+            // comboBoxTypeReport
+            // 
+            this.comboBoxTypeReport.FormattingEnabled = true;
+            this.comboBoxTypeReport.Location = new System.Drawing.Point(-1, 8);
+            this.comboBoxTypeReport.Name = "comboBoxTypeReport";
+            this.comboBoxTypeReport.Size = new System.Drawing.Size(143, 23);
+            this.comboBoxTypeReport.TabIndex = 6;
+            this.comboBoxTypeReport.SelectedValueChanged += new System.EventHandler(this.comboBoxTypeReport_ValueMemberChanged);
+            // 
             // Reports
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.comboBoxTypeReport);
             this.Controls.Add(this.btnShowReport);
-            this.Controls.Add(this.dtpToDate);
+            this.Controls.Add(this.dateTimePickerEnd);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.dtpFromDate);
+            this.Controls.Add(this.dateTimePickerStart);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.reportViewer1);
             this.Name = "Reports";
@@ -114,9 +125,10 @@
 
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
         private Label label1;
-        private DateTimePicker dtpFromDate;
-        private DateTimePicker dtpToDate;
+        private DateTimePicker dateTimePickerStart;
+        private DateTimePicker dateTimePickerEnd;
         private Label label2;
         private Button btnShowReport;
+        private ComboBox comboBoxTypeReport;
     }
 }
