@@ -144,18 +144,18 @@
             this.groupBox3.Controls.Add(this.btnReports);
             this.groupBox3.Location = new System.Drawing.Point(89, 387);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(277, 51);
+            this.groupBox3.Size = new System.Drawing.Size(277, 72);
             this.groupBox3.TabIndex = 9;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Отчётность";
             // 
             // btnReports
             // 
-            this.btnReports.Location = new System.Drawing.Point(44, 18);
+            this.btnReports.Location = new System.Drawing.Point(44, 28);
             this.btnReports.Name = "btnReports";
             this.btnReports.Size = new System.Drawing.Size(189, 23);
             this.btnReports.TabIndex = 7;
-            this.btnReports.Text = "Отчёты";
+            this.btnReports.Text = "Аналитика заказов";
             this.btnReports.UseVisualStyleBackColor = true;
             this.btnReports.Click += new System.EventHandler(this.btnReports_Click);
             // 
@@ -163,7 +163,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(462, 450);
+            this.ClientSize = new System.Drawing.Size(462, 471);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);

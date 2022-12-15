@@ -15,7 +15,7 @@ namespace TravelCompanyCore
 
         private void Reports_Load(object sender, EventArgs e)
         {
-            var reportTypes = new List<String>() { "Свой вариант", "Текущий год", "1 полугодие", "2 полугодие", "I квартал", "II квартал", "III квартал", "IV квартал", "Текущий месяц", "Текущяя неделя" };
+            var reportTypes = new List<String>() { "Произвольные даты", "Текущий год", "1 полугодие", "2 полугодие", "I квартал", "II квартал", "III квартал", "IV квартал", "Текущий месяц", "Текущяя неделя" };
             using(ApplicationContext db = new())
             {
                 comboBoxTypeReport.DataSource = reportTypes;
@@ -36,10 +36,8 @@ namespace TravelCompanyCore
             dataTable.Columns.Add("Оплачено");
             dataTable.Columns.Add("Продано");
 
-            DateTime StartDateTime = dateTimePickerStart.Value;
-            DateTime EndDateTime = dateTimePickerEnd.Value;
-            StartDateTime = new DateTime(StartDateTime.Year, StartDateTime.Month, StartDateTime.Day, 0, 0, 0);
-            EndDateTime = new DateTime(EndDateTime.Year, EndDateTime.Month, EndDateTime.Day, 0, 0, 0);
+            DateTime StartDateTime = dateTimePickerStart.Value.ClearTime();
+            DateTime EndDateTime = dateTimePickerEnd.Value.ClearTime();
 
             double? TotalAmount = 0;
             double? PeriodAmount = 0;
@@ -55,8 +53,7 @@ namespace TravelCompanyCore
                     .Include(t => t.TourOrderItems)
                     .ToList()
                     .Where(t => {
-                        DateTime date = (DateTime)t.TourOrderStatusShiftDate;
-                        date = new DateTime(date.Year, date.Month, date.Day, 0, 0, 0);
+                        DateTime date = ((DateTime)t.TourOrderStatusShiftDate).ClearTime();
                         return date >= StartDateTime && date <= EndDateTime;
                     })
                     .ToList();
@@ -78,7 +75,12 @@ namespace TravelCompanyCore
 
                 var pays = db.TourOrderPayments.ToList();
                 TotalAmount = pays.ConvertAll(t => t.TotalCost).ToList().Sum();
-                PeriodAmount = pays.Where(t => t.PaymentDate >= StartDateTime && t.PaymentDate <= EndDateTime).ToList().ConvertAll(t => t.TotalCost).ToList().Sum();
+                PeriodAmount = pays.Where(t =>
+                {
+                    DateTime PayDate = ((DateTime)t.PaymentDate).ClearTime();
+
+                    return PayDate >= StartDateTime && PayDate <= EndDateTime;
+                }).ToList().ConvertAll(t => t.TotalCost).ToList().Sum();
 
                 MoneyBooking = allOrders
                     .Where(t => t.TourOrderStatusId == Guid.Parse("5F24C6F9-704A-403A-B30B-04E2F361A403"))
@@ -102,10 +104,10 @@ namespace TravelCompanyCore
             reportViewer1.LocalReport.SetParameters(new ReportParameter("Period", string.Format("Заказы за период с {0} по {1}", dateTimePickerStart.Value.ToLongDateString(), dateTimePickerEnd.Value.ToLongDateString())));
             reportViewer1.LocalReport.SetParameters(new ReportParameter("Debet", string.Format("Всего средств на счету: {0} рублей.\nПоступления за выбранный период: {1} рублей.", TotalAmount.ToString(), PeriodAmount.ToString())));
             
-            reportViewer1.LocalReport.SetParameters(new ReportParameter("MoneyBooking", string.Format("Потенциальный доход: {0}", MoneyBooking)));
-            reportViewer1.LocalReport.SetParameters(new ReportParameter("MoneyPay", string.Format("Потенциальный доход: {0}", MoneyPay)));
-            reportViewer1.LocalReport.SetParameters(new ReportParameter("MoneyLost", string.Format("Потеряно: {0}", MoneyLost)));
-            reportViewer1.LocalReport.SetParameters(new ReportParameter("MoneyRealization", string.Format("Доход: {0}", MoneyRealization)));
+            reportViewer1.LocalReport.SetParameters(new ReportParameter("MoneyBooking", string.Format("{0}", MoneyBooking)));
+            reportViewer1.LocalReport.SetParameters(new ReportParameter("MoneyPay", string.Format("{0}", MoneyPay)));
+            reportViewer1.LocalReport.SetParameters(new ReportParameter("MoneyLost", string.Format("{0}", MoneyLost)));
+            reportViewer1.LocalReport.SetParameters(new ReportParameter("MoneyRealization", string.Format("{0}", MoneyRealization)));
 
             ReportDataSource rds = new ReportDataSource("DataSet222", dataTable);
             reportViewer1.LocalReport.DataSources.Add(rds);
@@ -115,7 +117,7 @@ namespace TravelCompanyCore
         private void comboBoxTypeReport_ValueMemberChanged(object sender, EventArgs e)
         {
             var Name = ((List<string>)comboBoxTypeReport.DataSource)[comboBoxTypeReport.SelectedIndex];
-            dateTimePickerStart.Enabled = Name == "Свой вариант";
+            dateTimePickerStart.Enabled = Name == "Произвольные даты";
             dateTimePickerEnd.Enabled = dateTimePickerStart.Enabled;
             if (!dateTimePickerStart.Enabled)
             {
@@ -173,5 +175,14 @@ namespace TravelCompanyCore
 
             return null;
         }
+    }
+}
+
+
+public static class DateTimeExtension
+{
+    public static DateTime ClearTime(this DateTime dateTime)
+    {
+        return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0);
     }
 }
