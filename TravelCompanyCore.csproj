@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="ReportDefinitions\SalesAndOrders.rdlc" />
+    <None Remove="ReportDefinitions\SalesAndOrdersOld.rdlc" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="ReportDefinitions\SalesAndOrders.rdlc">
+    <EmbeddedResource Include="ReportDefinitions\SalesAndOrdersOld.rdlc">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

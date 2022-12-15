@@ -17,9 +17,9 @@
             <xs:sequence>
               <xs:element name="Тур" msprop:Generator_ColumnPropNameInTable="ТурColumn" msprop:Generator_ColumnPropNameInRow="Тур" msprop:Generator_UserColumnName="Тур" msprop:Generator_ColumnVarNameInTable="columnТур" type="xs:string" minOccurs="0" />
               <xs:element name="Отменено" msprop:Generator_ColumnPropNameInTable="ОтмененоColumn" msprop:Generator_ColumnPropNameInRow="Отменено" msprop:Generator_UserColumnName="Отменено" msprop:Generator_ColumnVarNameInTable="columnОтменено" type="xs:int" minOccurs="0" />
-              <xs:element name="Забронировано" msprop:Generator_ColumnPropNameInTable="ЗабронированоColumn" msprop:Generator_ColumnPropNameInRow="Забронировано" msprop:Generator_UserColumnName="Забронировано" msprop:Generator_ColumnVarNameInTable="columnЗабронировано" type="xs:string" minOccurs="0" />
-              <xs:element name="Оплачено" msprop:Generator_ColumnPropNameInTable="ОплаченоColumn" msprop:Generator_ColumnPropNameInRow="Оплачено" msprop:Generator_UserColumnName="Оплачено" msprop:Generator_ColumnVarNameInTable="columnОплачено" type="xs:string" minOccurs="0" />
-              <xs:element name="Продано" msprop:Generator_ColumnPropNameInTable="ПроданоColumn" msprop:Generator_ColumnPropNameInRow="Продано" msprop:Generator_UserColumnName="Продано" msprop:Generator_ColumnVarNameInTable="columnПродано" type="xs:string" minOccurs="0" />
+              <xs:element name="Забронировано" msprop:Generator_ColumnPropNameInTable="ЗабронированоColumn" msprop:Generator_ColumnPropNameInRow="Забронировано" msprop:Generator_UserColumnName="Забронировано" msprop:Generator_ColumnVarNameInTable="columnЗабронировано" type="xs:int" minOccurs="0" />
+              <xs:element name="Оплачено" msprop:Generator_ColumnPropNameInTable="ОплаченоColumn" msprop:Generator_ColumnPropNameInRow="Оплачено" msprop:Generator_UserColumnName="Оплачено" msprop:Generator_ColumnVarNameInTable="columnОплачено" type="xs:int" minOccurs="0" />
+              <xs:element name="Продано" msprop:Generator_ColumnPropNameInTable="ПроданоColumn" msprop:Generator_ColumnPropNameInRow="Продано" msprop:Generator_UserColumnName="Продано" msprop:Generator_ColumnVarNameInTable="columnПродано" type="xs:int" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
