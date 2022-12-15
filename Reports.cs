@@ -15,7 +15,7 @@ namespace TravelCompanyCore
 
         private void Reports_Load(object sender, EventArgs e)
         {
-            var reportTypes = new List<String>() { "Произвольные даты", "Текущий год", "1 полугодие", "2 полугодие", "I квартал", "II квартал", "III квартал", "IV квартал", "Текущий месяц", "Текущяя неделя" };
+            var reportTypes = new List<String>() { "Произвольные даты", "Текущий год", "1 полугодие", "2 полугодие", "I квартал", "II квартал", "III квартал", "IV квартал", "Текущий месяц", "Текущая неделя" };
             using(ApplicationContext db = new())
             {
                 comboBoxTypeReport.DataSource = reportTypes;
@@ -165,7 +165,7 @@ namespace TravelCompanyCore
             {
                 return Tuple.Create(new DateTime(Year, Month, 1), new DateTime(Year, Month, DateTime.DaysInMonth(Year, Month)));
             }
-            else if (Name == "Текущяя неделя")
+            else if (Name == "Текущая неделя")
             {
                 int DayOfWeek = ((int)DateTime.Now.DayOfWeek == 0) ? 6 : (int)DateTime.Now.DayOfWeek - 1;
                 var start = DateTime.Now.AddDays(-DayOfWeek);
