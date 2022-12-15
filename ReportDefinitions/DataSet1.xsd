@@ -23,6 +23,14 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="DataSet22M" msprop:Generator_RowEvHandlerName="DataSet22MRowChangeEventHandler" msprop:Generator_RowDeletedName="DataSet22MRowDeleted" msprop:Generator_RowDeletingName="DataSet22MRowDeleting" msprop:Generator_RowEvArgName="DataSet22MRowChangeEvent" msprop:Generator_TablePropName="DataSet22M" msprop:Generator_RowChangedName="DataSet22MRowChanged" msprop:Generator_RowChangingName="DataSet22MRowChanging" msprop:Generator_TableClassName="DataSet22MDataTable" msprop:Generator_RowClassName="DataSet22MRow" msprop:Generator_TableVarName="tableDataSet22M" msprop:Generator_UserTableName="DataSet22M">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MetricaName" msprop:Generator_ColumnPropNameInRow="MetricaName" msprop:Generator_ColumnPropNameInTable="MetricaNameColumn" msprop:Generator_ColumnVarNameInTable="columnMetricaName" msprop:Generator_UserColumnName="MetricaName" type="xs:string" minOccurs="0" />
+              <xs:element name="TotalAmount" msprop:Generator_ColumnPropNameInRow="TotalAmount" msprop:Generator_ColumnPropNameInTable="TotalAmountColumn" msprop:Generator_ColumnVarNameInTable="columnTotalAmount" msprop:Generator_UserColumnName="TotalAmount" type="xs:double" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
   </xs:element>
