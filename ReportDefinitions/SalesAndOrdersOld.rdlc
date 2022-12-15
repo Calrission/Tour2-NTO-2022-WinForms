@@ -730,20 +730,21 @@
                   <TextRun>
                     <Value>=Parameters!Debet.Value</Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
-                      <Color>SeaGreen</Color>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Blue</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Right</TextAlign>
+                  <TextAlign>Center</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>0.6525cm</Top>
+            <Top>0.62273cm</Top>
+            <Left>1.67639cm</Left>
             <Height>0.6cm</Height>
-            <Width>19.8cm</Width>
+            <Width>16.64194cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -788,7 +789,9 @@
                         <Y>=Sum(Int32.Parse(Fields!Оплачено.Value.ToString()))</Y>
                       </ChartDataPointValues>
                       <ChartDataLabel>
-                        <Style />
+                        <Style>
+                          <FontSize>8pt</FontSize>
+                        </Style>
                         <UseValueAsLabel>true</UseValueAsLabel>
                         <Visible>true</Visible>
                       </ChartDataLabel>
@@ -1184,6 +1187,19 @@
                 <ColumnSeparatorColor>Black</ColumnSeparatorColor>
               </ChartLegend>
             </ChartLegends>
+            <ChartTitles>
+              <ChartTitle Name="Title1">
+                <Caption>Стоимостное распределение</Caption>
+                <Style>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                  <FontWeight>Normal</FontWeight>
+                  <TextAlign>General</TextAlign>
+                  <VerticalAlign>Top</VerticalAlign>
+                  <Color>DimGray</Color>
+                </Style>
+                <Position>TopLeft</Position>
+              </ChartTitle>
+            </ChartTitles>
             <Palette>Pacific</Palette>
             <ChartBorderSkin>
               <Style>
@@ -1202,10 +1218,10 @@
               </Style>
             </ChartNoDataMessage>
             <DataSetName>DataSet222</DataSetName>
-            <Top>6.01768cm</Top>
+            <Top>6.44101cm</Top>
             <Left>0.3175cm</Left>
-            <Height>5cm</Height>
-            <Width>7.5cm</Width>
+            <Height>5.76729cm</Height>
+            <Width>8.74354cm</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -1297,7 +1313,11 @@
                         <Y>=First(Fields!TotalAmount.Value)</Y>
                       </ChartDataPointValues>
                       <ChartDataLabel>
-                        <Style />
+                        <Style>
+                          <FontSize>8pt</FontSize>
+                        </Style>
+                        <UseValueAsLabel>true</UseValueAsLabel>
+                        <Visible>true</Visible>
                       </ChartDataLabel>
                       <Style />
                       <ChartMarker>
@@ -1585,7 +1605,6 @@
                 <Caption>Стоимостное распределение</Caption>
                 <Style>
                   <BackgroundGradientType>None</BackgroundGradientType>
-                  <FontSize>9pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextAlign>Left</TextAlign>
                   <VerticalAlign>Top</VerticalAlign>
@@ -1612,10 +1631,10 @@
               </Style>
             </ChartNoDataMessage>
             <DataSetName>DataSet22M</DataSetName>
-            <Top>5.95487cm</Top>
-            <Left>11.9034cm</Left>
-            <Height>5cm</Height>
-            <Width>7.5cm</Width>
+            <Top>6.01768cm</Top>
+            <Left>10.75646cm</Left>
+            <Height>6.48167cm</Height>
+            <Width>8.79646cm</Width>
             <ZIndex>6</ZIndex>
             <Style>
               <Border>
@@ -1627,7 +1646,7 @@
             </Style>
           </Chart>
         </ReportItems>
-        <Height>11.84953cm</Height>
+        <Height>13.3312cm</Height>
         <Style />
       </Body>
       <Width>19.86771cm</Width>

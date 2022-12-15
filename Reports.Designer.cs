@@ -95,6 +95,7 @@
             // 
             // comboBoxTypeReport
             // 
+            this.comboBoxTypeReport.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxTypeReport.FormattingEnabled = true;
             this.comboBoxTypeReport.Location = new System.Drawing.Point(68, 8);
             this.comboBoxTypeReport.Name = "comboBoxTypeReport";

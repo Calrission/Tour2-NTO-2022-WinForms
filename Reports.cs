@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.Reporting.WinForms;
 using System.Data;
@@ -97,8 +98,31 @@ namespace TravelCompanyCore
                 MoneyRealization = allOrders
                     .Where(t => t.TourOrderStatusId == Guid.Parse("4A31DF95-6013-4AC7-AA88-C7E9ED348E02"))
                     .Sum(t => t.TotalCost);
-
             }
+
+            SqliteConnection sqliteConnection = new SqliteConnection("Data Source=TravelCompanyCoreStorage.db");
+            SqliteCommand cmd = sqliteConnection.CreateCommand();
+
+            SqliteParameter dt1 = new();
+            dt1.ParameterName = "FromDate";
+            dt1.Value = StartDateTime;
+
+            SqliteParameter dt2 = new();
+            dt2.ParameterName = "ToDate";
+            dt2.Value = EndDateTime;
+
+            cmd.Parameters.Add(dt1);
+            cmd.Parameters.Add(dt2);
+
+            cmd.CommandText = "select TourOrderStatusShiftDate, 'Продано' as MetricaName, ifnull(sum(TotalCost), 0) as TotalAmount from TourOrders where TourOrderStatusId='4A31DF95-6013-4AC7-AA88-C7E9ED348E02' and TourOrderStatusShiftDate >=  @FromDate and TourOrderStatusShiftDate <= @ToDate union select TourOrderStatusShiftDate, 'Оплачено' as MetricaName, ifnull(sum(TotalCost), 0) as TotalAmount from TourOrders where TourOrderStatusId='D40D224C-D35A-4E2E-9D85-4EFAF3CA701E' and TourOrderStatusShiftDate >=  @FromDate and TourOrderStatusShiftDate <= @ToDate union select TourOrderStatusShiftDate, 'Забронировано' as MetricaName, ifnull(sum(TotalCost), 0) as TotalAmount from TourOrders where TourOrderStatusId='5F24C6F9-704A-403A-B30B-04E2F361A403' and TourOrderStatusShiftDate >=  @FromDate and TourOrderStatusShiftDate <= @ToDate union select TourOrderStatusShiftDate, 'Отменено' as MetricaName, ifnull(sum(TotalCost), 0) as TotalAmount from TourOrders where TourOrderStatusId='0A593624-6F2F-4FEA-BFF3-0A67904DE4E1' and TourOrderStatusShiftDate >=  @FromDate and TourOrderStatusShiftDate <= @ToDate";
+            DataTable dtM = new DataTable();
+            cmd.Connection = sqliteConnection;
+            sqliteConnection.Open();
+            dtM.Load(cmd.ExecuteReader());
+            ReportDataSource rdsM = new ReportDataSource("DataSet22M", dtM);
+            sqliteConnection.Close();
+
+
             reportViewer1.LocalReport.ReportEmbeddedResource = "TravelCompanyCore.ReportDefinitions.SalesAndOrdersOld.rdlc";
 
             reportViewer1.LocalReport.SetParameters(new ReportParameter("Period", string.Format("Заказы за период с {0} по {1}", dateTimePickerStart.Value.ToLongDateString(), dateTimePickerEnd.Value.ToLongDateString())));
@@ -111,6 +135,7 @@ namespace TravelCompanyCore
 
             ReportDataSource rds = new ReportDataSource("DataSet222", dataTable);
             reportViewer1.LocalReport.DataSources.Add(rds);
+            reportViewer1.LocalReport.DataSources.Add(rdsM);
             reportViewer1.RefreshReport();
         }
 
