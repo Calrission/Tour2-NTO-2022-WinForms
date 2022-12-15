@@ -47,6 +47,30 @@
         <rd:TableAdapterName />
       </rd:DataSetInfo>
     </DataSet>
+    <DataSet Name="DataSet22M">
+      <Query>
+        <DataSourceName>DataSet1</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="MetricaName">
+          <DataField>MetricaName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TotalAmount">
+          <DataField>TotalAmount</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>DataSet1</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\ILyaE\source\repos\TravelCompanyCore\ReportDefinitions\DataSet1.xsd</rd:SchemaPath>
+        <rd:TableName>DataSet22M</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
+      </rd:DataSetInfo>
+    </DataSet>
   </DataSets>
   <ReportSections>
     <ReportSection>
@@ -56,19 +80,19 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>8.41949cm</Width>
+                  <Width>9.7442cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.48391cm</Width>
+                  <Width>3.11529cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.49758cm</Width>
+                  <Width>2.06545cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.81148cm</Width>
+                  <Width>1.85378cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.58754cm</Width>
+                  <Width>2.09191cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -426,61 +450,25 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>1.10271cm</Height>
+                  <Height>1.07625cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox13">
+                        <Textbox Name="Textbox4">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Итого</Value>
-                                  <Style>
-                                    <Color>White</Color>
-                                  </Style>
+                                  <Value>Итого:</Value>
+                                  <Style />
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox13</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BackgroundColor>DimGray</BackgroundColor>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>4pt</PaddingLeft>
-                            <PaddingRight>4pt</PaddingRight>
-                            <PaddingTop>6pt</PaddingTop>
-                            <PaddingBottom>6pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Забронировано1">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Sum(Int32.Parse(Fields!Забронировано.Value.ToString()))</Value>
-                                  <Style />
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Забронировано1</rd:DefaultName>
+                          <rd:DefaultName>Textbox4</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -497,14 +485,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox15">
+                        <Textbox Name="Textbox6">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Int32.Parse(Fields!Оплачено.Value.ToString()))</Value>
+                                  <Value>=sum(Fields!Забронировано.Value)</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -513,7 +501,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox15</rd:DefaultName>
+                          <rd:DefaultName>Textbox6</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -530,14 +518,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox16">
+                        <Textbox Name="Textbox8">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Int32.Parse(Fields!Продано.Value.ToString()))</Value>
+                                  <Value>=sum(Fields!Оплачено.Value)</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -546,7 +534,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox16</rd:DefaultName>
+                          <rd:DefaultName>Textbox8</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -563,14 +551,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Отменено1">
+                        <Textbox Name="Textbox10">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Int32.Parse(Fields!Отменено.Value.ToString()))</Value>
+                                  <Value>=Sum(Fields!Продано.Value)</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -579,7 +567,40 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Отменено1</rd:DefaultName>
+                          <rd:DefaultName>Textbox10</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>4pt</PaddingLeft>
+                            <PaddingRight>4pt</PaddingRight>
+                            <PaddingTop>6pt</PaddingTop>
+                            <PaddingBottom>6pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox12">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=sum(Fields!Отменено.Value)</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox12</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -597,18 +618,18 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.83283cm</Height>
+                  <Height>0.9175cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox14">
+                        <Textbox Name="Textbox21">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Итого в денежном эквиваленте</Value>
+                                  <Value>Итого в денежной эквиваленте</Value>
                                   <Style>
                                     <Color>White</Color>
                                   </Style>
@@ -635,7 +656,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox17">
+                        <Textbox Name="Textbox22">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -668,7 +689,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox18">
+                        <Textbox Name="Textbox23">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -701,7 +722,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox19">
+                        <Textbox Name="Textbox24">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -734,7 +755,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox20">
+                        <Textbox Name="Textbox25">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -785,9 +806,6 @@
                 </TablixMember>
                 <TablixMember>
                   <Group Name="Подробности" />
-                  <TablixMembers>
-                    <TablixMember />
-                  </TablixMembers>
                 </TablixMember>
                 <TablixMember>
                   <KeepWithGroup>Before</KeepWithGroup>
@@ -801,8 +819,9 @@
             <NoRowsMessage> За указанный период записи не найдены. Попробуйте изменить даты и повторить получение отчёта</NoRowsMessage>
             <DataSetName>DataSet222</DataSetName>
             <Top>1.39912cm</Top>
-            <Height>3.63825cm</Height>
-            <Width>19.8cm</Width>
+            <Left>0.1cm</Left>
+            <Height>3.69646cm</Height>
+            <Width>18.87063cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -830,7 +849,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Height>0.6cm</Height>
-            <Width>19.8cm</Width>
+            <Width>18.97062cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -864,7 +883,7 @@
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>0.6525cm</Top>
             <Height>0.6cm</Height>
-            <Width>19.8cm</Width>
+            <Width>18.97062cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -893,7 +912,7 @@
                   <Label>Продано</Label>
                 </ChartMember>
                 <ChartMember>
-                  <Label>Продано</Label>
+                  <Label>Забронировано</Label>
                 </ChartMember>
                 <ChartMember>
                   <Label>Отменено</Label>
@@ -906,7 +925,7 @@
                   <ChartDataPoints>
                     <ChartDataPoint>
                       <ChartDataPointValues>
-                        <Y>=Sum(Int32.Parse(Fields!Оплачено.Value.ToString()))</Y>
+                        <Y>=SUM(Fields!Оплачено.Value)</Y>
                       </ChartDataPointValues>
                       <ChartDataLabel>
                         <Style />
@@ -941,7 +960,7 @@
                   <ChartDataPoints>
                     <ChartDataPoint>
                       <ChartDataPointValues>
-                        <Y>=Sum(Int32.Parse(Fields!Продано.Value.ToString()))</Y>
+                        <Y>=SUM(Fields!Продано.Value)</Y>
                       </ChartDataPointValues>
                       <ChartDataLabel>
                         <Style />
@@ -976,7 +995,7 @@
                   <ChartDataPoints>
                     <ChartDataPoint>
                       <ChartDataPointValues>
-                        <Y>=Sum(Int32.Parse(Fields!Продано.Value.ToString()))</Y>
+                        <Y>=SUM(Fields!Забронировано.Value)</Y>
                       </ChartDataPointValues>
                       <ChartDataLabel>
                         <Style />
@@ -1011,7 +1030,7 @@
                   <ChartDataPoints>
                     <ChartDataPoint>
                       <ChartDataPointValues>
-                        <Y>=Sum(Int32.Parse(Fields!Отменено.Value.ToString()))</Y>
+                        <Y>=SUM(Fields!Отменено.Value)</Y>
                       </ChartDataPointValues>
                       <ChartDataLabel>
                         <Style />
@@ -1329,8 +1348,8 @@
               </Style>
             </ChartNoDataMessage>
             <DataSetName>DataSet222</DataSetName>
-            <Top>6.01768cm</Top>
-            <Left>0.3175cm</Left>
+            <Top>5.57954cm</Top>
+            <Left>0.4175cm</Left>
             <Height>5cm</Height>
             <Width>7.5cm</Width>
             <ZIndex>3</ZIndex>
@@ -1344,17 +1363,17 @@
             </Style>
           </Chart>
         </ReportItems>
-        <Height>11.84953cm</Height>
+        <Height>5.10267in</Height>
         <Style />
       </Body>
-      <Width>19.86771cm</Width>
+      <Width>7.71197in</Width>
       <Page>
         <PageHeight>29.7cm</PageHeight>
         <PageWidth>21cm</PageWidth>
-        <LeftMargin>0.5cm</LeftMargin>
-        <RightMargin>0.5cm</RightMargin>
-        <TopMargin>0.5cm</TopMargin>
-        <BottomMargin>0.5cm</BottomMargin>
+        <LeftMargin>1cm</LeftMargin>
+        <RightMargin>1cm</RightMargin>
+        <TopMargin>1cm</TopMargin>
+        <BottomMargin>1cm</BottomMargin>
         <ColumnSpacing>0.13cm</ColumnSpacing>
         <Style />
       </Page>
@@ -1383,22 +1402,6 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="MoneyBooking">
-      <DataType>String</DataType>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="MoneyPay">
-      <DataType>String</DataType>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="MoneyRealization">
-      <DataType>String</DataType>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="MoneyLost">
-      <DataType>String</DataType>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -1414,26 +1417,6 @@
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>0</RowIndex>
           <ParameterName>Debet</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>2</ColumnIndex>
-          <RowIndex>0</RowIndex>
-          <ParameterName>MoneyBooking</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>3</ColumnIndex>
-          <RowIndex>0</RowIndex>
-          <ParameterName>MoneyPay</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>1</RowIndex>
-          <ParameterName>MoneyRealization</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>1</ColumnIndex>
-          <RowIndex>1</RowIndex>
-          <ParameterName>MoneyLost</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
